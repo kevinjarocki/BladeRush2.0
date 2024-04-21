@@ -17,11 +17,14 @@ forge.tscn::PackedScene::342816302421224454::1713663734::0::1::::<><>::uid://c23
 GUI HUD.gd::GDScript::-1::1713663734::0::1::::<>Control<>::
 icon.svg::CompressedTexture2D::7278417368236156369::1713663734::1713663897::1::::<><>::
 Ingot.gd::GDScript::-1::1713672758::0::1::::<>Node2D<>::
+
 ingot.tscn::PackedScene::2273015361652194587::1713681762::0::1::::<><>::res://Ingot.gd<>uid://db52wh6xkyow2::::res://Assets/Shareef/Ingot_Axe.png<>uid://bck4grq042uhg::::res://Assets/Shareef/Ingot_Dagger.png<>uid://duau8ofdjhjo1::::res://Assets/Shareef/Ingot_Falchion.png<>uid://dfrdi5r22eshs::::res://Assets/Shareef/Ingot_Scimitar.png<>uid://dvy7ncrs3anmk::::res://Assets/Shareef/Ingot_Longsword.png<>uid://t53u5gu5hub0::::res://Assets/Shareef/Ingot_Rapier.png<>uid://he00givm2mwh::::res://Assets/Shareef/Ingot_Sabre.png<>uid://dfi3cgupn6xjt::::res://Assets/Shareef/Ingot_Tachi.png
+
 Menu.gd::GDScript::-1::1713663734::0::1::::<>Control<>::
 menu.tscn::PackedScene::7514941363191808468::1713663734::0::1::::<><>::res://Menu.gd<>res://VBoxContainer.gd<>uid://d4gloc7rb6s5s::::res://Assets/Font/vinque rg.otf<>uid://dqs8l8yjjil2j::::res://Assets/Shareef/MomoStart.png<>uid://cwaciop3hck2r::::res://Assets/Shareef/Anvil.png<>uid://bsv436vlcuyea::::res://Assets/Sounds/Audacity/blacksmith3.mp3
 Options_Menu.gd::GDScript::-1::1713663734::0::1::::<>Control<>::
 options_menu.tscn::PackedScene::7017446220853654354::1713663734::0::1::::<><>::res://Options_Menu.gd<>uid://d4gloc7rb6s5s::::res://Assets/Font/vinque rg.otf<>uid://dpmica7dit60i::::res://Assets/Sounds/Audacity/blacksmith2.mp3
+
 ore_box.tscn::PackedScene::6679126079294608587::1713681521::0::1::::<><>::uid://dqs8l8yjjil2j::::res://Assets/Shareef/MomoStart.png
 Player.gd::GDScript::-1::1713663734::0::1::::<>CharacterBody2D<>::
 Player.tscn::PackedScene::7484548445895763447::1713681521::0::1::::<><>::res://Player.gd<>uid://dpjpqh73a8uds::::res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Red/BlackSmith.png
@@ -32,6 +35,7 @@ ShopManager.gd::GDScript::-1::1713681762::0::1::::<>Node2D<>::
 tax_man.gd::GDScript::-1::1713669445::0::1::::<>CharacterBody2D<>::
 tax_man.tscn::PackedScene::3865019996596901793::1713681521::0::1::::<><>::res://tax_man.gd<>uid://cta8wgfld4egx::::res://Assets/Shareef/TaxManIdle.png<>uid://bjwiivcroi3ec::::res://Assets/Shareef/TaxMan.png
 trashCan.tscn::PackedScene::7945017426298969918::1713681521::0::1::::<><>::uid://n5eey64opuvo::::res://Assets/Sprites/can.png
+
 VBoxContainer.gd::GDScript::-1::1713663734::0::1::::<>VBoxContainer<>::
 ::res://Assets/::1713664497
 anvil.jpg::CompressedTexture2D::540040943167239207::1713663734::1713663734::1::::<><>::
@@ -251,7 +255,9 @@ Ored Silver 8.png::CompressedTexture2D::7790177864963419378::1713663734::1713663
 Ored Silver 9.png::CompressedTexture2D::5653627626629031503::1713663734::1713663734::1::::<><>::
 Ored Silver 10.png::CompressedTexture2D::3717950571280351595::1713663734::1713663734::1::::<><>::
 Ore_Atlas.png::CompressedTexture2D::5906316613194930777::1713663734::1713663734::1::::<><>::
+
 ::res://Assets/Shareef/::1713681762
+
 Anvil.png::CompressedTexture2D::6317132407540292239::1713663734::1713663734::1::::<><>::
 anvilTop.png::CompressedTexture2D::7354796586972631987::1713663734::1713663734::1::::<><>::
 CashReg.png::CompressedTexture2D::1766386008806727756::1713663734::1713663734::1::::<><>::
@@ -262,6 +268,7 @@ ForgeStart.png::CompressedTexture2D::6727202693968431040::1713663734::1713663734
 gradientHammer.png::CompressedTexture2D::2339928595346762868::1713663734::1713663734::1::::<><>::
 HammerThwack2.png::CompressedTexture2D::6183237756558469146::1713663734::1713663734::1::::<><>::
 HammerThwack.png::CompressedTexture2D::3520855989522626432::1713663734::1713663734::1::::<><>::
+
 Ingot_Axe.png::CompressedTexture2D::7293061290221457343::1713681762::1713681779::1::::<><>::
 Ingot_Dagger.png::CompressedTexture2D::2549214574852967436::1713681762::1713681779::1::::<><>::
 Ingot_Falchion.png::CompressedTexture2D::8564312938093685122::1713681762::1713681779::1::::<><>::
@@ -270,6 +277,7 @@ Ingot_Rapier.png::CompressedTexture2D::1397256739338395171::1713681762::17136817
 Ingot_Sabre.png::CompressedTexture2D::501142314619041755::1713681762::1713681779::1::::<><>::
 Ingot_Scimitar.png::CompressedTexture2D::7545498731643215032::1713681762::1713681779::1::::<><>::
 Ingot_Tachi.png::CompressedTexture2D::7528425285423552329::1713681762::1713681779::1::::<><>::
+
 Ingot_Tashi.png::CompressedTexture2D::6669268014541872529::1713669436::1713669451::1::::<><>::
 MomoStart.png::CompressedTexture2D::8321467424122279099::1713663734::1713663734::1::::<><>::
 PoVHammer.png::CompressedTexture2D::1520421211285365919::1713663734::1713663734::1::::<><>::

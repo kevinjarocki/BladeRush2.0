@@ -18,11 +18,17 @@ config/icon="res://icon.svg"
 [autoload]
 
 BackgroundMusic="*res://background_music.tscn"
+SilentWolf="*res://addons/silent_wolf/SilentWolf.gd"
+ScoreSingleton="*res://ScoreSingleton.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/silent_wolf/plugin.cfg")
 
 [input]
 
