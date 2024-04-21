@@ -4,6 +4,8 @@ var heatingMod = 0
 var moneyPrevTurn = 0
 var moneyEarned = 0
 var beBackIn5Game = false
+var taxesDueDate = 0
+var taxesDueValue = 0
 
 signal nextDayPressed
 signal speedInc
@@ -20,7 +22,8 @@ func _process(delta):
 	$Control/PlayerSpeedInc.text = "Increase Player Walk Speed; \nLevel: " + str(owner.playerSpeedModInc) + "/10 Costs: " + str(owner.playerSpeedModCost[owner.playerSpeedModInc]) + "G"
 	$Control/CoolingRateDec.text = "Decrease Cooling Rate; \nLevel: " + str(owner.coolingModInc) + "/10 Costs: " + str(owner.coolingModCost[owner.coolingModInc]) + "G"
 	$Control/HeatRateInc.text = "Increase Heating Rate; \nLevel: " + str(owner.heatingModInc) + "/10 Costs: " + str(owner.heatingModCost[owner.heatingModInc]) + "G"
-	$Control/Info.text = "Finished Day: " + str(owner.day) + "\nGold Earned: " + str(moneyEarned) + "G\nGold: " + str(owner.money) + "G\nReputation: " + str(floor(owner.rep))
+	$Control/Info.text = "Finished Day: " + str(owner.day) + "\nGold Earned: " + str(moneyEarned) + "G\nGold: " + str(owner.money) + "G\nReputation: " + str(floor(owner.rep)) + "\nTaxes Due In " + str(taxesDueDate) + " Days, " + str(taxesDueValue) + " Gs"
+	
 	$Control/AutoIngot.text = "Auto Molmol: " + str(owner.autoMolmol) + "\nCosts: " + str(owner.autoMolmolCost) + "G"
 	
 	$"Control/Golden Hammer".disabled = owner.goldenHammer 
@@ -33,6 +36,12 @@ func _process(delta):
 	
 func endDay(day, money):
 	visible = true
+	if owner.day == 1:
+		taxesDueDate = 1
+		taxesDueValue = 2
+	else:
+		taxesDueDate = 5 - (owner.day % 5)
+		taxesDueValue = int(6*pow((((owner.day/5)+1)*5),1.1))
 	moneyEarned = owner.money - moneyPrevTurn
 
 func _on_next_day_pressed():

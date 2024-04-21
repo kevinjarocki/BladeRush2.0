@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dlgvjnk6rw5xy" path="res://trashCan.tscn" id="21_lpgaf"]
 [ext_resource type="AudioStream" uid="uid://db4md3siwxiht" path="res://Assets/Sounds/racoon-gecker (1).mp3" id="23_7iopb"]
 [ext_resource type="Texture2D" uid="uid://bl7n336mfvqcn" path="res://Assets/Shareef/coin.png" id="23_ijiq0"]
-[ext_resource type="PackedScene" path="res://lamp.tscn" id="25_1k1tr"]
+[ext_resource type="PackedScene" uid="uid://cegfh61h80clf" path="res://lamp.tscn" id="25_1k1tr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xo30u"]
 texture = ExtResource("3_v2og8")

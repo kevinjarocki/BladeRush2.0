@@ -69,11 +69,11 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lui1a"]
-size = Vector2(18.7166, 11.2462)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hmlun"]
-size = Vector2(23.1765, 23.7596)
+size = Vector2(41.7754, 30.8874)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lui1a"]
+size = Vector2(21.262, 10.177)
 
 [sub_resource type="Gradient" id="Gradient_sk8cu"]
 offsets = PackedFloat32Array(0, 0.655844)
@@ -95,23 +95,22 @@ sprite_frames = SubResource("SpriteFrames_iqvho")
 script = ExtResource("2_gf6xs")
 metadata/_edit_group_ = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(177, 392)
-scale = Vector2(6.67857, 6.31325)
-collision_layer = 129
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-27.1016, -57.9733)
-shape = SubResource("RectangleShape2D_lui1a")
-debug_color = Color(0.960784, 0, 0.505882, 0.419608)
-
 [node name="Area2D" type="Area2D" parent="."]
-position = Vector2(177, 392)
 scale = Vector2(6.67857, 6.31325)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-26.861, -60.8245)
+position = Vector2(-0.449196, -0.475189)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_hmlun")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2(6.67857, 6.31325)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.748663, 5.08851)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_lui1a")
+debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 
 [node name="Ding" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_lrslc")
@@ -140,3 +139,5 @@ offset_right = 26.0
 offset_bottom = 14.0
 text = "test"
 label_settings = SubResource("LabelSettings_roa4a")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

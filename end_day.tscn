@@ -43,18 +43,22 @@ color = Color(0.184314, 0.113725, 0.00392157, 1)
 
 [node name="Info" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 59.0
-offset_top = 153.0
-offset_right = 309.0
-offset_bottom = 314.0
-text = "INFO"
+offset_left = 57.0
+offset_top = 113.0
+offset_right = 307.0
+offset_bottom = 450.0
+text = "Line 1
+2
+3
+4
+5"
 
 [node name="DaysDone" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 57.0
-offset_top = 59.0
-offset_right = 377.0
-offset_bottom = 185.0
+offset_left = 117.0
+offset_top = 10.0
+offset_right = 372.0
+offset_bottom = 74.0
 text = "Days Done!"
 
 [node name="NextDay" type="Button" parent="Control"]
