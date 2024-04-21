@@ -1,5 +1,7 @@
 ea4bc82a6ad023ab7ee23ee620429895
+
 ::res://::1713728045
+
 anvil.tscn::PackedScene::4204598536075105987::1713663734::0::1::::<><>::uid://cwaciop3hck2r::::res://Assets/Shareef/Anvil.png
 AnvilGame.gd::GDScript::-1::1713692612::0::1::::<>Control<>::
 AnvilGame.tscn::PackedScene::4245366750886621648::1713727902::0::1::::<><>::res://AnvilGame.gd<>uid://bxch7joyvexmh::::res://click_target.tscn<>uid://dc1yopttemrmx::::res://Assets/Shareef/anvilTop.png<>uid://7sjplt5w0opd::::res://Assets/Sounds/Audacity/AnvilHit1.wav<>uid://dfc24sukfej28::::res://Assets/Sounds/Audacity/AnvilHit2.wav<>uid://bokbvu8wkxrk::::res://Assets/Sounds/Audacity/blacksmith1.mp3<>uid://dpmica7dit60i::::res://Assets/Sounds/Audacity/blacksmith2.mp3<>uid://cudha08dbdm6e::::res://Assets/Shareef/HammerThwack2.png<>uid://bsv436vlcuyea::::res://Assets/Sounds/Audacity/blacksmith3.mp3<>uid://br7qg3ntb3h2j::::res://Assets/Sounds/pog ping.mp3<>uid://xky5hhp50v5n::::res://Assets/Sounds/break_metal.mp3<>uid://bl7n336mfvqcn::::res://Assets/Shareef/coin.png
@@ -18,8 +20,10 @@ end_day.tscn::PackedScene::755653992362656058::1713727901::0::1::::<><>::res://E
 forge.tscn::PackedScene::342816302421224454::1713663734::0::1::::<><>::uid://c23ybsu3ysp8s::::res://Assets/Shareef/ForgeStart.png
 GUI HUD.gd::GDScript::-1::1713722865::0::1::::<>Control<>::
 icon.svg::CompressedTexture2D::7278417368236156369::1713663734::1713663897::1::::<><>::
+
 Ingot.gd::GDScript::-1::1713728045::0::1::::<>Node2D<>::
 ingot.tscn::PackedScene::2273015361652194587::1713727937::0::1::::<><>::res://Ingot.gd<>uid://db52wh6xkyow2::::res://Assets/Shareef/Ingot_Axe.png<>uid://bck4grq042uhg::::res://Assets/Shareef/Ingot_Dagger.png<>uid://duau8ofdjhjo1::::res://Assets/Shareef/Ingot_Falchion.png<>uid://dfrdi5r22eshs::::res://Assets/Shareef/Ingot_Scimitar.png<>uid://dvy7ncrs3anmk::::res://Assets/Shareef/Ingot_Longsword.png<>uid://t53u5gu5hub0::::res://Assets/Shareef/Ingot_Rapier.png<>uid://he00givm2mwh::::res://Assets/Shareef/Ingot_Sabre.png<>uid://dfi3cgupn6xjt::::res://Assets/Shareef/Ingot_Tachi.png
+
 Menu.gd::GDScript::-1::1713683951::0::1::::<>Control<>::
 menu.tscn::PackedScene::7514941363191808468::1713663734::0::1::::<><>::res://Menu.gd<>res://VBoxContainer.gd<>uid://d4gloc7rb6s5s::::res://Assets/Font/vinque rg.otf<>uid://dqs8l8yjjil2j::::res://Assets/Shareef/MomoStart.png<>uid://cwaciop3hck2r::::res://Assets/Shareef/Anvil.png<>uid://bsv436vlcuyea::::res://Assets/Sounds/Audacity/blacksmith3.mp3
 Options_Menu.gd::GDScript::-1::1713663734::0::1::::<>Control<>::
