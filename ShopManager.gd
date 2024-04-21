@@ -31,7 +31,9 @@ var autoMolmolCost = 150
 @export var beBackIn5Cost = 50
 
 var taxManHere = false
-
+var taxPayed = false
+var taxMan = InstancePlaceholder
+var taxesOwed = 10*pow(day,1.1)
 var ingotNode = null
 var gameFinished = false
 
@@ -150,7 +152,7 @@ func playerAtForge():
 		print("Nothing to do, player does not have ingot")
 
 func playerAtOreBox():
-	if !ingotCheck() and activeRecipe != "Awaiting Order":
+	if !ingotCheck() and activeRecipe != "Awaiting Order" and !taxManHere:
 		
 		$OreBox.play()
 		$Ferret.play()
@@ -223,9 +225,9 @@ func playerAtCashRegister():
 		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
 		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
 	elif taxManHere:
-		activeRecipe = "Tax Man is here. Time to Pay up!"
-		activeMaterial = "Total Owed:"
-		# totalTax = 10*pwr(day,1.1)
+		money -= snappedf(taxesOwed,1.5)
+		taxMan.ExitShop()
+		taxManHere = false
 		
 		if autoMolmol:
 			playerAtOreBox()
@@ -251,7 +253,7 @@ func createCustomer():
 	item.speed = 100
 	
 func createTaxMan():
-	var taxMan = load("res://tax_man.tscn").instantiate()
+	taxMan = load("res://tax_man.tscn").instantiate()
 	add_child(taxMan)
 	taxMan.position = Vector2(172,580)
 	#taxMan.speed = 1
@@ -291,6 +293,9 @@ func _on_end_day_next_day_pressed():
 	dayTimer = 0.00
 	if !taxManHere:
 		createCustomer()
+	elif taxManHere:
+		activeRecipe = "Tax Man is here. Time to Pay up!"
+		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.5))
 	
 func _on_ready():
 	$ThwakToMainMenu.play()
@@ -317,7 +322,7 @@ func resetDay():
 		child.queue_free()
 		
 	resetOrder()
-	if(day % 5 == 0):
+	if(day == 1 || day % 5 == 0):
 		taxManHere = true
 		createTaxMan()
 
