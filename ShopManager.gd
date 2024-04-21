@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var scoreSingleton = get_node("/root/ScoreSingleton")
+
 @export var money = 0
 @export var day = 1
 @export var dayTimer = 0.00
@@ -37,7 +39,7 @@ var autoMolmolCost = 150
 var taxManHere = false
 var taxPayed = false
 var taxMan = InstancePlaceholder
-var taxesOwed = 10*pow(day,1.1)
+var taxesOwed = 0
 var ingotNode = null
 var gameFinished = false
 
@@ -45,8 +47,8 @@ var handPosition = Vector2(20,10)
 
 var recipeBook = {
 
-	"Dagger" : {"points": [Vector2(569, 139),Vector2(628, 191),Vector2(654, 237),Vector2(660, 291),Vector2(660, 293)], 
-	"name": "dagger", "perfectRange": 5, "punishRate": 0.2, "value" : 3},
+	"Dagger" : {"points": [Vector2(558, 377),Vector2(554, 319),Vector2(623, 308),Vector2(598, 355),Vector2(585, 274)], 
+	"name": "dagger", "perfectRange": 5, "punishRate": 0.2, "value" : 1},
 	
 	"Scimitar" : {"points": [Vector2(586, 279),Vector2(545, 329),Vector2(523, 369),Vector2(506, 381),Vector2(535, 332),Vector2(580, 277),Vector2(484, 394),Vector2(516, 335),Vector2(546, 285),Vector2(611, 244)], 
 	"name": "scimitar","perfectRange": 5, "punishRate": 0.1, "value" : 2},
@@ -84,7 +86,8 @@ var materialBook = {
 func _process(delta):
 	
 	$"GUI HUD/DayTimer".value = (dayTimer/endDayTime)*100
-	dayTimer += delta
+	if !taxManHere:
+		dayTimer += delta
 	
 	if dayTimer > endDayTime and !$EndDay.visible:
 		resetDay()
@@ -228,6 +231,7 @@ func playerAtCashRegister():
 				kingsSigilActive = false
 				
 			money += sellValue
+			scoreSingleton.score += sellValue
 			$CashRegister.drawGoldValue(sellValue)
 			$CashRegister.play()
 			$CashRegister.get_node("Ding").play()
@@ -259,16 +263,23 @@ func playerAtCashRegister():
 			playerAtOreBox()
 	
 	elif taxManHere:
-		money -= snappedf(taxesOwed,1.0)
-		$CashRegister.drawGoldValue(-taxesOwed)
-		$CashRegister.play()
-		$CashRegister.get_node("Ding").play()
-		$GPUParticles2D.amount = taxesOwed
-		$GPUParticles2D.emitting = true
-		taxMan.ExitShop()
-		taxManHere = false
-		_on_end_day_next_day_pressed()
 		
+		if money >= int(taxesOwed):
+			money -= int(taxesOwed)
+			$CashRegister.drawGoldValue(int(-taxesOwed))
+			$CashRegister.play()
+			$CashRegister.get_node("Ding").play()
+			$GPUParticles2D.amount = int(taxesOwed)
+			$GPUParticles2D.emitting = true
+			taxMan.ExitShop()
+			await get_tree().create_timer(2).timeout 
+			taxManHere = false
+			resetDay()
+			_on_end_day_next_day_pressed()
+			
+		else:
+			get_tree().change_scene_to_file("res://endGame.tscn")
+			print("Game Over")
 		
 func playerAtTrashCan():
 	if ingotCheck():
@@ -309,10 +320,8 @@ func _input(event):
 		print(event.get_position())
 
 func _on_button_pressed():
-	var ingotNode = ingotCheck()
-	money += 1*ingotNode.recipeProperties["value"]*ingotNode.materialProperties["valueMod"]*(ingotNode.quality/100)
-	resetOrder()
-	ingotNode.queue_free()
+	#SilentWolf.Scores.save_score("GitDumpster", 105)
+	pass
 
 func _on_ore_box_animation_looped():
 	$OreBox.pause()
@@ -332,15 +341,26 @@ func _on_day_button_pressed():
 func _on_end_day_next_day_pressed():
 	day += 1
 	dayTimer = 0.00
-	if !taxManHere:
-		createCustomer()
-	elif taxManHere:
+	#START HERE -------------------------------------------------------------
+	if(day == 2 || day % 5 == 0):
+		taxManHere = true
+		taxesOwed = int(5*pow(day,1.1))
+		createTaxMan()
 		activeRecipe = "Tax Man is here. Time to Pay up!"
 		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
+		
+	else:
+		createCustomer()
 	
 func _on_ready():
 	$ThwakToMainMenu.play()
 	createCustomer()
+	scoreSingleton.score = 0
+	SilentWolf.configure({
+	"api_key": "7UNhUyzXAO2TnnCDn2v4h6hKxQAlDCSc9ODDHErW",
+	"game_id": "BladeRush",
+	"log_level": 1
+  })
 
 func resetDay():
 	if $AnvilGame.visible:
@@ -363,9 +383,6 @@ func resetDay():
 		child.queue_free()
 		
 	resetOrder()
-	if(day == 1 || day % 5 == 0):
-		taxManHere = true
-		createTaxMan()
 
 func resetOrder():
 	
