@@ -42,11 +42,11 @@ func _input(event):
 		#if too hot
 		if ingotInstance.temperature > ingotInstance.materialProperties["idealTemp"] + ingotInstance.materialProperties["idealTempRange"]:
 			tempMiss = (ingotInstance.temperature - (ingotInstance.materialProperties["idealTemp"] + ingotInstance.materialProperties["idealTempRange"]))
-			TemptQualitySubtract()
+			TempQualitySubtract()
 			#if too cold
 		elif ingotInstance.temperature < ingotInstance.materialProperties["idealTemp"] - ingotInstance.materialProperties["idealTempRange"]:
 			tempMiss = (ingotInstance.materialProperties["idealTemp"] - ingotInstance.materialProperties["idealTempRange"]) - ingotInstance.temperature
-			TemptQualitySubtract()
+			TempQualitySubtract()
 		print("temp miss:",tempMiss)
 		
 		#distance punishment
@@ -56,6 +56,8 @@ func _input(event):
 		else:
 			if missDistance*ingotInstance.recipeProperties["punishRate"] > ingotInstance.quality:
 				ingotInstance.quality = 0
+				ingotSprite.frame = 2
+				ingotFilter.frame = 2
 			else:
 				ingotInstance.quality -= missDistance * ingotInstance.recipeProperties["punishRate"]
 		print("quality score" ,ingotInstance.quality)
@@ -66,11 +68,16 @@ func _input(event):
 			nextClick.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
 			
 		else:
-			ingotSprite.frame = 1
-			ingotFilter.frame = 1
+			ingotSprite.frame = 3
+			ingotFilter.frame = 3
 			nextClick.killInstance()
 			gameCompletedBool = true
-			gameCompleteSignal.emit()
+			#gameCompleteSignal.emit(ingotInstance)
+		if ingotSprite.frame == 2 or ingotFilter.frame ==2:
+			nextClick.killInstance()
+			gameCompletedBool = true
+			#gameCompleteSignal.emit(ingotInstance)
+			
 	if (event is InputEventMouseMotion and visible):
 		$AnimatedSprite2D.position = event.position
 		
@@ -78,6 +85,8 @@ func summonMinigame(instance):
 	ingotInstance = instance
 	ingotSprite = ingotInstance.get_node("AnimatedSprite2D")
 	ingotFilter = ingotInstance.get_node("Filter")
+	ingotSprite.frame = 1
+	ingotFilter.frame = 1
 	gameStarted = true
 	ingotInstance.position = ingotPosition
 	ingotInstance.scale = scaleValue
@@ -97,42 +106,42 @@ func summonMinigame(instance):
 		add_child(nextClick)
 		move_child(nextClick, 2)
 	else:
-		ingotSprite.frame = 1
-		ingotFilter.frame = 1
-		hide()
+		ingotSprite.frame = 3
+		ingotFilter.frame = 3
+		abortAnvilGame()
 
 	#await get_tree().create_timer(1.0).timeout
 	
 func _on_button_pressed():
 	recipeTool = true
-func TemptQualitySubtract():
+func TempQualitySubtract():
 	if abs(tempMiss) > 1000:
 		ingotInstance.quality = 0
 		$Broken.play()
+		ingotSprite.frame = 2
+		ingotFilter.frame = 2
 	elif abs(tempMiss) > 0 and abs(tempMiss) <= 1000:
 		tempQualityMod = -0.008*abs(tempMiss)
 		ingotInstance.quality += tempQualityMod
-	print("temp mod",tempQualityMod)
+	print("temp modifier : ",tempQualityMod)
 		
 func _on_player_departed(body):
 	if body.owner.name == "Anvil":
-		if !gameCompletedBool and instanceCounter > 0:
-			instanceCounter = 0
-		if gameStarted and ingotInstance != null and get_node("Ingot"):
-			ingotInstance.scale = Vector2(1.5,1.5)
-			remove_child(ingotInstance)
-			owner.add_child(ingotInstance)
-			ingotInstance.position = Vector2(20,-10)
-			#print(owner.get_children())
-			playerLeft.emit(ingotInstance)
-		if gameCompletedBool:
-			instanceBudget = 1
-
-			gameStarted = false
-
-
+		abortAnvilGame()
+func pauseAnvilGame():
+	if gameStarted and ingotInstance != null:
+		ingotInstance.scale = Vector2(1.5,1.5)
+		remove_child(ingotInstance)
+		owner.add_child(ingotInstance)
+		ingotInstance.position = Vector2(20,10)
+		playerLeft.emit(ingotInstance)
+		gameCompletedBool = false
+	if gameCompletedBool:
+		instanceBudget = 1
+		gameCompleteSignal.emit(ingotInstance)
+		gameStarted = false
+		gameCompletedBool = true
 	hide()
-
 func abortAnvilGame():
 	if !gameCompletedBool and instanceCounter > 0:
 		instanceCounter = 0
@@ -144,5 +153,6 @@ func abortAnvilGame():
 		playerLeft.emit(ingotInstance)
 	if gameCompletedBool:
 		instanceBudget = 1
+		gameCompleteSignal.emit(ingotInstance)
 		gameStarted = false
 	hide()

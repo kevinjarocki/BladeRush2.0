@@ -41,6 +41,8 @@ var taxesOwed = 10*pow(day,1.1)
 var ingotNode = null
 var gameFinished = false
 
+var handPosition = Vector2(20,10)
+
 var recipeBook = {
 
 	"Dagger" : {"points": [Vector2(569, 139),Vector2(628, 191),Vector2(654, 237),Vector2(660, 291),Vector2(660, 293)], 
@@ -156,7 +158,7 @@ func playerAtForge():
 		if x.collider.owner.is_in_group("ingot"):
 			remove_child(x.collider.owner)
 			$Player.add_child(x.collider.owner)
-			x.collider.owner.position = Vector2(20,10)
+			x.collider.owner.position = handPosition
 			x.collider.owner.isForge = false
 			$Forge.pause()
 			$Forge.set_frame_and_progress(0,0)
@@ -185,7 +187,7 @@ func playerAtOreBox():
 		gameFinished = false
 		ingotNode = load("res://ingot.tscn").instantiate()
 		$Player.add_child(ingotNode)
-		ingotNode.position = Vector2(20,10)
+		ingotNode.position = handPosition
 		ingotNode.scale = Vector2(1.5,1.5)
 		print ("Picked up ingot")
 		
@@ -294,9 +296,13 @@ func createTaxMan():
 	taxMan.position = Vector2(172,580)
 	#taxMan.speed = 1
 
-func _on_anvil_game_game_complete_signal():
+func _on_anvil_game_game_complete_signal(ingotInstance):
 	gameFinished = true
-	$AnvilGame.hide()
+	ingotInstance.scale = Vector2(1.5,1.5)
+	$AnvilGame.remove_child(ingotInstance)
+	$Player.add_child(ingotInstance)
+	ingotInstance.position = handPosition
+	#$AnvilGame.hide()
 
 func _input(event):
 	if Input.is_action_just_pressed("click"):
@@ -315,10 +321,8 @@ func _on_ore_box_animation_finished(Start):
 	$OreBox.pause()
 
 func _on_anvil_game_player_left(child):
-		
 			remove_child(child)
 			$Player.add_child(child)
-			print($Player.get_children())
 			child.position = Vector2.ZERO
 
 func _on_day_button_pressed():
