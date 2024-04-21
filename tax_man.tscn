@@ -71,6 +71,7 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aaw1j"]
 
 [node name="TaxMan" type="CharacterBody2D"]
+scale = Vector2(0.25, 0.25)
 script = ExtResource("1_cfmq0")
 
 [node name="Area2D" type="Area2D" parent="."]
