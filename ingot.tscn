@@ -1,9 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://7nch364v2svb"]
+[gd_scene load_steps=30 format=3 uid="uid://7nch364v2svb"]
 
 [ext_resource type="Script" path="res://Ingot.gd" id="1_iac0r"]
 [ext_resource type="Texture2D" uid="uid://db52wh6xkyow2" path="res://Assets/Shareef/Ingot_Axe.png" id="2_jgmdq"]
+[ext_resource type="Texture2D" uid="uid://c3mjra7a4b1h4" path="res://Assets/Shareef/Ingot_Falchion.png" id="4_007vi"]
 [ext_resource type="Texture2D" uid="uid://dfrdi5r22eshs" path="res://Assets/Shareef/Ingot_Scimitar.png" id="4_f5qwb"]
+[ext_resource type="Texture2D" path="res://Assets/Shareef/Ingot_Longsword.png" id="4_htq1w"]
 [ext_resource type="Texture2D" uid="uid://wsjx08weifro" path="res://Assets/Shareef/dagger.png" id="6_3ku6o"]
+[ext_resource type="Texture2D" uid="uid://c1ytflt4nq2pc" path="res://Assets/Shareef/Ingot_Rapier.png" id="6_x8asn"]
+[ext_resource type="Texture2D" uid="uid://cvpq74s7vrpfy" path="res://Assets/Shareef/Ingot_Sabre.png" id="7_2x3ei"]
+[ext_resource type="Texture2D" uid="uid://b6m6kbowjq2rp" path="res://Assets/Shareef/Ingot_Tashi.png" id="9_2251x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_46kyo"]
 atlas = ExtResource("2_jgmdq")
@@ -21,12 +26,52 @@ region = Rect2(0, 0, 200, 200)
 atlas = ExtResource("6_3ku6o")
 region = Rect2(200, 0, 200, 200)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xvu2"]
+atlas = ExtResource("4_007vi")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_652sw"]
+atlas = ExtResource("4_007vi")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mik72"]
+atlas = ExtResource("4_htq1w")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qffpp"]
+atlas = ExtResource("4_htq1w")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xoar"]
+atlas = ExtResource("6_x8asn")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4d18"]
+atlas = ExtResource("6_x8asn")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4ved"]
+atlas = ExtResource("7_2x3ei")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_waeso"]
+atlas = ExtResource("7_2x3ei")
+region = Rect2(200, 0, 200, 200)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_8mr8m"]
 atlas = ExtResource("4_f5qwb")
 region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3oa4w"]
 atlas = ExtResource("4_f5qwb")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sel7"]
+atlas = ExtResource("9_2251x")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbxvo"]
+atlas = ExtResource("9_2251x")
 region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6qvr0"]
@@ -55,6 +100,50 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_5xvu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_652sw")
+}],
+"loop": true,
+"name": &"falchion",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mik72")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qffpp")
+}],
+"loop": true,
+"name": &"longsword",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xoar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4d18")
+}],
+"loop": true,
+"name": &"rapier",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4ved")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_waeso")
+}],
+"loop": true,
+"name": &"sabre",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_8mr8m")
 }, {
 "duration": 1.0,
@@ -62,6 +151,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"scimitar",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sel7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbxvo")
+}],
+"loop": true,
+"name": &"tashi",
 "speed": 5.0
 }]
 
@@ -83,11 +183,10 @@ script = ExtResource("1_iac0r")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.168627, 0.168627, 0.168627, 0.752941)
-scale = Vector2(0.3, 0.3)
-
+scale = Vector2(0.308594, 0.302734)
 sprite_frames = SubResource("SpriteFrames_6qvr0")
-animation = &"axe"
+animation = &"tashi"
+frame = 1
 
 [node name="Filter" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.788235, 0.678431, 0.67451, 1)
