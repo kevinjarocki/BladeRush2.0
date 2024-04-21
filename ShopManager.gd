@@ -22,9 +22,13 @@ var playerSpeedModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var autoMolmolCost = 150
 
 @export var goldenHammer = false
-@export var bottledFire = false
+@export var bottledFire = true
 @export var kingsSigil = false
 @export var beBackIn5 = false
+@export var goldenHammerActive = false
+@export var bottledFireActive = false
+@export var kingsSigilActive = false
+@export var beBackIn5Active = false
 @export var goldenHammerCost = 10
 @export var bottledFireCost = 10
 @export var kingsSigilCost = 25
@@ -49,7 +53,7 @@ var recipeBook = {
 	"name": "axe", "perfectRange": 10, "punishRate": 0.5, "value" : 8}
 }
 
-var materialBook = {
+
 	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 2, "cost": 1},
 	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 3, "cost": 1},
 	"Bronze" : {"name": "bronze", "coolRate" : 4, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 4, "cost": 1},
@@ -57,6 +61,7 @@ var materialBook = {
 	"Rune": {"name": "rune", "coolRate" : 15, "heatRate" : 40, "idealTemp": 5500, "idealTempRange": 400, "valueMod": 7, "cost": 1},
 	"Mithril": {"name": "mithril", "coolRate" : 50, "heatRate" : 10, "idealTemp": 5000, "idealTempRange": 200, "valueMod": 7, "cost": 1},
 	"Caledonite": {"name": "caledonite", "coolRate" : 4, "heatRate" : 20, "idealTemp": 7000, "idealTempRange": 200, "valueMod": 8, "cost": 1}
+
 }
 
 func _process(delta):
@@ -71,7 +76,7 @@ func _process(delta):
 	$"GUI HUD/ActiveRecipe".text = ("Active Recipe: " + str(activeMaterial) + " " + str(activeRecipe))
 	$"GUI HUD/DayCount".text = ("Day " + str(day))
 	$"GUI HUD/MoneyCount".text = ("Gold: " + str(money))
-	
+		
 	if(ingotNode != null):
 		var temp = ingotNode.temperature
 		$"GUI HUD/ProgressBar".value = ((temp/ingotNode.maxTemp)*100)
@@ -80,6 +85,10 @@ func _process(delta):
 		var temp = 0
 		$"GUI HUD/ProgressBar".value = temp
 
+	$"GUI HUD/Golden Hammer".disabled = !goldenHammer 
+	$"GUI HUD/Kings Sigil".disabled = !kingsSigil
+	$"GUI HUD/Be Back in 5".disabled = !beBackIn5 
+	$"GUI HUD/Bottled Fire".disabled = !bottledFire
 
 func _on_player_interacted(station):
 	
@@ -159,7 +168,7 @@ func playerAtOreBox():
 		$Dirt.play()
 	
 		gameFinished = false
-		var ingotNode = load("res://ingot.tscn").instantiate()
+		ingotNode = load("res://ingot.tscn").instantiate()
 		$Player.add_child(ingotNode)
 		ingotNode.position = Vector2(20,10)
 		ingotNode.scale = Vector2(1.5,1.5)
@@ -196,7 +205,11 @@ func playerAtCashRegister():
 				sellValue = int(recipeValue*materialValue*2)
 			else:
 				sellValue = int(recipeValue*materialValue*(ingotNode.quality/100))
-
+			
+			if kingsSigilActive:
+				sellValue = sellValue*2
+				kingsSigilActive = false
+				
 			money += sellValue
 			$CashRegister.drawGoldValue(sellValue)
 			$CashRegister.play()
@@ -216,7 +229,6 @@ func playerAtCashRegister():
 			for x in get_world_2d().direct_space_state.intersect_point(query):
 
 				if x.collider.owner.is_in_group("customer"):
-					print(x.collider)
 					x.collider.owner.ExitShop()
 					createCustomer()
 					
@@ -225,6 +237,10 @@ func playerAtCashRegister():
 	elif activeRecipe == "Awaiting Order" and get_tree().get_nodes_in_group("customer"):
 		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
 		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
+		
+		if autoMolmol:
+			playerAtOreBox()
+	
 	elif taxManHere:
 		money -= snappedf(taxesOwed,1.0)
 		$CashRegister.drawGoldValue(-taxesOwed)
@@ -234,9 +250,6 @@ func playerAtCashRegister():
 		$GPUParticles2D.emitting = true
 		taxMan.ExitShop()
 		taxManHere = false
-		
-		if autoMolmol:
-			playerAtOreBox()
 		
 func playerAtTrashCan():
 	if ingotCheck():
@@ -268,9 +281,9 @@ func _on_anvil_game_game_complete_signal():
 	gameFinished = true
 	$AnvilGame.hide()
 
-#func _input(event):
-	#if Input.is_action_just_pressed("click"):
-		#print(event.get_position())
+func _input(event):
+	if Input.is_action_just_pressed("click"):
+		print(event.get_position())
 
 func _on_button_pressed():
 	var ingotNode = ingotCheck()
@@ -412,13 +425,24 @@ func _on_end_day_speed_inc():
 		print("cant afford, but you're cool ;)")
 
 func _on_golden_hammer_pressed():
-	pass # Replace with function body.
+	goldenHammerActive = true
+	goldenHammer = false
 
 func _on_kings_sigil_pressed():
-	pass # Replace with function body.
+	kingsSigilActive = true
+	kingsSigil = false
 
 func _on_be_back_in_5_pressed():
-	pass # Replace with function body.
+	beBackIn5Active = true
+	beBackIn5 = false
 
 func _on_bottled_fire_pressed():
-	pass # Replace with function body.
+	bottledFire = false
+	if ingotCheck():
+		ingotCheck().bottledFire(3)
+		
+	else:
+		for child in $AnvilGame.get_children():
+			if child.is_in_group("ingot"):
+				child.bottledFire(3)
+		

@@ -1,5 +1,8 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1713669445
+
+
+::res://::1713666692
+
 anvil.tscn::PackedScene::4204598536075105987::1713663734::0::1::::<><>::uid://cwaciop3hck2r::::res://Assets/Shareef/Anvil.png
 AnvilGame.gd::GDScript::-1::1713666942::0::1::::<>Control<>::
 AnvilGame.tscn::PackedScene::4245366750886621648::1713667295::0::1::::<><>::res://AnvilGame.gd<>uid://bxch7joyvexmh::::res://click_target.tscn<>uid://dc1yopttemrmx::::res://Assets/Shareef/anvilTop.png<>uid://7sjplt5w0opd::::res://Assets/Sounds/Audacity/AnvilHit1.wav<>uid://dfc24sukfej28::::res://Assets/Sounds/Audacity/AnvilHit2.wav<>uid://bokbvu8wkxrk::::res://Assets/Sounds/Audacity/blacksmith1.mp3<>uid://dpmica7dit60i::::res://Assets/Sounds/Audacity/blacksmith2.mp3<>uid://cudha08dbdm6e::::res://Assets/Shareef/HammerThwack2.png<>uid://bsv436vlcuyea::::res://Assets/Sounds/Audacity/blacksmith3.mp3<>uid://br7qg3ntb3h2j::::res://Assets/Sounds/pog ping.mp3<>uid://xky5hhp50v5n::::res://Assets/Sounds/break_metal.mp3
