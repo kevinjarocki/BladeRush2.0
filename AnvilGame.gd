@@ -18,7 +18,7 @@ var tempQualityMod = 0
 var tempMiss = 0
 var ingotSprite = AnimatedSprite2D
 var ingotFilter = AnimatedSprite2D
-
+var ingotIsChild = false
 signal gameCompleteSignal
 signal playerLeft(child)
 
@@ -119,7 +119,7 @@ func _on_player_departed(body):
 	if body.owner.name == "Anvil":
 		if !gameCompletedBool and instanceCounter > 0:
 			instanceCounter = 0
-		if gameStarted and ingotInstance != null:
+		if gameStarted and ingotInstance != null and get_node("Ingot"):
 			ingotInstance.scale = Vector2(1.5,1.5)
 			remove_child(ingotInstance)
 			owner.add_child(ingotInstance)
