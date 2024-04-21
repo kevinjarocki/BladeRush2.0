@@ -60,6 +60,12 @@ func SetMaterialColor():
 		targetColor = Color(254.0/255,208.0/255,200.0/255,255.0/255)
 	elif materialProperties["name"] == "gold":
 		targetColor = Color(254.0/255,208.0/255,47.0/255,255.0/255)
+	elif materialProperties["name"] == "rune":
+		targetColor = Color(145.0/255,213.0/255,255.0/255,255.0/255)
+	elif materialProperties["name"] == "mithril":
+		targetColor = Color(192.0/255,172.0/255,255.0/255,255.0/255)
+	elif materialProperties["name"] == "caledonite":
+		targetColor = Color(43.0/255,43.0/255,43.0/255,192.0/255)
 		
 	$AnimatedSprite2D.modulate = targetColor
 	print("new color" ,targetColor)

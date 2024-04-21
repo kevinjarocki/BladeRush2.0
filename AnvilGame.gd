@@ -116,7 +116,6 @@ func TemptQualitySubtract():
 	print("temp mod",tempQualityMod)
 		
 func _on_player_departed(body):
-
 	if body.owner.name == "Anvil":
 		if !gameCompletedBool and instanceCounter > 0:
 			instanceCounter = 0
