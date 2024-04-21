@@ -3,7 +3,7 @@ extends Node2D
 @export var money = 0
 @export var day = 1
 @export var dayTimer = 0.00
-@export var endDayTime = 5
+@export var endDayTime = 80
 @export var activeRecipe = "Awaiting Order"
 @export var activeMaterial = ""
 @export var minigame: PackedScene
@@ -46,20 +46,35 @@ var recipeBook = {
 	"Dagger" : {"points": [Vector2(569, 139),Vector2(628, 191),Vector2(654, 237),Vector2(660, 291),Vector2(660, 293)], 
 	"name": "dagger", "perfectRange": 5, "punishRate": 0.2, "value" : 3},
 	
-	"Scimitar" : {"points": [Vector2(553, 214),Vector2(610, 282),Vector2(515, 326),Vector2(619, 398),Vector2(534, 448)], 
-	"name": "scimitar","perfectRange": 3, "punishRate": 0.1, "value" : 5},
+	"Scimitar" : {"points": [Vector2(586, 279),Vector2(545, 329),Vector2(523, 369),Vector2(506, 381),Vector2(535, 332),Vector2(580, 277),Vector2(484, 394),Vector2(516, 335),Vector2(546, 285),Vector2(611, 244)], 
+	"name": "scimitar","perfectRange": 5, "punishRate": 0.1, "value" : 2},
 	
-	"Axe" : {"points": [Vector2(580, 508),Vector2(576, 431),Vector2(578, 365),Vector2(578, 287),Vector2(613, 492),Vector2(614, 440),Vector2(614, 391),Vector2(615, 325),Vector2(550, 266)], 
-	"name": "axe", "perfectRange": 10, "punishRate": 0.5, "value" : 8}
+	"Axe" : {"points": [Vector2(635, 355),Vector2(596, 326),Vector2(559, 293),Vector2(524, 264),Vector2(626, 368),Vector2(648, 337),Vector2(504, 298),Vector2(507, 270),Vector2(524, 253),Vector2(552, 239),Vector2(547, 368),Vector2(568, 397),Vector2(597, 365)], 
+	"name": "axe", "perfectRange": 10, "punishRate": 0.5, "value" : 3},
+	
+	"Falchion" : {"points": [Vector2(602, 276),Vector2(504, 387),Vector2(627, 324),Vector2(581, 234),Vector2(574, 408),Vector2(492, 382),Vector2(623, 261),Vector2(554, 350),Vector2(587, 257),Vector2(563, 391),Vector2(520, 372),Vector2(531, 356),Vector2(531, 355),Vector2(624, 235),Vector2(637, 235)], 
+	"name": "falchion", "perfectRange": 5, "punishRate": 0.4, "value" : 4},
+	
+	"Longsword" : {"points": [Vector2(519, 374),Vector2(658, 264),Vector2(562, 324),Vector2(562, 325),Vector2(620, 252),Vector2(557, 368)], 
+	"name": "longsword", "perfectRange": 8, "punishRate": 0.1, "value" : 1},
+	
+	"Rapier" : {"points": [Vector2(635, 248),Vector2(635, 248),Vector2(635, 248),Vector2(600, 292),Vector2(600, 292),Vector2(600, 292),Vector2(563, 355),Vector2(563, 355),Vector2(563, 355),Vector2(526, 413),Vector2(526, 413),Vector2(526, 413)], 
+	"name": "rapier", "perfectRange": 3, "punishRate": 1, "value" : 3},
+	
+	"Sabre" : {"points": [Vector2(503, 367),Vector2(655, 283),Vector2(543, 326),Vector2(537, 367),Vector2(537, 368),Vector2(642, 258),Vector2(600, 301),Vector2(602, 300)], 
+	"name": "sabre", "perfectRange": 6, "punishRate": 0.5, "value" : 2},
+	
+	"Tashi" : {"points": [Vector2(566, 287),Vector2(567, 287),Vector2(527, 360),Vector2(581, 247),Vector2(526, 327),Vector2(525, 328),Vector2(640, 258),Vector2(515, 364),Vector2(591, 237),Vector2(474, 412),Vector2(428, 387),Vector2(651, 240),Vector2(530, 370),Vector2(530, 371)], 
+	"name": "tashi", "perfectRange": 15, "punishRate": 1.5, "value" : 2}
 }
 
 var materialBook = {
-	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 2, "cost": 1},
+	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 2, "cost": 0},
 	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 3, "cost": 1},
 	"Bronze" : {"name": "bronze", "coolRate" : 4, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 4, "cost": 1},
 	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 3000, "idealTempRange": 500, "valueMod": 6, "cost": 1},
 	"Rune": {"name": "rune", "coolRate" : 15, "heatRate" : 40, "idealTemp": 5500, "idealTempRange": 400, "valueMod": 7, "cost": 1},
-	"Mithril": {"name": "mithril", "coolRate" : 50, "heatRate" : 10, "idealTemp": 5000, "idealTempRange": 200, "valueMod": 7, "cost": 1},
+	"Mithril": {"name": "mithril", "coolRate" : 50, "heatRate" : 10, "idealTemp": 5000, "idealTempRange": 1000, "valueMod": 7, "cost": 1},
 	"Caledonite": {"name": "caledonite", "coolRate" : 4, "heatRate" : 20, "idealTemp": 7000, "idealTempRange": 200, "valueMod": 8, "cost": 1}
 
 }

@@ -18,8 +18,17 @@ func _input(event):
 func _on_button_pressed():
 	tempRecipeArray.pop_back()
 	recipeTool = !recipeTool
+	var tempArray = "["
+	#if !recipeTool:
+		#print("[")
+		#for x in tempRecipeArray:
+			#print("Vector2",x,",")
+		#print("]")
+		
 	if !recipeTool:
-		print("[")
 		for x in tempRecipeArray:
-			print("Vector2",x,",")
-		print("]")
+			tempArray = tempArray + "Vector2" + str(x) + ","
+	tempArray = tempArray.left(tempArray.length() - 1)
+	tempArray = tempArray + "]"
+	print (tempArray)
+	tempRecipeArray = []
