@@ -9,6 +9,8 @@ var timeLeftHeated = 30.0;
 var isForge = false
 var recipe = []
 var stage = 0
+var bottledFireTime = 3
+
 var recipeProperties = {
 	"name" : "forged",
 	"points": [Vector2(100,100),Vector2(200,200),Vector2(150,150)], 
@@ -41,6 +43,7 @@ func _process(delta):
 	$AnimatedSprite2D.self_modulate = Color(1,1,1,1)
 	$PointLight2D.energy = temperature/maxTemp
 	$Filter.self_modulate = MetalGlow
+	
 	if isForge:
 		if temperature < maxTemp:
 			temperature += materialProperties["heatRate"] + heatingMod
@@ -49,6 +52,7 @@ func _process(delta):
 			temperature -= (materialProperties["coolRate"] * (1-coolingMod))
 		else:
 			temperature = 0
+
 func SetMaterialColor():
 	var targetColor = Color(0,0,0,0)
 	
@@ -70,5 +74,13 @@ func SetMaterialColor():
 	$AnimatedSprite2D.modulate = targetColor
 	print("new color" ,targetColor)
 
-
+func bottledFire(time):
+	var originalCoolRate = materialProperties["coolRate"]
+	var originalHeatRate = materialProperties["heatRate"]
+	materialProperties["coolRate"] = 0
+	materialProperties["heatRate"] = 0
+	temperature = materialProperties["idealTemp"]
+	await get_tree().create_timer(3).timeout
+	materialProperties["coolRate"] = originalCoolRate
+	materialProperties["heatRate"] = originalHeatRate
 

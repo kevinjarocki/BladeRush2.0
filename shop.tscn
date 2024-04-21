@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cab2q7cer6567"]
+[gd_scene load_steps=33 format=3 uid="uid://cab2q7cer6567"]
 
 [ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
 [ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://c6cnd0kx11fvq" path="res://Assets/Shareef/walls Tilemap.png" id="4_xgx1w"]
 [ext_resource type="PackedScene" uid="uid://bewrwdr2l45aj" path="res://cash_register.tscn" id="5_bnaeq"]
 [ext_resource type="PackedScene" uid="uid://devtoi3ah4vy2" path="res://Player.tscn" id="5_lp5dw"]
-[ext_resource type="PackedScene" uid="uid://bdnf3f3fjgnoh" path="res://recipeTool.tscn" id="9_4745i"]
 [ext_resource type="Script" path="res://GUI HUD.gd" id="9_laghi"]
 [ext_resource type="Theme" uid="uid://ccxq1ecn67rk" path="res://Assets/end_day.tres" id="9_ne1fh"]
 [ext_resource type="Texture2D" uid="uid://cin7oklhjhe8s" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png" id="11_aeu1v"]
@@ -130,12 +129,6 @@ position = Vector2(222, 367)
 
 [node name="AnvilGame" parent="." instance=ExtResource("2_vq7so")]
 visible = false
-
-[node name="Button2" parent="AnvilGame" instance=ExtResource("9_4745i")]
-offset_left = 2012.0
-offset_top = 399.0
-offset_right = 2148.0
-offset_bottom = 535.0
 
 [node name="GUI HUD" type="Control" parent="."]
 layout_mode = 3

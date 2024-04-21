@@ -32,7 +32,7 @@ func _process(delta):
 	
 func _input(event):
 	
-	if (event is InputEventMouseButton and visible and Input.is_action_just_pressed("click") and not gameCompletedBool):
+	if (event is InputEventMouseButton and visible and Input.is_action_just_pressed("click") and not gameCompletedBool and event.position.y < 570):
 		$AnimatedSprite2D.play()
 		$Ping.play()
 		$AnvilTop.play()
@@ -68,7 +68,6 @@ func _input(event):
 		else:
 			ingotSprite.frame = 1
 			ingotFilter.frame = 1
-			print(ingotSprite)
 			nextClick.killInstance()
 			gameCompletedBool = true
 			gameCompleteSignal.emit()
