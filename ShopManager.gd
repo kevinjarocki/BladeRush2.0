@@ -226,7 +226,12 @@ func playerAtCashRegister():
 		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
 		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
 	elif taxManHere:
-		money -= snappedf(taxesOwed,1.5)
+		money -= snappedf(taxesOwed,1.0)
+		$CashRegister.drawGoldValue(-taxesOwed)
+		$CashRegister.play()
+		$CashRegister.get_node("Ding").play()
+		$GPUParticles2D.amount = taxesOwed
+		$GPUParticles2D.emitting = true
 		taxMan.ExitShop()
 		taxManHere = false
 		
@@ -296,7 +301,7 @@ func _on_end_day_next_day_pressed():
 		createCustomer()
 	elif taxManHere:
 		activeRecipe = "Tax Man is here. Time to Pay up!"
-		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.5))
+		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
 	
 func _on_ready():
 	$ThwakToMainMenu.play()
