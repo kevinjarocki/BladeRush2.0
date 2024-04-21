@@ -300,7 +300,6 @@ scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_6qvr0")
 animation = &"longsword"
 
-
 [node name="Filter" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.788235, 0.678431, 0.67451, 1)
 scale = Vector2(0.308594, 0.302734)

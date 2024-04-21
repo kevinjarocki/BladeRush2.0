@@ -4,6 +4,7 @@ extends Control
 
 func _ready():
 	var sw_result: Dictionary = await SilentWolf.Scores.get_scores().sw_get_scores_complete
+	$Label.text = "Score: " + str(score.score)
 	pass
 
 func _on_button_pressed():
