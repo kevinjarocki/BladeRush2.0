@@ -192,6 +192,7 @@ text = "Gold: "
 label_settings = SubResource("LabelSettings_mpd5g")
 
 [node name="DayButton" type="Button" parent="GUI HUD"]
+visible = false
 layout_mode = 0
 offset_left = 887.0
 offset_top = 461.0
@@ -200,6 +201,7 @@ offset_bottom = 511.0
 text = "Next Day"
 
 [node name="Button" type="Button" parent="GUI HUD"]
+visible = false
 layout_mode = 0
 offset_left = 387.0
 offset_top = 672.0
@@ -208,6 +210,7 @@ offset_bottom = 708.0
 text = "Sell Ingot DEV ONLY PLZ"
 
 [node name="DoNothing" type="Button" parent="GUI HUD"]
+visible = false
 layout_mode = 0
 offset_left = 149.0
 offset_top = 670.0

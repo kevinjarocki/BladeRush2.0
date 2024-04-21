@@ -1,21 +1,15 @@
-res://shop.tscn
-res://Assets/end_day.tres
-res://end_day.tscn
 res://ingot.tscn
-res://Player.tscn
+res://Assets/end_day.tres
+res://addons/silent_wolf/assets/themes/sw_theme.tres
+res://Ingot.gd
+res://end_day.tscn
 res://Customer.tscn
 res://recipeTool.tscn
 res://trashCan.tscn
 res://cash_register.tscn
+res://shop.tscn
 res://ore_box.tscn
 res://AnvilGame.tscn
-res://AnvilGame.gd
-res://ShopManager.gd
-res://Ingot.gd
 res://tax_man.tscn
+res://Player.tscn
 res://lamp.tscn
-res://Player.gd
-res://EndDay.gd
-res://GUI HUD.gd
-res://endGame.tscn
-res://endGame.gd
