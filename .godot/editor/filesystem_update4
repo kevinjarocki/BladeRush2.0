@@ -7,3 +7,6 @@ res://recipeTool.tscn
 res://trashCan.tscn
 res://cash_register.tscn
 res://shop.tscn
+res://tax_man.tscn
+res://tax_man.gd
+res://ShopManager.gd
