@@ -7,3 +7,7 @@ res://Customer.tscn
 res://recipeTool.tscn
 res://trashCan.tscn
 res://cash_register.tscn
+res://ore_box.tscn
+res://AnvilGame.tscn
+res://AnvilGame.gd
+res://ShopManager.gd
