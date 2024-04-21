@@ -1,40 +1,40 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1713683951
+::res://::1713686792
 anvil.tscn::PackedScene::4204598536075105987::1713663734::0::1::::<><>::uid://cwaciop3hck2r::::res://Assets/Shareef/Anvil.png
-AnvilGame.gd::GDScript::-1::1713683808::0::1::::<>Control<>::
-AnvilGame.tscn::PackedScene::4245366750886621648::1713683744::0::1::::<><>::res://AnvilGame.gd<>uid://bxch7joyvexmh::::res://click_target.tscn<>uid://dc1yopttemrmx::::res://Assets/Shareef/anvilTop.png<>uid://7sjplt5w0opd::::res://Assets/Sounds/Audacity/AnvilHit1.wav<>uid://dfc24sukfej28::::res://Assets/Sounds/Audacity/AnvilHit2.wav<>uid://bokbvu8wkxrk::::res://Assets/Sounds/Audacity/blacksmith1.mp3<>uid://dpmica7dit60i::::res://Assets/Sounds/Audacity/blacksmith2.mp3<>uid://cudha08dbdm6e::::res://Assets/Shareef/HammerThwack2.png<>uid://bsv436vlcuyea::::res://Assets/Sounds/Audacity/blacksmith3.mp3<>uid://br7qg3ntb3h2j::::res://Assets/Sounds/pog ping.mp3<>uid://xky5hhp50v5n::::res://Assets/Sounds/break_metal.mp3
+AnvilGame.gd::GDScript::-1::1713685305::0::1::::<>Control<>::
+AnvilGame.tscn::PackedScene::4245366750886621648::1713685422::0::1::::<><>::res://AnvilGame.gd<>uid://bxch7joyvexmh::::res://click_target.tscn<>uid://dc1yopttemrmx::::res://Assets/Shareef/anvilTop.png<>uid://7sjplt5w0opd::::res://Assets/Sounds/Audacity/AnvilHit1.wav<>uid://dfc24sukfej28::::res://Assets/Sounds/Audacity/AnvilHit2.wav<>uid://bokbvu8wkxrk::::res://Assets/Sounds/Audacity/blacksmith1.mp3<>uid://dpmica7dit60i::::res://Assets/Sounds/Audacity/blacksmith2.mp3<>uid://cudha08dbdm6e::::res://Assets/Shareef/HammerThwack2.png<>uid://bsv436vlcuyea::::res://Assets/Sounds/Audacity/blacksmith3.mp3<>uid://br7qg3ntb3h2j::::res://Assets/Sounds/pog ping.mp3<>uid://xky5hhp50v5n::::res://Assets/Sounds/break_metal.mp3<>uid://bl7n336mfvqcn::::res://Assets/Shareef/coin.png
 background_music.tscn::PackedScene::3840827246982397416::1713663734::0::1::::<><>::uid://brmpyynqk6y8k::::res://Assets/Sounds/Music/medieval-fantasy-142837.mp3
 cash_register.gd::GDScript::-1::1713669445::0::1::::<>AnimatedSprite2D<>::
-cash_register.tscn::PackedScene::2713664030251839417::1713683744::0::1::::<><>::uid://0fwecess81wq::::res://Assets/Shareef/CashReg.png<>res://cash_register.gd<>uid://y57q1qm2e1as::::res://Assets/Sounds/cashDing.mp3<>uid://d4gloc7rb6s5s::::res://Assets/Font/vinque rg.otf
+cash_register.tscn::PackedScene::2713664030251839417::1713685382::0::1::::<><>::uid://0fwecess81wq::::res://Assets/Shareef/CashReg.png<>res://cash_register.gd<>uid://y57q1qm2e1as::::res://Assets/Sounds/cashDing.mp3<>uid://d4gloc7rb6s5s::::res://Assets/Font/vinque rg.otf
 click_target.gd::GDScript::-1::1713663734::0::1::::<>AnimatedSprite2D<>::
 click_target.tscn::PackedScene::4005375502686397931::1713663734::0::1::::<><>::uid://brx5dttqs8k13::::res://Assets/Shareef/clickTarget.png<>res://click_target.gd
 Customer.gd::GDScript::-1::1713663734::0::1::::<>CharacterBody2D<>::
-Customer.tscn::PackedScene::8740514909995867786::1713683744::0::1::::<><>::res://Customer.gd<>uid://b0uw7jvrx78w1::::res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Yellow/Pawn_Yellow.png
+Customer.tscn::PackedScene::8740514909995867786::1713685382::0::1::::<><>::res://Customer.gd<>uid://b0uw7jvrx78w1::::res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Yellow/Pawn_Yellow.png
 default_bus_layout.tres::AudioBusLayout::856313259123118525::1713663734::0::1::::<><>::
 EndDay.gd::GDScript::-1::1713663734::0::1::::<>Node2D<>::
 endGame.gd::GDScript::-1::1713683951::0::1::::<>Control<>::
 endGame.tscn::PackedScene::-1::1713683951::0::1::::<><>::
-end_day.tscn::PackedScene::755653992362656058::1713683744::0::1::::<><>::res://EndDay.gd<>uid://d4gloc7rb6s5s::::res://Assets/Font/vinque rg.otf<>uid://ccxq1ecn67rk::::res://Assets/end_day.tres<>uid://cwhgt788030vg::::res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Carved_9Slides.png
+end_day.tscn::PackedScene::755653992362656058::1713685382::0::1::::<><>::res://EndDay.gd<>uid://d4gloc7rb6s5s::::res://Assets/Font/vinque rg.otf<>uid://ccxq1ecn67rk::::res://Assets/end_day.tres<>uid://cwhgt788030vg::::res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Carved_9Slides.png
 forge.tscn::PackedScene::342816302421224454::1713663734::0::1::::<><>::uid://c23ybsu3ysp8s::::res://Assets/Shareef/ForgeStart.png
 GUI HUD.gd::GDScript::-1::1713663734::0::1::::<>Control<>::
 icon.svg::CompressedTexture2D::7278417368236156369::1713663734::1713663897::1::::<><>::
 Ingot.gd::GDScript::-1::1713672758::0::1::::<>Node2D<>::
-ingot.tscn::PackedScene::2273015361652194587::1713683951::0::1::::<><>::res://Ingot.gd<>uid://db52wh6xkyow2::::res://Assets/Shareef/Ingot_Axe.png<>uid://bck4grq042uhg::::res://Assets/Shareef/Ingot_Dagger.png<>uid://duau8ofdjhjo1::::res://Assets/Shareef/Ingot_Falchion.png<>uid://dfrdi5r22eshs::::res://Assets/Shareef/Ingot_Scimitar.png<>uid://dvy7ncrs3anmk::::res://Assets/Shareef/Ingot_Longsword.png<>uid://t53u5gu5hub0::::res://Assets/Shareef/Ingot_Rapier.png<>uid://he00givm2mwh::::res://Assets/Shareef/Ingot_Sabre.png<>uid://dfi3cgupn6xjt::::res://Assets/Shareef/Ingot_Tachi.png
+ingot.tscn::PackedScene::2273015361652194587::1713685382::0::1::::<><>::res://Ingot.gd<>uid://db52wh6xkyow2::::res://Assets/Shareef/Ingot_Axe.png<>uid://bck4grq042uhg::::res://Assets/Shareef/Ingot_Dagger.png<>uid://duau8ofdjhjo1::::res://Assets/Shareef/Ingot_Falchion.png<>uid://dfrdi5r22eshs::::res://Assets/Shareef/Ingot_Scimitar.png<>uid://dvy7ncrs3anmk::::res://Assets/Shareef/Ingot_Longsword.png<>uid://t53u5gu5hub0::::res://Assets/Shareef/Ingot_Rapier.png<>uid://he00givm2mwh::::res://Assets/Shareef/Ingot_Sabre.png<>uid://dfi3cgupn6xjt::::res://Assets/Shareef/Ingot_Tachi.png
 Menu.gd::GDScript::-1::1713683951::0::1::::<>Control<>::
 menu.tscn::PackedScene::7514941363191808468::1713663734::0::1::::<><>::res://Menu.gd<>res://VBoxContainer.gd<>uid://d4gloc7rb6s5s::::res://Assets/Font/vinque rg.otf<>uid://dqs8l8yjjil2j::::res://Assets/Shareef/MomoStart.png<>uid://cwaciop3hck2r::::res://Assets/Shareef/Anvil.png<>uid://bsv436vlcuyea::::res://Assets/Sounds/Audacity/blacksmith3.mp3
 Options_Menu.gd::GDScript::-1::1713663734::0::1::::<>Control<>::
 options_menu.tscn::PackedScene::7017446220853654354::1713663734::0::1::::<><>::res://Options_Menu.gd<>uid://d4gloc7rb6s5s::::res://Assets/Font/vinque rg.otf<>uid://dpmica7dit60i::::res://Assets/Sounds/Audacity/blacksmith2.mp3
-ore_box.tscn::PackedScene::6679126079294608587::1713683744::0::1::::<><>::uid://dqs8l8yjjil2j::::res://Assets/Shareef/MomoStart.png
+ore_box.tscn::PackedScene::6679126079294608587::1713685382::0::1::::<><>::uid://dqs8l8yjjil2j::::res://Assets/Shareef/MomoStart.png
 Player.gd::GDScript::-1::1713663734::0::1::::<>CharacterBody2D<>::
-Player.tscn::PackedScene::7484548445895763447::1713683744::0::1::::<><>::res://Player.gd<>uid://dpjpqh73a8uds::::res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Red/BlackSmith.png
+Player.tscn::PackedScene::7484548445895763447::1713685382::0::1::::<><>::res://Player.gd<>uid://dpjpqh73a8uds::::res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Red/BlackSmith.png
 recipeTool.gd::GDScript::-1::1713675961::0::1::::<>Control<>::
-recipeTool.tscn::PackedScene::2624178018713874551::1713683744::0::1::::<><>::uid://dbxyqadajdmm8::::res://icon.svg<>res://recipeTool.gd<>uid://dc1yopttemrmx::::res://Assets/Shareef/anvilTop.png<>uid://7nch364v2svb::::res://ingot.tscn
+recipeTool.tscn::PackedScene::2624178018713874551::1713685382::0::1::::<><>::uid://dbxyqadajdmm8::::res://icon.svg<>res://recipeTool.gd<>uid://dc1yopttemrmx::::res://Assets/Shareef/anvilTop.png<>uid://7nch364v2svb::::res://ingot.tscn
 ScoreSingleton.gd::GDScript::-1::1713683951::0::1::::<>Node2D<>::
-shop.tscn::PackedScene::4776575360689961790::1713683843::0::1::::<><>::res://ShopManager.gd<>uid://c2foh3xf7xqox::::res://ore_box.tscn<>uid://b1qqtnco6o3b5::::res://AnvilGame.tscn<>uid://e5cetnbk6s3o::::res://forge.tscn<>uid://x87tv08rqsb1::::res://Assets/Shareef/Tilemap set sj.png<>uid://b050eg4ti6ipn::::res://anvil.tscn<>uid://c6cnd0kx11fvq::::res://Assets/Shareef/walls Tilemap.png<>uid://bewrwdr2l45aj::::res://cash_register.tscn<>uid://devtoi3ah4vy2::::res://Player.tscn<>res://GUI HUD.gd<>uid://ccxq1ecn67rk::::res://Assets/end_day.tres<>uid://cin7oklhjhe8s::::res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png<>uid://btbfj47m04llr::::res://Assets/Sounds/Ferret/155115__jzazvurek__ferret1.mp3<>uid://dm1c6rd1ioylc::::res://Assets/Sounds/Ferret/155115__jzazvurek__ferret2.mp3<>uid://b47won4vrbchq::::res://Assets/Sounds/Ferret/155115__jzazvurek__ferret3.mp3<>uid://th0gdq3bowgo::::res://Assets/Sounds/Ferret/155115__jzazvurek__ferret4.mp3<>uid://df4ym32qvy80h::::res://Assets/Sounds/Ferret/155115__jzazvurek__ferret5.mp3<>uid://bdml4x3j8ni0w::::res://Assets/Sounds/Ferret/477390__nuff3__steps-dirt_2a.ogg<>uid://ba8u1nix4fee7::::res://Assets/Sounds/214456__quaker540__hq-flamethrower-burning.wav<>uid://k1brmsrvmi3s::::res://end_day.tscn<>uid://dpmica7dit60i::::res://Assets/Sounds/Audacity/blacksmith2.mp3<>uid://dlgvjnk6rw5xy::::res://trashCan.tscn<>uid://bl7n336mfvqcn::::res://Assets/Shareef/coin.png
-ShopManager.gd::GDScript::-1::1713683951::0::1::::<>Node2D<>::
+shop.tscn::PackedScene::4776575360689961790::1713686792::0::1::::<><>::res://ShopManager.gd<>uid://c2foh3xf7xqox::::res://ore_box.tscn<>uid://b1qqtnco6o3b5::::res://AnvilGame.tscn<>uid://e5cetnbk6s3o::::res://forge.tscn<>uid://x87tv08rqsb1::::res://Assets/Shareef/Tilemap set sj.png<>uid://b050eg4ti6ipn::::res://anvil.tscn<>uid://c6cnd0kx11fvq::::res://Assets/Shareef/walls Tilemap.png<>uid://bewrwdr2l45aj::::res://cash_register.tscn<>uid://devtoi3ah4vy2::::res://Player.tscn<>res://GUI HUD.gd<>uid://ccxq1ecn67rk::::res://Assets/end_day.tres<>uid://cin7oklhjhe8s::::res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png<>uid://btbfj47m04llr::::res://Assets/Sounds/Ferret/155115__jzazvurek__ferret1.mp3<>uid://dm1c6rd1ioylc::::res://Assets/Sounds/Ferret/155115__jzazvurek__ferret2.mp3<>uid://b47won4vrbchq::::res://Assets/Sounds/Ferret/155115__jzazvurek__ferret3.mp3<>uid://th0gdq3bowgo::::res://Assets/Sounds/Ferret/155115__jzazvurek__ferret4.mp3<>uid://df4ym32qvy80h::::res://Assets/Sounds/Ferret/155115__jzazvurek__ferret5.mp3<>uid://bdml4x3j8ni0w::::res://Assets/Sounds/Ferret/477390__nuff3__steps-dirt_2a.ogg<>uid://ba8u1nix4fee7::::res://Assets/Sounds/214456__quaker540__hq-flamethrower-burning.wav<>uid://k1brmsrvmi3s::::res://end_day.tscn<>uid://dpmica7dit60i::::res://Assets/Sounds/Audacity/blacksmith2.mp3<>uid://dlgvjnk6rw5xy::::res://trashCan.tscn<>uid://bl7n336mfvqcn::::res://Assets/Shareef/coin.png
+ShopManager.gd::GDScript::-1::1713686792::0::1::::<>Node2D<>::
 tax_man.gd::GDScript::-1::1713669445::0::1::::<>CharacterBody2D<>::
-tax_man.tscn::PackedScene::3865019996596901793::1713683744::0::1::::<><>::res://tax_man.gd<>uid://cta8wgfld4egx::::res://Assets/Shareef/TaxManIdle.png<>uid://bjwiivcroi3ec::::res://Assets/Shareef/TaxMan.png
-trashCan.tscn::PackedScene::7945017426298969918::1713683744::0::1::::<><>::uid://n5eey64opuvo::::res://Assets/Sprites/can.png
+tax_man.tscn::PackedScene::3865019996596901793::1713685383::0::1::::<><>::res://tax_man.gd<>uid://cta8wgfld4egx::::res://Assets/Shareef/TaxManIdle.png<>uid://bjwiivcroi3ec::::res://Assets/Shareef/TaxMan.png
+trashCan.tscn::PackedScene::7945017426298969918::1713686770::0::1::::<><>::uid://dvi4dfe4f4v6w::::res://Assets/Shareef/tashCan.png
 tutorial.gd::GDScript::-1::1713683951::0::1::::<>Control<>::
 tutorial.tscn::PackedScene::-1::1713683951::0::1::::<><>::
 VBoxContainer.gd::GDScript::-1::1713663734::0::1::::<>VBoxContainer<>::
@@ -108,7 +108,7 @@ crow_jump.png::CompressedTexture2D::5604612833687090416::1713663733::1713663733:
 crow_walk.png::CompressedTexture2D::521509185146409410::1713663733::1713663733::1::::<><>::
 ::res://Assets/Font/::1713663733
 vinque rg.otf::FontFile::9207817826397121022::1713663733::1713663733::1::::<><>::
-::res://Assets/HowtoPlay/::1713683951
+::res://Assets/HowtoPlay/::1713683987
 Anvil.PNG::CompressedTexture2D::2963611825458325951::1713683951::1713683987::1::::<><>::
 Furnace.PNG::CompressedTexture2D::59700522870211857::1713683951::1713683987::1::::<><>::
 MainGame.PNG::CompressedTexture2D::3043456829847873004::1713683951::1713683987::1::::<><>::
@@ -320,7 +320,7 @@ Ored Silver 8.png::CompressedTexture2D::7790177864963419378::1713663734::1713663
 Ored Silver 9.png::CompressedTexture2D::5653627626629031503::1713663734::1713663734::1::::<><>::
 Ored Silver 10.png::CompressedTexture2D::3717950571280351595::1713663734::1713663734::1::::<><>::
 Ore_Atlas.png::CompressedTexture2D::5906316613194930777::1713663734::1713663734::1::::<><>::
-::res://Assets/Shareef/::1713681779
+::res://Assets/Shareef/::1713686872
 Anvil.png::CompressedTexture2D::6317132407540292239::1713663734::1713663734::1::::<><>::
 anvilTop.png::CompressedTexture2D::7354796586972631987::1713663734::1713663734::1::::<><>::
 CashReg.png::CompressedTexture2D::1766386008806727756::1713663734::1713663734::1::::<><>::
@@ -342,12 +342,13 @@ Ingot_Tachi.png::CompressedTexture2D::7528425285423552329::1713681762::171368177
 Ingot_Tashi.png::CompressedTexture2D::6669268014541872529::1713669436::1713669451::1::::<><>::
 MomoStart.png::CompressedTexture2D::8321467424122279099::1713663734::1713663734::1::::<><>::
 PoVHammer.png::CompressedTexture2D::1520421211285365919::1713663734::1713663734::1::::<><>::
+tashCan.png::CompressedTexture2D::8651509209803846112::1713686572::1713686577::1::::<><>::
 TaxMan.png::CompressedTexture2D::3064037716189498170::1713675021::1713675043::1::::<><>::
 TaxManIdle.png::CompressedTexture2D::6108472668105084715::1713675573::1713675577::1::::<><>::
 Tilemap set sj.png::CompressedTexture2D::1684445886544637172::1713663734::1713663734::1::::<><>::
 walls Tilemap.png::CompressedTexture2D::6953620283573589950::1713663734::1713663734::1::::<><>::
 ::res://Assets/Shareef/Ingot_Longsword_sprites/::1713678738
-::res://Assets/Sounds/::1713663734
+::res://Assets/Sounds/::1713686911
 155115__jzazvurek__ferret.wav::AudioStreamWAV::8526199737769072876::1713663734::1713663734::1::::<><>::
 180894__jobro__cash-register-opening.wav::AudioStreamWAV::8113686270477119353::1713663734::1713663734::1::::<><>::
 214456__quaker540__hq-flamethrower-burning.wav::AudioStreamWAV::2455806616319887248::1713663734::1713663734::1::::<><>::
@@ -357,6 +358,8 @@ break_metal.mp3::AudioStreamMP3::1636498342058595877::1713663734::1713663734::1:
 cashDing.mp3::AudioStreamMP3::1748436487311043530::1713663734::1713663734::1::::<><>::
 pog ping.mp3::AudioStreamMP3::3646674791919237579::1713663734::1713663734::1::::<><>::
 Powerup2.wav::AudioStreamWAV::1003760776185264907::1713663734::1713663734::1::::<><>::
+racoon-gecker (1).mp3::AudioStreamMP3::7290053309734061113::1713686911::1713686915::1::::<><>::
+racoon-gecker (1).wav::AudioStreamWAV::5521825644094021119::1713686873::1713686915::1::::<><>::
 ::res://Assets/Sounds/Audacity/::1713663734
 AnvilHit1.wav::AudioStreamWAV::2283775644335180769::1713663734::1713663734::1::::<><>::
 AnvilHit2.wav::AudioStreamWAV::7516027148383116555::1713663734::1713663734::1::::<><>::
