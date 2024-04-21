@@ -294,6 +294,8 @@ func playerAtCashRegister():
 			taxManHere = false
 			resetDay()
 			_on_end_day_next_day_pressed()
+			$EndDay.moneyPrevTurn = money
+			
 			
 		else:
 			get_tree().change_scene_to_file("res://endGame.tscn")
