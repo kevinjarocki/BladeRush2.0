@@ -162,6 +162,7 @@ func playerAtOreBox():
 		var ingotNode = load("res://ingot.tscn").instantiate()
 		$Player.add_child(ingotNode)
 		ingotNode.position = Vector2(20,10)
+		ingotNode.scale = Vector2(1.5,1.5)
 		print ("Picked up ingot")
 		
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
