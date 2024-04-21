@@ -162,6 +162,8 @@ stream = ExtResource("10_kile0")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 modulate = Color(1, 0.403922, 0.0588235, 0.470588)
+z_index = 1
+y_sort_enabled = true
 position = Vector2(587, 357)
 scale = Vector2(0.2, 0.2)
 emitting = false
