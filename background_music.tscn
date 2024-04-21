@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://buyr4mlfw8p4k"]
+
+[ext_resource type="AudioStream" uid="uid://brmpyynqk6y8k" path="res://Assets/Sounds/Music/medieval-fantasy-142837.mp3" id="1_j6fsw"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_j6fsw")
+volume_db = -13.607
+autoplay = true
+bus = &"Music"

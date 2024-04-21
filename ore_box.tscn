@@ -1,0 +1,119 @@
+[gd_scene load_steps=17 format=3 uid="uid://c2foh3xf7xqox"]
+
+[ext_resource type="Texture2D" uid="uid://dqs8l8yjjil2j" path="res://Assets/Shareef/MomoStart.png" id="1_4u1mc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8q68r"]
+atlas = ExtResource("1_4u1mc")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yh2l6"]
+atlas = ExtResource("1_4u1mc")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgdte"]
+atlas = ExtResource("1_4u1mc")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bfx6l"]
+atlas = ExtResource("1_4u1mc")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7feh"]
+atlas = ExtResource("1_4u1mc")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msdro"]
+atlas = ExtResource("1_4u1mc")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44scy"]
+atlas = ExtResource("1_4u1mc")
+region = Rect2(400, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s1k6"]
+atlas = ExtResource("1_4u1mc")
+region = Rect2(600, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eils0"]
+atlas = ExtResource("1_4u1mc")
+region = Rect2(0, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7oq5"]
+atlas = ExtResource("1_4u1mc")
+region = Rect2(200, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15up1"]
+atlas = ExtResource("1_4u1mc")
+region = Rect2(400, 400, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_scdnw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8q68r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yh2l6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgdte")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bfx6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7feh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msdro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44scy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8s1k6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eils0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7oq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15up1")
+}],
+"loop": true,
+"name": &"Start",
+"speed": 13.0
+}]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8xceh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7nix2"]
+size = Vector2(9.88312, 6.76665)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqsir"]
+size = Vector2(15.0909, 25.7333)
+
+[node name="OreBox" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_scdnw")
+animation = &"Start"
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(344, 101)
+scale = Vector2(9.625, 7.5)
+physics_material_override = SubResource("PhysicsMaterial_8xceh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-35.7403, -11.2)
+shape = SubResource("RectangleShape2D_7nix2")
+debug_color = Color(0.933333, 0.188235, 0.443137, 0.419608)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(344, 101)
+scale = Vector2(9.625, 7.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-36.1558, -11.4667)
+shape = SubResource("RectangleShape2D_wqsir")

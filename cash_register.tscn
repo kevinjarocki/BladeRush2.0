@@ -1,0 +1,142 @@
+[gd_scene load_steps=20 format=3 uid="uid://bewrwdr2l45aj"]
+
+[ext_resource type="Texture2D" uid="uid://0fwecess81wq" path="res://Assets/Shareef/CashReg.png" id="1_kqsuk"]
+[ext_resource type="Script" path="res://cash_register.gd" id="2_gf6xs"]
+[ext_resource type="AudioStream" uid="uid://y57q1qm2e1as" path="res://Assets/Sounds/cashDing.mp3" id="2_lrslc"]
+[ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="4_hpumm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0mjh"]
+atlas = ExtResource("1_kqsuk")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0y6rk"]
+atlas = ExtResource("1_kqsuk")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cse1x"]
+atlas = ExtResource("1_kqsuk")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ox575"]
+atlas = ExtResource("1_kqsuk")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja3da"]
+atlas = ExtResource("1_kqsuk")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ltpa"]
+atlas = ExtResource("1_kqsuk")
+region = Rect2(400, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bwms"]
+atlas = ExtResource("1_kqsuk")
+region = Rect2(0, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cn780"]
+atlas = ExtResource("1_kqsuk")
+region = Rect2(200, 400, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iqvho"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0mjh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0y6rk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cse1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ox575")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ja3da")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ltpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bwms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cn780")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lui1a"]
+size = Vector2(18.7166, 11.2462)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmlun"]
+size = Vector2(23.1765, 23.7596)
+
+[sub_resource type="Gradient" id="Gradient_sk8cu"]
+offsets = PackedFloat32Array(0, 0.655844)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jhywb"]
+gradient = SubResource("Gradient_sk8cu")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i1et3"]
+polygon = PackedVector2Array(-51, -55, -24, -49, -1, -44, 15, -33, 11, -22, 22, -19, 22, -9, 68, 11, 68, 21, 57, 26, 56, 53, 19, 69, -66, 49, -67, 24, -77, 19, -79, 13, -51, -9)
+
+[sub_resource type="LabelSettings" id="LabelSettings_roa4a"]
+font = ExtResource("4_hpumm")
+
+[node name="CashRegister" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_iqvho")
+script = ExtResource("2_gf6xs")
+metadata/_edit_group_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(177, 392)
+scale = Vector2(6.67857, 6.31325)
+collision_layer = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-27.1016, -57.9733)
+shape = SubResource("RectangleShape2D_lui1a")
+debug_color = Color(0.960784, 0, 0.505882, 0.419608)
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(177, 392)
+scale = Vector2(6.67857, 6.31325)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-26.861, -60.8245)
+shape = SubResource("RectangleShape2D_hmlun")
+
+[node name="Ding" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_lrslc")
+pitch_scale = 0.97
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(36, -35)
+scale = Vector2(2.79688, 2.34375)
+color = Color(1, 0.905882, 0, 1)
+range_item_cull_mask = 9
+shadow_enabled = true
+shadow_item_cull_mask = 9
+texture = SubResource("GradientTexture2D_jhywb")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(-1, 0)
+occluder = SubResource("OccluderPolygon2D_i1et3")
+occluder_light_mask = 8
+
+[node name="Label" type="Label" parent="."]
+visible = false
+texture_filter = 3
+offset_left = -14.0
+offset_top = -9.0
+offset_right = 26.0
+offset_bottom = 14.0
+text = "test"
+label_settings = SubResource("LabelSettings_roa4a")

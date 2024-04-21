@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3 uid="uid://e5cetnbk6s3o"]
+
+[ext_resource type="Texture2D" uid="uid://c23ybsu3ysp8s" path="res://Assets/Shareef/ForgeStart.png" id="1_hyjmg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gfpqr"]
+atlas = ExtResource("1_hyjmg")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foyob"]
+atlas = ExtResource("1_hyjmg")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2jq6"]
+atlas = ExtResource("1_hyjmg")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncykd"]
+atlas = ExtResource("1_hyjmg")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qlsy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gfpqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_foyob")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2jq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncykd")
+}],
+"loop": true,
+"name": &"Start",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kit3j"]
+size = Vector2(157.316, 214.835)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nn4i7"]
+size = Vector2(78.8947, 137.159)
+
+[sub_resource type="Gradient" id="Gradient_4v6ji"]
+offsets = PackedFloat32Array(0, 0.675325, 0.688312)
+colors = PackedColorArray(1, 1, 1, 1, 0.0660378, 0.0660378, 0.0660378, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qtmqi"]
+gradient = SubResource("Gradient_4v6ji")
+width = 300
+height = 300
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.816514, 0)
+
+[node name="Forge" type="AnimatedSprite2D"]
+texture_filter = 5
+scale = Vector2(1, 0.956)
+sprite_frames = SubResource("SpriteFrames_0qlsy")
+animation = &"Start"
+centered = false
+
+[node name="Area2D" type="Area2D" parent="."]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(96.6316, 107.34)
+shape = SubResource("RectangleShape2D_kit3j")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(97.8947, 106.905)
+shape = SubResource("RectangleShape2D_nn4i7")
+debug_color = Color(0.937255, 0.129412, 0.541176, 0.419608)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(99, 101.464)
+color = Color(0.635294, 0.309804, 0.054902, 1)
+energy = 1.5
+texture = SubResource("GradientTexture2D_qtmqi")

@@ -1,0 +1,148 @@
+[gd_scene load_steps=24 format=3 uid="uid://b1qqtnco6o3b5"]
+
+[ext_resource type="Script" path="res://AnvilGame.gd" id="1_3ooct"]
+[ext_resource type="PackedScene" uid="uid://bxch7joyvexmh" path="res://click_target.tscn" id="2_k18te"]
+[ext_resource type="Texture2D" uid="uid://dc1yopttemrmx" path="res://Assets/Shareef/anvilTop.png" id="3_410m1"]
+[ext_resource type="AudioStream" uid="uid://7sjplt5w0opd" path="res://Assets/Sounds/Audacity/AnvilHit1.wav" id="3_k1k31"]
+[ext_resource type="AudioStream" uid="uid://dfc24sukfej28" path="res://Assets/Sounds/Audacity/AnvilHit2.wav" id="4_1ywx1"]
+[ext_resource type="AudioStream" uid="uid://bokbvu8wkxrk" path="res://Assets/Sounds/Audacity/blacksmith1.mp3" id="5_ckptm"]
+[ext_resource type="AudioStream" uid="uid://dpmica7dit60i" path="res://Assets/Sounds/Audacity/blacksmith2.mp3" id="6_5xbeg"]
+[ext_resource type="Texture2D" uid="uid://cudha08dbdm6e" path="res://Assets/Shareef/HammerThwack2.png" id="6_agt10"]
+[ext_resource type="AudioStream" uid="uid://bsv436vlcuyea" path="res://Assets/Sounds/Audacity/blacksmith3.mp3" id="7_qfhuv"]
+[ext_resource type="AudioStream" uid="uid://br7qg3ntb3h2j" path="res://Assets/Sounds/pog ping.mp3" id="9_ix781"]
+[ext_resource type="AudioStream" uid="uid://xky5hhp50v5n" path="res://Assets/Sounds/break_metal.mp3" id="10_kile0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_km7r8"]
+atlas = ExtResource("3_410m1")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bh7gs"]
+atlas = ExtResource("3_410m1")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drmks"]
+atlas = ExtResource("3_410m1")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pye2g"]
+atlas = ExtResource("3_410m1")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fg74g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_km7r8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bh7gs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drmks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pye2g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_km7r8")
+}],
+"loop": false,
+"name": &"Whack",
+"speed": 30.0
+}]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6cs55"]
+streams_count = 5
+stream_0/stream = ExtResource("3_k1k31")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_1ywx1")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_ckptm")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("6_5xbeg")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("7_qfhuv")
+stream_4/weight = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4krl"]
+atlas = ExtResource("6_agt10")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trlxl"]
+atlas = ExtResource("6_agt10")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klthu"]
+atlas = ExtResource("6_agt10")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qg18h"]
+atlas = ExtResource("6_agt10")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbogl"]
+atlas = ExtResource("6_agt10")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xmowa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4krl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trlxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klthu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qg18h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbogl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbogl")
+}],
+"loop": false,
+"name": &"thwack",
+"speed": 20.0
+}]
+
+[node name="AnvilGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3ooct")
+clickTarget = ExtResource("2_k18te")
+
+[node name="AnvilTop" type="AnimatedSprite2D" parent="."]
+position = Vector2(579, 402)
+scale = Vector2(3.065, 3.065)
+sprite_frames = SubResource("SpriteFrames_fg74g")
+animation = &"Whack"
+frame = 4
+frame_progress = 1.0
+offset = Vector2(-3.98, -21.775)
+
+[node name="Ping" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_6cs55")
+pitch_scale = 0.7
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(686, 433)
+scale = Vector2(2.07, 2.07)
+sprite_frames = SubResource("SpriteFrames_xmowa")
+animation = &"thwack"
+offset = Vector2(16.245, 27.71)
+
+[node name="Perfect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_ix781")
+volume_db = 3.0
+
+[node name="Broken" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_kile0")

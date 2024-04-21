@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://br7qg3ntb3h2j"
+path="res://.godot/imported/pog ping.mp3-cff10ea0773d735130fdc99fe98a5ec5.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/pog ping.mp3"
+dest_files=["res://.godot/imported/pog ping.mp3-cff10ea0773d735130fdc99fe98a5ec5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

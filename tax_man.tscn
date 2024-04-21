@@ -1,0 +1,95 @@
+[gd_scene load_steps=15 format=3 uid="uid://bvcikx0kdhp5b"]
+
+[ext_resource type="Script" path="res://tax_man.gd" id="1_cfmq0"]
+[ext_resource type="Texture2D" uid="uid://d1qldsuhsbhii" path="res://Assets/Crow Animations/crow_idle.png" id="1_suik1"]
+[ext_resource type="Texture2D" uid="uid://hovgegdj7cjy" path="res://Assets/Crow Animations/crow_walk.png" id="2_nqynm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7knbn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svvpq"]
+atlas = ExtResource("1_suik1")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2525s"]
+atlas = ExtResource("1_suik1")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8784x"]
+atlas = ExtResource("1_suik1")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2cen"]
+atlas = ExtResource("1_suik1")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2biyb"]
+atlas = ExtResource("2_nqynm")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgaot"]
+atlas = ExtResource("2_nqynm")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nnxh"]
+atlas = ExtResource("2_nqynm")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sp8bd"]
+atlas = ExtResource("2_nqynm")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fo5yt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svvpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2525s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8784x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2cen")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2biyb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgaot")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nnxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sp8bd")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aaw1j"]
+
+[node name="TaxMan" type="CharacterBody2D"]
+script = ExtResource("1_cfmq0")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(3, 3)
+
+[node name="TaxManCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_7knbn")
+
+[node name="TaxManAnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+sprite_frames = SubResource("SpriteFrames_fo5yt")
+animation = &"idle"
+frame_progress = 0.50528
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_aaw1j")

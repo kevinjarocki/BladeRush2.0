@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=3 uid="uid://7nch364v2svb"]
+
+[ext_resource type="Script" path="res://Ingot.gd" id="1_iac0r"]
+[ext_resource type="Texture2D" uid="uid://db52wh6xkyow2" path="res://Assets/Shareef/Ingot_Axe.png" id="2_jgmdq"]
+[ext_resource type="Texture2D" uid="uid://dfrdi5r22eshs" path="res://Assets/Shareef/Ingot_Scimitar.png" id="4_f5qwb"]
+[ext_resource type="Texture2D" uid="uid://wsjx08weifro" path="res://Assets/Shareef/dagger.png" id="6_3ku6o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46kyo"]
+atlas = ExtResource("2_jgmdq")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6rb8"]
+atlas = ExtResource("2_jgmdq")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqgal"]
+atlas = ExtResource("6_3ku6o")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61q7q"]
+atlas = ExtResource("6_3ku6o")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mr8m"]
+atlas = ExtResource("4_f5qwb")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3oa4w"]
+atlas = ExtResource("4_f5qwb")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6qvr0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46kyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6rb8")
+}],
+"loop": true,
+"name": &"axe",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqgal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61q7q")
+}],
+"loop": true,
+"name": &"dagger",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mr8m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3oa4w")
+}],
+"loop": true,
+"name": &"scimitar",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1cr4"]
+size = Vector2(31.2811, 17.7589)
+
+[sub_resource type="Gradient" id="Gradient_ietvd"]
+offsets = PackedFloat32Array(0, 0.506494)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1wrkv"]
+gradient = SubResource("Gradient_ietvd")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.495413, 0.490826)
+
+[node name="Ingot" type="Node2D" groups=["ingot"]]
+script = ExtResource("1_iac0r")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.308594, 0.302734)
+sprite_frames = SubResource("SpriteFrames_6qvr0")
+animation = &"axe"
+
+[node name="Filter" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(0.788235, 0.678431, 0.67451, 1)
+scale = Vector2(0.308594, 0.302734)
+sprite_frames = SubResource("SpriteFrames_6qvr0")
+animation = &"scimitar"
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(5, -4.83333)
+rotation = -1.02974
+shape = SubResource("RectangleShape2D_d1cr4")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(4.01, -3.93)
+color = Color(1, 0.831373, 0.756863, 1)
+texture = SubResource("GradientTexture2D_1wrkv")

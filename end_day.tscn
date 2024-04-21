@@ -1,0 +1,184 @@
+[gd_scene load_steps=7 format=3 uid="uid://k1brmsrvmi3s"]
+
+[ext_resource type="Script" path="res://EndDay.gd" id="1_5xngi"]
+[ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="2_ixve3"]
+[ext_resource type="Theme" uid="uid://ccxq1ecn67rk" path="res://Assets/end_day.tres" id="3_bom54"]
+[ext_resource type="Texture2D" uid="uid://cwhgt788030vg" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Carved_9Slides.png" id="6_l5164"]
+
+[sub_resource type="Theme" id="Theme_nmuwe"]
+resource_local_to_scene = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_unw6c"]
+font = ExtResource("2_ixve3")
+font_size = 36
+font_color = Color(0, 0, 0, 1)
+
+[node name="EndDay" type="Node2D"]
+z_index = 30
+script = ExtResource("1_5xngi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(576, 325)
+scale = Vector2(5.97917, 3.36458)
+texture = ExtResource("6_l5164")
+
+[node name="Control" type="Control" parent="."]
+texture_filter = 6
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("3_bom54")
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+z_index = -9
+layout_mode = 0
+offset_left = 2.0
+offset_right = 1152.0
+offset_bottom = 644.0
+color = Color(0.184314, 0.113725, 0.00392157, 1)
+
+[node name="Info" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 153.0
+offset_right = 309.0
+offset_bottom = 314.0
+text = "INFO"
+
+[node name="DaysDone" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 59.0
+offset_right = 377.0
+offset_bottom = 185.0
+text = "Days Done!"
+
+[node name="NextDay" type="Button" parent="Control"]
+z_index = 5
+layout_mode = 0
+offset_left = 853.0
+offset_top = 530.0
+offset_right = 991.0
+offset_bottom = 578.0
+text = "Next Day"
+
+[node name="PlayerSpeedInc" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 685.0
+offset_top = 50.0
+offset_right = 1085.0
+offset_bottom = 140.0
+theme = SubResource("Theme_nmuwe")
+text = "Increase Player Speed:
+blet"
+
+[node name="CoolingRateDec" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 685.0
+offset_top = 150.0
+offset_right = 1085.0
+offset_bottom = 240.0
+text = "Decrease Cooling Rate: 10G
+ree"
+
+[node name="HeatRateInc" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 685.0
+offset_top = 250.0
+offset_right = 1085.0
+offset_bottom = 340.0
+text = "Increase Heat Rate: 10G
+meh"
+
+[node name="AutoIngot" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 685.0
+offset_top = 350.0
+offset_right = 1085.0
+offset_bottom = 440.0
+text = "Auto Molmol
+ "
+
+[node name="Golden Hammer" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 500.0
+offset_right = 205.0
+offset_bottom = 595.0
+text = "Golden
+Hammer"
+
+[node name="Label" type="Label" parent="Control/Golden Hammer"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 80.0
+offset_right = 96.0
+offset_bottom = 139.0
+text = "5 G"
+label_settings = SubResource("LabelSettings_unw6c")
+
+[node name="Kings Sigil" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 500.0
+offset_right = 465.0
+offset_bottom = 595.0
+text = "Kings
+Sigil"
+
+[node name="Label" type="Label" parent="Control/Kings Sigil"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 80.0
+offset_right = 96.0
+offset_bottom = 139.0
+text = "5 G"
+label_settings = SubResource("LabelSettings_unw6c")
+
+[node name="Be Back in 5" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 500.0
+offset_right = 595.0
+offset_bottom = 595.0
+text = "Be back
+in 5"
+
+[node name="Label" type="Label" parent="Control/Be Back in 5"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 80.0
+offset_right = 96.0
+offset_bottom = 139.0
+text = "5 G"
+label_settings = SubResource("LabelSettings_unw6c")
+
+[node name="Bottled Fire" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 500.0
+offset_right = 335.0
+offset_bottom = 595.0
+text = "Bottled
+Fire"
+
+[node name="Label" type="Label" parent="Control/Bottled Fire"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 80.0
+offset_right = 96.0
+offset_bottom = 139.0
+text = "5 G"
+label_settings = SubResource("LabelSettings_unw6c")
+
+[connection signal="pressed" from="Control/NextDay" to="." method="_on_next_day_pressed"]
+[connection signal="pressed" from="Control/PlayerSpeedInc" to="." method="_on_player_speed_inc_pressed"]
+[connection signal="pressed" from="Control/CoolingRateDec" to="." method="_on_cooling_rate_dec_pressed"]
+[connection signal="pressed" from="Control/HeatRateInc" to="." method="_on_heat_rate_inc_pressed"]
+[connection signal="pressed" from="Control/AutoIngot" to="." method="_on_auto_ingot_pressed"]
+[connection signal="pressed" from="Control/Golden Hammer" to="." method="_on_golden_hammer_pressed"]
+[connection signal="pressed" from="Control/Kings Sigil" to="." method="_on_kings_sigil_pressed"]
+[connection signal="pressed" from="Control/Be Back in 5" to="." method="_on_be_back_in_5_pressed"]
+[connection signal="pressed" from="Control/Bottled Fire" to="." method="_on_bottled_fire_pressed"]
