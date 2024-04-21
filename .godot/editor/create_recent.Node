@@ -1,3 +1,4 @@
+TileMap
 Label
 Button
 GPUParticles2D
@@ -8,7 +9,6 @@ ProgressBar
 Control
 CharacterBody2D
 RigidBody2D
-TileMap
 CollisionShape2D
 Area2D
 StaticBody2D
