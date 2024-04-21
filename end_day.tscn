@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://k1brmsrvmi3s"]
+[gd_scene load_steps=8 format=3 uid="uid://k1brmsrvmi3s"]
 
 [ext_resource type="Script" path="res://EndDay.gd" id="1_5xngi"]
 [ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="2_ixve3"]
 [ext_resource type="Theme" uid="uid://ccxq1ecn67rk" path="res://Assets/end_day.tres" id="3_bom54"]
+[ext_resource type="AudioStream" uid="uid://bsv436vlcuyea" path="res://Assets/Sounds/Audacity/blacksmith3.mp3" id="5_eydan"]
 [ext_resource type="Texture2D" uid="uid://cwhgt788030vg" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Carved_9Slides.png" id="6_l5164"]
 
 [sub_resource type="Theme" id="Theme_nmuwe"]
@@ -174,6 +175,10 @@ offset_right = 96.0
 offset_bottom = 139.0
 text = "5 G"
 label_settings = SubResource("LabelSettings_unw6c")
+
+[node name="Thwak" type="AudioStreamPlayer2D" parent="."]
+visible = false
+stream = ExtResource("5_eydan")
 
 [connection signal="pressed" from="Control/NextDay" to="." method="_on_next_day_pressed"]
 [connection signal="pressed" from="Control/PlayerSpeedInc" to="." method="_on_player_speed_inc_pressed"]

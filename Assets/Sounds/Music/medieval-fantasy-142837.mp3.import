@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/medieval-fantasy-142837.mp3-8c4de94495cec97a2
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
