@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://pbf0rnvtidu1"]
+[gd_scene load_steps=10 format=3 uid="uid://pbf0rnvtidu1"]
 
 [ext_resource type="Script" path="res://tutorial.gd" id="1_5n47n"]
 [ext_resource type="Texture2D" uid="uid://bjmjj3p7c6wq3" path="res://Assets/HowtoPlay/MainGame.PNG" id="1_bo1vo"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://06sa50iv8utp" path="res://Assets/HowtoPlay/Taxman.PNG" id="3_8g8by"]
 [ext_resource type="Texture2D" uid="uid://b8tkhgua2lb0o" path="res://Assets/HowtoPlay/MolMol.PNG" id="5_aguc0"]
 [ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="5_aldoo"]
+[ext_resource type="Texture2D" uid="uid://36i2jnd452l" path="res://Assets/HowtoPlay/Furnace.PNG" id="6_7vh2p"]
+[ext_resource type="Texture2D" uid="uid://bihuivmoi5ghj" path="res://Assets/HowtoPlay/Anvil.PNG" id="7_pr1fr"]
+[ext_resource type="AudioStream" uid="uid://bsv436vlcuyea" path="res://Assets/Sounds/Audacity/blacksmith3.mp3" id="7_r0ej4"]
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3
@@ -32,8 +35,18 @@ position = Vector2(574, 327)
 texture = ExtResource("3_8g8by")
 
 [node name="MolMolImage" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(580, 328)
 texture = ExtResource("5_aguc0")
+
+[node name="FurnaceImage" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(580, 328)
+texture = ExtResource("6_7vh2p")
+
+[node name="AnvilImage" type="Sprite2D" parent="."]
+position = Vector2(580, 328)
+texture = ExtResource("7_pr1fr")
 
 [node name="NextButton" type="Button" parent="."]
 layout_mode = 0
@@ -45,15 +58,6 @@ theme_override_fonts/font = ExtResource("5_aldoo")
 theme_override_font_sizes/font_size = 23
 text = "Next"
 
-[node name="TutorialDialog1" type="Label" parent="."]
-layout_mode = 0
-offset_left = 67.0
-offset_top = 449.0
-offset_right = 279.0
-offset_bottom = 640.0
-text = "Step 1: Receive Order from a Customer. Your \"Active Recipe\" can be seen on the top left part of the screen. Different ore and weapon type combinations can be seen here."
-autowrap_mode = 2
-
 [node name="MainMenuButton" type="Button" parent="."]
 visible = false
 layout_mode = 0
@@ -64,10 +68,79 @@ offset_bottom = 622.0
 theme_override_fonts/font = ExtResource("5_aldoo")
 text = "Back to Main Menu"
 
-[node name="TutorialDialog2" type="Label" parent="."]
+[node name="TutorialDialog1" type="Label" parent="."]
+visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Step 2: "
+offset_left = 45.0
+offset_top = 42.0
+offset_right = 546.0
+offset_bottom = 495.0
+theme_override_fonts/font = ExtResource("5_aldoo")
+text = "You will play as the Dwarf named \"Yolkenheim the Veteran Blacksmith of Bladania\". You are racing against the clock to forge weapons for your customers to save up enough money to pay the evil \"Taxman\" and purchase some handy gadgets with any leftover funds.
+
+Controls
+W - Forward
+A - Left
+S - Down
+D - Right
+Spacebar - Interact
+
+
+Step 1:  
+Receive Order from a Customer. Your \"Active Recipe\" can be seen on the top left part of the screen. Different ore and weapon type combinations can be seen here. 
+
+Click \"Next\" to continue this guide."
+autowrap_mode = 2
+
+[node name="TutorialDialog2" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 345.0
+offset_top = 198.0
+offset_right = 880.0
+offset_bottom = 276.0
+theme_override_fonts/font = ExtResource("5_aldoo")
+text = "Step 2:
+Once you have an \"Active Recipe\", pay a visit to our good ol' friend \"Mol Mol\" to get the required ore for the Customer's recipe. \"Mol Mol\" spends his free time scavenging the deepest mines and caverns to find the rarest ores in all of \"Bladania\".
+We want to bring this ore to the furnace as soon as possible as we're burning daylight.
+
+Click \"Next\" to continue this guide."
+autowrap_mode = 2
+
+[node name="TutorialDialog3" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 345.0
+offset_top = 198.0
+offset_right = 880.0
+offset_bottom = 276.0
+theme_override_fonts/font = ExtResource("5_aldoo")
+text = "Step 3:
+After visiting \"Mol Mol\" to get your required ore. We need to quickly throw the ore into the \"Caladonian Furnace\". We want to get this ore hot enough so that it reaches it's \"Sweet Green Spot\". 
+This is where metal will bend to your will effortlessly. You can't let it get too hot otherwise you will burn daylight waiting for the ore to cool down.
+Quick! Move your hot ingot to the \"Caladonian Anvil\"!
+
+Click \"Next\" to continue this guide."
+autowrap_mode = 2
+
+[node name="TutorialDialog4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 707.0
+offset_top = 294.0
+offset_right = 1151.0
+offset_bottom = 555.0
+theme_override_fonts/font = ExtResource("5_aldoo")
+text = "Step 4:
+Time for Yolkenheim's favorite part, the smashing!
+Use your mouse to hit the markers to bend the ingot into a mighty weapon. Be careful that your ingot does not cool down and leave the \"Green Sweet Spot\", it's very easy to break the weapon and dissapoint the customer. Every hit counts! 
+
+If your ingot leaves the \"Green Sweet Spot\" you can bring it back to the furnace for re-heating.
+
+Click \"Next\" to continue this guide."
+autowrap_mode = 2
+
+[node name="Thwak" type="AudioStreamPlayer2D" parent="."]
+visible = false
+stream = ExtResource("7_r0ej4")
 
 [connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]

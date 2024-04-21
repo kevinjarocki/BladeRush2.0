@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://duau8ofdjhjo1" path="res://Assets/Shareef/Ingot_Falchion.png" id="4_b3l8r"]
 [ext_resource type="Texture2D" uid="uid://dfrdi5r22eshs" path="res://Assets/Shareef/Ingot_Scimitar.png" id="4_f5qwb"]
 [ext_resource type="Texture2D" uid="uid://dvy7ncrs3anmk" path="res://Assets/Shareef/Ingot_Longsword.png" id="4_htq1w"]
-[ext_resource type="Texture2D" uid="uid://wsjx08weifro" path="res://Assets/Shareef/dagger.png" id="6_3ku6o"]
 [ext_resource type="Texture2D" uid="uid://t53u5gu5hub0" path="res://Assets/Shareef/Ingot_Rapier.png" id="5_psh3x"]
 [ext_resource type="Texture2D" uid="uid://c2av4tq50l2hp" path="res://Assets/Shareef/Ingot_Tashi.png" id="7_0hnh0"]
 [ext_resource type="Texture2D" uid="uid://he00givm2mwh" path="res://Assets/Shareef/Ingot_Sabre.png" id="7_bg4bo"]
@@ -57,14 +56,6 @@ region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mj0s"]
 atlas = ExtResource("7_bg4bo")
-region = Rect2(200, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pe0e2"]
-atlas = ExtResource("4_htq1w")
-region = Rect2(0, 0, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cwjmb"]
-atlas = ExtResource("4_htq1w")
 region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8mr8m"]
@@ -194,9 +185,6 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_6qvr0")
-animation = &"longsword"
-frame = 1
-frame_progress = 0.893834
 animation = &"dagger"
 
 [node name="Filter" type="AnimatedSprite2D" parent="."]
