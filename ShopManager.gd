@@ -509,34 +509,18 @@ func _on_end_day_cooling_dec():
 		money -= coolingModCost[coolingModInc]
 		coolingModInc += 1
 		coolingMod += .09
-	else:
-		money -= coolingModCost[coolingModInc]
-		coolingModInc += 1
-		coolingMod += .09
-		print("cant afford, but you're cool ;)")
 
 func _on_end_day_heat_inc():
 	if money >= heatingModCost[heatingModInc]:
 		money -= heatingModCost[heatingModInc]
 		heatingModInc += 1
 		heatingMod += 5
-	else:
-		money -= heatingModCost[heatingModInc]
-		heatingModInc += 1
-		heatingMod += 5
-		print("cant afford, but you're cool ;)")
 
 func _on_end_day_speed_inc():
 	if money >= playerSpeedModCost[playerSpeedModInc]:
 		money -= playerSpeedModCost[playerSpeedModInc]
 		playerSpeedModInc += 1
 		$Player.increaseSpeed(20)
-		 
-	else:
-		money -= playerSpeedModCost[playerSpeedModInc]
-		playerSpeedModInc += 1
-		$Player.increaseSpeed(20)
-		print("cant afford, but you're cool ;)")
 
 func _on_golden_hammer_pressed():
 	goldenHammerActive = true
