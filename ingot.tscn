@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://7nch364v2svb"]
+
+[gd_scene load_steps=18 format=3 uid="uid://7nch364v2svb"]
 
 [ext_resource type="Script" path="res://Ingot.gd" id="1_iac0r"]
 [ext_resource type="Texture2D" uid="uid://db52wh6xkyow2" path="res://Assets/Shareef/Ingot_Axe.png" id="2_jgmdq"]
 [ext_resource type="Texture2D" uid="uid://c3mjra7a4b1h4" path="res://Assets/Shareef/Ingot_Falchion.png" id="4_007vi"]
 [ext_resource type="Texture2D" uid="uid://dfrdi5r22eshs" path="res://Assets/Shareef/Ingot_Scimitar.png" id="4_f5qwb"]
-[ext_resource type="Texture2D" path="res://Assets/Shareef/Ingot_Longsword.png" id="4_htq1w"]
+[ext_resource type="Texture2D" uid="uid://dvy7ncrs3anmk" path="res://Assets/Shareef/Ingot_Longsword.png" id="4_htq1w"]
 [ext_resource type="Texture2D" uid="uid://wsjx08weifro" path="res://Assets/Shareef/dagger.png" id="6_3ku6o"]
 [ext_resource type="Texture2D" uid="uid://c1ytflt4nq2pc" path="res://Assets/Shareef/Ingot_Rapier.png" id="6_x8asn"]
 [ext_resource type="Texture2D" uid="uid://cvpq74s7vrpfy" path="res://Assets/Shareef/Ingot_Sabre.png" id="7_2x3ei"]
@@ -100,6 +101,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+
 "texture": SubResource("AtlasTexture_5xvu2")
 }, {
 "duration": 1.0,
@@ -115,6 +117,7 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qffpp")
+
 }],
 "loop": true,
 "name": &"longsword",
@@ -122,6 +125,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+
 "texture": SubResource("AtlasTexture_2xoar")
 }, {
 "duration": 1.0,
@@ -144,6 +148,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+
 "texture": SubResource("AtlasTexture_8mr8m")
 }, {
 "duration": 1.0,
@@ -183,10 +188,14 @@ script = ExtResource("1_iac0r")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.308594, 0.302734)
+
+modulate = Color(0.168627, 0.168627, 0.168627, 0.752941)
+scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_6qvr0")
-animation = &"tashi"
+animation = &"longsword"
 frame = 1
+frame_progress = 0.893834
+
 
 [node name="Filter" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.788235, 0.678431, 0.67451, 1)

@@ -69,6 +69,7 @@ var recipeBook = {
 }
 
 var materialBook = {
+
 	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 2, "cost": 0},
 	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 3, "cost": 1},
 	"Bronze" : {"name": "bronze", "coolRate" : 4, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 4, "cost": 1},
@@ -76,7 +77,6 @@ var materialBook = {
 	"Rune": {"name": "rune", "coolRate" : 15, "heatRate" : 40, "idealTemp": 5500, "idealTempRange": 400, "valueMod": 7, "cost": 1},
 	"Mithril": {"name": "mithril", "coolRate" : 50, "heatRate" : 10, "idealTemp": 5000, "idealTempRange": 1000, "valueMod": 7, "cost": 1},
 	"Caledonite": {"name": "caledonite", "coolRate" : 4, "heatRate" : 20, "idealTemp": 7000, "idealTempRange": 200, "valueMod": 8, "cost": 1}
-
 }
 
 func _process(delta):
@@ -265,6 +265,8 @@ func playerAtCashRegister():
 		$GPUParticles2D.emitting = true
 		taxMan.ExitShop()
 		taxManHere = false
+		_on_end_day_next_day_pressed()
+		
 		
 func playerAtTrashCan():
 	if ingotCheck():
