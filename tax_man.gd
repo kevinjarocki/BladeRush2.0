@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 
 const speed = 200
-
 var screen_size
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,4 +34,12 @@ func start(pos):
 	position = pos
 	show()
 	$Area2D/TaxManCollisionShape2D.disabled = false
+	
+	
+func ExitShop():
+	set_velocity(Vector2(-10,0))
+	$Timer.start()
 
+func _on_timer_timeout():
+	queue_free()
+	

@@ -35,7 +35,9 @@ var autoMolmolCost = 150
 @export var beBackIn5Cost = 50
 
 var taxManHere = false
-
+var taxPayed = false
+var taxMan = InstancePlaceholder
+var taxesOwed = 10*pow(day,1.1)
 var ingotNode = null
 var gameFinished = false
 
@@ -158,7 +160,7 @@ func playerAtForge():
 		print("Nothing to do, player does not have ingot")
 
 func playerAtOreBox():
-	if !ingotCheck() and activeRecipe != "Awaiting Order":
+	if !ingotCheck() and activeRecipe != "Awaiting Order" and !taxManHere:
 		
 		$OreBox.play()
 		$Ferret.play()
@@ -168,6 +170,7 @@ func playerAtOreBox():
 		ingotNode = load("res://ingot.tscn").instantiate()
 		$Player.add_child(ingotNode)
 		ingotNode.position = Vector2(20,10)
+		ingotNode.scale = Vector2(1.5,1.5)
 		print ("Picked up ingot")
 		
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
@@ -238,9 +241,14 @@ func playerAtCashRegister():
 			playerAtOreBox()
 	
 	elif taxManHere:
-		activeRecipe = "Tax Man is here. Time to Pay up!"
-		activeMaterial = "Total Owed:"
-		# totalTax = 10*pwr(day,1.1)
+		money -= snappedf(taxesOwed,1.0)
+		$CashRegister.drawGoldValue(-taxesOwed)
+		$CashRegister.play()
+		$CashRegister.get_node("Ding").play()
+		$GPUParticles2D.amount = taxesOwed
+		$GPUParticles2D.emitting = true
+		taxMan.ExitShop()
+		taxManHere = false
 		
 func playerAtTrashCan():
 	if ingotCheck():
@@ -263,7 +271,7 @@ func createCustomer():
 	item.speed = 100
 	
 func createTaxMan():
-	var taxMan = load("res://tax_man.tscn").instantiate()
+	taxMan = load("res://tax_man.tscn").instantiate()
 	add_child(taxMan)
 	taxMan.position = Vector2(172,580)
 	#taxMan.speed = 1
@@ -303,6 +311,9 @@ func _on_end_day_next_day_pressed():
 	dayTimer = 0.00
 	if !taxManHere:
 		createCustomer()
+	elif taxManHere:
+		activeRecipe = "Tax Man is here. Time to Pay up!"
+		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
 	
 func _on_ready():
 	$ThwakToMainMenu.play()
@@ -329,7 +340,7 @@ func resetDay():
 		child.queue_free()
 		
 	resetOrder()
-	if(day % 5 == 0):
+	if(day == 1 || day % 5 == 0):
 		taxManHere = true
 		createTaxMan()
 

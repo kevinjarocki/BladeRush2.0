@@ -1,0 +1,328 @@
+[gd_scene load_steps=34 format=3 uid="uid://cab2q7cer6567"]
+
+[ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
+[ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
+[ext_resource type="PackedScene" uid="uid://b1qqtnco6o3b5" path="res://AnvilGame.tscn" id="2_vq7so"]
+[ext_resource type="PackedScene" uid="uid://e5cetnbk6s3o" path="res://forge.tscn" id="3_oi4xx"]
+[ext_resource type="Texture2D" uid="uid://x87tv08rqsb1" path="res://Assets/Shareef/Tilemap set sj.png" id="3_v2og8"]
+[ext_resource type="PackedScene" uid="uid://b050eg4ti6ipn" path="res://anvil.tscn" id="4_aakto"]
+[ext_resource type="Texture2D" uid="uid://c6cnd0kx11fvq" path="res://Assets/Shareef/walls Tilemap.png" id="4_xgx1w"]
+[ext_resource type="PackedScene" uid="uid://bewrwdr2l45aj" path="res://cash_register.tscn" id="5_bnaeq"]
+[ext_resource type="PackedScene" uid="uid://devtoi3ah4vy2" path="res://Player.tscn" id="5_lp5dw"]
+[ext_resource type="PackedScene" uid="uid://bdnf3f3fjgnoh" path="res://recipeTool.tscn" id="9_4745i"]
+[ext_resource type="Script" path="res://GUI HUD.gd" id="9_laghi"]
+[ext_resource type="Theme" uid="uid://ccxq1ecn67rk" path="res://Assets/end_day.tres" id="9_ne1fh"]
+[ext_resource type="Texture2D" uid="uid://cin7oklhjhe8s" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png" id="11_aeu1v"]
+[ext_resource type="AudioStream" uid="uid://btbfj47m04llr" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret1.mp3" id="12_jdva2"]
+[ext_resource type="AudioStream" uid="uid://dm1c6rd1ioylc" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret2.mp3" id="13_t1mm5"]
+[ext_resource type="AudioStream" uid="uid://b47won4vrbchq" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret3.mp3" id="14_clega"]
+[ext_resource type="AudioStream" uid="uid://th0gdq3bowgo" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret4.mp3" id="15_5l16s"]
+[ext_resource type="AudioStream" uid="uid://df4ym32qvy80h" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret5.mp3" id="16_k12j5"]
+[ext_resource type="AudioStream" uid="uid://bdml4x3j8ni0w" path="res://Assets/Sounds/Ferret/477390__nuff3__steps-dirt_2a.ogg" id="17_axae4"]
+[ext_resource type="AudioStream" uid="uid://ba8u1nix4fee7" path="res://Assets/Sounds/214456__quaker540__hq-flamethrower-burning.wav" id="18_mw575"]
+[ext_resource type="PackedScene" uid="uid://k1brmsrvmi3s" path="res://end_day.tscn" id="19_bnti8"]
+[ext_resource type="AudioStream" uid="uid://dpmica7dit60i" path="res://Assets/Sounds/Audacity/blacksmith2.mp3" id="19_p3ybx"]
+[ext_resource type="PackedScene" uid="uid://dlgvjnk6rw5xy" path="res://trashCan.tscn" id="21_lpgaf"]
+[ext_resource type="Texture2D" uid="uid://bl7n336mfvqcn" path="res://Assets/Shareef/coin.png" id="23_ijiq0"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xo30u"]
+texture = ExtResource("3_v2og8")
+texture_region_size = Vector2i(200, 200)
+5:9/0 = 0
+0:0/0 = 0
+1:0/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_48g3i"]
+tile_size = Vector2i(200, 200)
+sources/0 = SubResource("TileSetAtlasSource_xo30u")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgubc"]
+texture = ExtResource("4_xgx1w")
+texture_region_size = Vector2i(200, 200)
+0:0/0 = 0
+1:0/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_l7xit"]
+tile_size = Vector2i(200, 200)
+sources/0 = SubResource("TileSetAtlasSource_hgubc")
+
+[sub_resource type="LabelSettings" id="LabelSettings_8qs8s"]
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_81hsu"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mpd5g"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8i7mk"]
+streams_count = 5
+stream_0/stream = ExtResource("12_jdva2")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("13_t1mm5")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("14_clega")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("15_5l16s")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("16_k12j5")
+stream_4/weight = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_p462w"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 1.0
+direction = Vector3(1, -0.4, 0)
+spread = 30.0
+initial_velocity_min = 150.0
+initial_velocity_max = 400.0
+scale_max = 1.1
+color = Color(1, 1, 0, 1)
+hue_variation_min = -0.05
+turbulence_noise_strength = 15.58
+turbulence_noise_scale = 2.684
+turbulence_noise_speed_random = 0.0
+
+[node name="Shop" type="Node2D"]
+script = ExtResource("1_07efy")
+endDayTime = 120
+minigame = ExtResource("2_vq7so")
+
+[node name="TileMap" type="TileMap" parent="."]
+modulate = Color(0.521569, 0.580392, 0.482353, 1)
+z_index = -14
+scale = Vector2(0.25, 0.25)
+tile_set = SubResource("TileSet_48g3i")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 65536, 0, 1, 0, 0, 2, 0, 1, 3, 131072, 1, 4, 0, 1, 5, 131072, 0, 6, 65536, 1, 7, 0, 0, 8, 131072, 1, 9, 0, 0, 10, 65536, 1, 11, 131072, 0, 12, 65536, 1, 13, 0, 1, 14, 65536, 0, 15, 131072, 0, 16, 0, 1, 17, 131072, 0, 18, 65536, 0, 19, 65536, 1, 20, 0, 1, 21, 131072, 1, 22, 0, 0, 65558, 65536, 0, 131094, 131072, 0, 196630, 131072, 1, 262166, 131072, 1, 327702, 131072, 0, 393238, 65536, 1, 458774, 0, 0, 524310, 131072, 0, 589846, 0, 0, 655381, 65536, 1, 720917, 131072, 0, 786453, 0, 1, 786454, 65536, 0, 720918, 65536, 0, 655382, 0, 0, 786452, 65536, 0, 786451, 65536, 0, 786450, 65536, 1, 786449, 65536, 0, 786448, 65536, 1, 786447, 65536, 1, 786446, 0, 0, 786445, 65536, 1, 786444, 65536, 1, 786443, 131072, 1, 786442, 65536, 1, 786441, 65536, 1, 786440, 65536, 1, 786439, 131072, 1, 786438, 65536, 0, 786437, 131072, 1, 786436, 0, 0, 786435, 131072, 0, 786434, 0, 0, 786433, 65536, 1, 786432, 131072, 0, 720896, 65536, 0, 655360, 131072, 0, 589824, 65536, 0, 524288, 0, 1, 458752, 65536, 1, 393216, 131072, 1, 327680, 65536, 1, 262144, 0, 0, 196608, 131072, 0, 131072, 131072, 1, 65536, 0, 1, 65537, 0, 0, 65538, 0, 0, 65539, 65536, 1, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 1, 65545, 131072, 1, 65546, 0, 1, 65547, 65536, 0, 65548, 65536, 1, 65549, 65536, 0, 65550, 65536, 0, 65551, 0, 0, 65552, 0, 0, 65553, 65536, 0, 65554, 0, 0, 65555, 131072, 0, 65556, 0, 0, 65557, 0, 0, 131093, 65536, 0, 131092, 65536, 1, 131091, 131072, 0, 131090, 131072, 1, 131089, 131072, 1, 131088, 65536, 0, 131087, 0, 1, 131086, 131072, 0, 131085, 65536, 1, 131084, 0, 1, 131083, 131072, 0, 131082, 65536, 0, 131081, 131072, 0, 131080, 0, 1, 131079, 65536, 0, 131078, 131072, 0, 131077, 0, 1, 131076, 131072, 1, 131075, 131072, 0, 131074, 131072, 0, 131073, 65536, 0, 196609, 65536, 1, 196610, 131072, 1, 196611, 131072, 1, 196612, 65536, 0, 196613, 0, 1, 196614, 65536, 1, 196615, 65536, 0, 196616, 0, 0, 196617, 65536, 1, 196618, 131072, 1, 196619, 65536, 1, 196620, 65536, 1, 196621, 131072, 1, 196622, 0, 1, 196623, 131072, 1, 196624, 131072, 0, 196625, 131072, 1, 196626, 65536, 0, 196627, 131072, 0, 196628, 0, 1, 196629, 131072, 1, 262165, 0, 0, 262164, 65536, 1, 262163, 65536, 1, 262162, 0, 0, 262161, 0, 1, 262160, 0, 1, 262159, 131072, 0, 262158, 131072, 0, 262157, 131072, 1, 262156, 65536, 1, 262155, 65536, 1, 262154, 0, 1, 262153, 0, 1, 262152, 65536, 1, 262151, 131072, 0, 262150, 131072, 0, 262149, 0, 1, 262148, 65536, 1, 262147, 0, 1, 262146, 131072, 0, 262145, 131072, 1, 327681, 65536, 0, 327682, 0, 1, 327683, 131072, 1, 327684, 0, 0, 327685, 0, 0, 327686, 65536, 1, 393223, 65536, 0, 393224, 131072, 1, 393225, 131072, 0, 393226, 131072, 0, 393227, 131072, 0, 393228, 0, 1, 327693, 65536, 0, 327694, 65536, 0, 327695, 131072, 0, 327696, 65536, 0, 327697, 65536, 0, 327698, 0, 0, 327699, 131072, 0, 327700, 65536, 1, 327701, 131072, 0, 393237, 0, 1, 393236, 65536, 0, 393235, 131072, 1, 393234, 0, 0, 393233, 0, 0, 393232, 131072, 1, 393231, 65536, 1, 393230, 0, 1, 393229, 131072, 1, 327689, 0, 0, 327690, 65536, 0, 327691, 131072, 0, 327692, 65536, 1, 327688, 65536, 1, 327687, 131072, 1, 393222, 0, 1, 393221, 0, 0, 393220, 65536, 0, 393219, 0, 0, 393218, 0, 0, 393217, 0, 0, 458753, 65536, 0, 458754, 131072, 1, 458755, 0, 1, 458756, 0, 1, 458757, 65536, 0, 458758, 0, 0, 458759, 65536, 1, 458760, 0, 1, 458761, 65536, 0, 458762, 0, 1, 458763, 131072, 1, 458764, 65536, 0, 458765, 65536, 0, 458766, 65536, 1, 458767, 65536, 1, 458768, 131072, 0, 458769, 65536, 1, 458770, 131072, 1, 458771, 131072, 0, 458772, 0, 1, 458773, 131072, 0, 524309, 131072, 1, 524308, 131072, 1, 524307, 131072, 0, 524306, 131072, 1, 524305, 131072, 0, 524304, 131072, 1, 524303, 131072, 1, 589839, 0, 1, 589838, 0, 1, 589837, 0, 0, 589836, 0, 1, 589835, 65536, 1, 589834, 0, 0, 524298, 65536, 0, 524297, 65536, 0, 524296, 131072, 1, 524295, 131072, 1, 524294, 65536, 0, 524293, 0, 1, 524292, 65536, 1, 524291, 0, 0, 524290, 65536, 1, 524289, 131072, 1, 589825, 131072, 1, 589826, 65536, 0, 589827, 0, 0, 589828, 0, 0, 589829, 65536, 1, 589830, 65536, 1, 589831, 131072, 1, 589832, 65536, 0, 589833, 131072, 1, 524301, 131072, 0, 524302, 0, 0, 524300, 65536, 0, 589840, 131072, 1, 589841, 131072, 0, 589842, 131072, 1, 589843, 65536, 0, 589844, 65536, 1, 589845, 131072, 0, 655380, 131072, 1, 720916, 131072, 0, 720915, 65536, 1, 655379, 0, 1, 655378, 0, 0, 655377, 131072, 1, 720913, 0, 1, 720912, 65536, 1, 720911, 131072, 0, 720914, 65536, 1, 655376, 0, 0, 655375, 65536, 0, 655374, 65536, 1, 655373, 0, 0, 655372, 131072, 1, 655371, 0, 0, 655370, 0, 1, 655369, 65536, 1, 655368, 0, 0, 655367, 131072, 1, 655366, 0, 0, 655365, 0, 1, 655364, 0, 0, 655363, 131072, 0, 655362, 131072, 0, 655361, 0, 0, 720897, 65536, 1, 720898, 131072, 1, 720899, 131072, 0, 720900, 131072, 1, 720901, 65536, 1, 720902, 0, 1, 720903, 65536, 0, 720904, 131072, 0, 720905, 65536, 0, 720906, 65536, 0, 720907, 0, 1, 720908, 0, 1, 720909, 0, 1, 720910, 65536, 1, 524299, 65536, 1)
+
+[node name="TileMap2" type="TileMap" parent="."]
+z_index = -13
+scale = Vector2(0.25, 0.25)
+tile_set = SubResource("TileSet_l7xit")
+format = 2
+layer_0/tile_data = PackedInt32Array(786432, 0, 0, 720896, 0, 1, 655360, 0, 1, 589824, 0, 1, 524288, 0, 1, 458752, 0, 1, 393216, 0, 1, 327680, 0, 1, 262144, 0, 1, 196608, 0, 1, 131072, 0, 1, 65536, 0, 1, 0, 65536, 0, 1, 65536, 1610612737, 2, 65536, 1610612737, 3, 65536, 1610612737, 4, 65536, 1610612737, 5, 65536, 1610612737, 6, 65536, 1610612737, 7, 65536, 1610612737, 8, 65536, 1610612737, 9, 65536, 1610612737, 10, 65536, 1610612737, 11, 65536, 1610612737, 12, 65536, 1610612737, 13, 65536, 1610612737, 14, 65536, 1610612737, 15, 65536, 1610612737, 16, 65536, 1610612737, 17, 65536, 1610612737, 18, 65536, 1610612737, 19, 65536, 1610612737, 20, 65536, 1610612737, 21, 65536, 1610612737, 22, 131072, 1, 65558, 65536, 1, 131094, 65536, 1, 196630, 65536, 1, 262166, 65536, 1, 327702, 65536, 1, 393238, 65536, 1, 458774, 65536, 1, 524310, 65536, 1, 589846, 65536, 1, 655382, 65536, 1, 720918, 65536, 1, 786454, 131072, 0, 917526, 0, 0, 851990, 0, 1610612736, 851989, 65536, 1342177281, 851988, 65536, 1342177281, 851987, 65536, 1342177281, 851986, 65536, 1342177281, 851985, 65536, 1342177281, 851984, 65536, 1342177281, 851983, 65536, 1342177281, 851982, 65536, 1342177281, 851981, 65536, 1342177281, 851980, 65536, 1342177281, 851979, 65536, 1342177281, 851978, 65536, 1342177281, 851977, 65536, 1342177281, 851976, 65536, 1342177281, 851975, 65536, 1342177281, 851974, 65536, 1342177281, 851973, 65536, 1342177281, 851972, 65536, 1342177281, 851971, 65536, 1342177281, 851970, 65536, 1342177281, 851969, 65536, 1342177281, 917504, 0, 1342177280, 851968, 0, 805306368, 917505, 0, 1342177281, 917506, 0, 1342177281, 917507, 0, 1342177281, 917508, 0, 1342177281, 917509, 0, 1342177281, 917510, 0, 1342177281, 917511, 0, 1342177281, 917512, 0, 1342177281, 917513, 0, 1342177281, 917514, 0, 1342177281, 917515, 0, 1342177281, 917516, 0, 1342177281, 917517, 0, 1342177281, 917518, 0, 1342177281, 917519, 0, 1342177281, 917520, 0, 1342177281, 917521, 0, 1342177281, 917522, 0, 1342177281, 917523, 0, 1342177281, 917524, 0, 1342177281, 917525, 0, 1342177281)
+
+[node name="OreBox" parent="." instance=ExtResource("2_lioss")]
+position = Vector2(305, 121)
+
+[node name="Forge" parent="." instance=ExtResource("3_oi4xx")]
+position = Vector2(495, 1)
+
+[node name="Anvil" parent="." instance=ExtResource("4_aakto")]
+position = Vector2(845, 121)
+
+[node name="Player" parent="." instance=ExtResource("5_lp5dw")]
+position = Vector2(622, 401)
+
+[node name="CashRegister" parent="." instance=ExtResource("5_bnaeq")]
+position = Vector2(222, 367)
+
+[node name="AnvilGame" parent="." instance=ExtResource("2_vq7so")]
+visible = false
+
+[node name="Button2" parent="AnvilGame" instance=ExtResource("9_4745i")]
+offset_left = 2012.0
+offset_top = 399.0
+offset_right = 2148.0
+offset_bottom = 535.0
+
+[node name="GUI HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 26.0
+offset_top = 21.0
+offset_right = 158.0
+offset_bottom = 52.0
+theme = ExtResource("9_ne1fh")
+script = ExtResource("9_laghi")
+
+[node name="ProgressBar" type="ProgressBar" parent="GUI HUD"]
+layout_mode = 0
+offset_top = 50.0
+offset_right = 65.0
+offset_bottom = 270.0
+fill_mode = 3
+show_percentage = false
+
+[node name="IdealHeat" type="ColorRect" parent="GUI HUD/ProgressBar"]
+z_index = -2
+layout_mode = 0
+offset_right = 65.0
+color = Color(0.215686, 0.6, 0.172549, 0.411765)
+
+[node name="HeatRange" type="ColorRect" parent="GUI HUD/ProgressBar"]
+z_index = -3
+layout_mode = 0
+offset_right = 65.0
+color = Color(1, 1, 0.172549, 0.454902)
+
+[node name="ActiveRecipe" type="Label" parent="GUI HUD"]
+layout_mode = 0
+offset_top = -13.0
+offset_right = 224.0
+offset_bottom = 10.0
+text = "Active Recipe: Waiting order"
+label_settings = SubResource("LabelSettings_8qs8s")
+
+[node name="DayCount" type="Label" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 956.5
+offset_top = -14.875
+offset_right = 1019.5
+offset_bottom = 13.125
+text = "Day: 0"
+label_settings = SubResource("LabelSettings_81hsu")
+
+[node name="MoneyCount" type="Label" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 954.5
+offset_top = 16.125
+offset_right = 1013.5
+offset_bottom = 44.125
+text = "Gold: "
+label_settings = SubResource("LabelSettings_mpd5g")
+
+[node name="DayButton" type="Button" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 887.0
+offset_top = 461.0
+offset_right = 1010.0
+offset_bottom = 511.0
+text = "Next Day"
+
+[node name="Button" type="Button" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 387.0
+offset_top = 672.0
+offset_right = 667.0
+offset_bottom = 708.0
+text = "Sell Ingot DEV ONLY PLZ"
+
+[node name="DoNothing" type="Button" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 670.0
+offset_right = 266.0
+offset_bottom = 722.0
+text = "Do Nothing"
+
+[node name="DayTimer" type="ProgressBar" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 738.0
+offset_top = 555.0
+offset_right = 1061.0
+offset_bottom = 602.0
+
+[node name="Sprite2D" type="Sprite2D" parent="GUI HUD"]
+z_index = -1
+position = Vector2(994.25, 15.125)
+scale = Vector2(1.05469, 0.688802)
+texture = ExtResource("11_aeu1v")
+
+[node name="Golden Hammer" type="Button" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 90.0
+offset_top = 550.0
+offset_right = 205.0
+offset_bottom = 645.0
+scale = Vector2(0.7, 0.7)
+text = "Golden
+Hammer"
+
+[node name="Kings Sigil" type="Button" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 270.0
+offset_top = 550.0
+offset_right = 385.0
+offset_bottom = 645.0
+scale = Vector2(0.7, 0.7)
+text = "Kings
+Sigil"
+
+[node name="Be Back in 5" type="Button" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 550.0
+offset_right = 475.0
+offset_bottom = 645.0
+scale = Vector2(0.7, 0.7)
+text = "Be back
+in 5"
+
+[node name="Bottled Fire" type="Button" parent="GUI HUD"]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 550.0
+offset_right = 295.0
+offset_bottom = 645.0
+scale = Vector2(0.7, 0.7)
+text = "Bottled
+Fire"
+
+[node name="Ferret" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_8i7mk")
+pitch_scale = 0.9
+
+[node name="Dirt" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_axae4")
+
+[node name="Fire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_mw575")
+attenuation = 2.37841
+max_polyphony = 5
+panning_strength = 1.86
+
+[node name="EndDay" parent="." instance=ExtResource("19_bnti8")]
+visible = false
+
+[node name="ThwakToMainMenu" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_p3ybx")
+
+[node name="TrashCan" parent="." instance=ExtResource("21_lpgaf")]
+position = Vector2(985, 309)
+scale = Vector2(0.303125, 0.303125)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.666667, 0.729412, 0.498039, 1)
+energy = 0.4
+blend_mode = 1
+shadow_enabled = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(257, 333)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_p462w")
+texture = ExtResource("23_ijiq0")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.9
+randomness = 0.38
+
+[connection signal="ready" from="." to="." method="_on_ready"]
+[connection signal="animation_finished" from="OreBox" to="." method="_on_ore_box_animation_finished1"]
+[connection signal="animation_looped" from="OreBox" to="." method="_on_ore_box_animation_looped"]
+[connection signal="departed" from="Player" to="AnvilGame" method="_on_player_departed"]
+[connection signal="interacted" from="Player" to="." method="_on_player_interacted"]
+[connection signal="gameCompleteSignal" from="AnvilGame" to="." method="_on_anvil_game_game_complete_signal"]
+[connection signal="playerLeft" from="AnvilGame" to="." method="_on_anvil_game_player_left"]
+[connection signal="pressed" from="GUI HUD/DayButton" to="." method="_on_day_button_pressed"]
+[connection signal="pressed" from="GUI HUD/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="GUI HUD/Golden Hammer" to="." method="_on_golden_hammer_pressed"]
+[connection signal="pressed" from="GUI HUD/Kings Sigil" to="." method="_on_kings_sigil_pressed"]
+[connection signal="pressed" from="GUI HUD/Be Back in 5" to="." method="_on_be_back_in_5_pressed"]
+[connection signal="pressed" from="GUI HUD/Bottled Fire" to="." method="_on_bottled_fire_pressed"]
+[connection signal="coolingDec" from="EndDay" to="." method="_on_end_day_cooling_dec"]
+[connection signal="heatInc" from="EndDay" to="." method="_on_end_day_heat_inc"]
+[connection signal="nextDayPressed" from="EndDay" to="." method="_on_end_day_next_day_pressed"]
+[connection signal="speedInc" from="EndDay" to="." method="_on_end_day_speed_inc"]
