@@ -296,12 +296,12 @@ func createTaxMan():
 	taxMan.position = Vector2(172,580)
 	#taxMan.speed = 1
 
-func _on_anvil_game_game_complete_signal(ingotInstance):
-	gameFinished = true
-	ingotInstance.scale = Vector2(1.5,1.5)
-	$AnvilGame.remove_child(ingotInstance)
-	$Player.add_child(ingotInstance)
-	ingotInstance.position = handPosition
+#func _on_anvil_game_game_complete_signal(ingotInstance):
+	#gameFinished = true
+	#ingotInstance.scale = Vector2(1.5,1.5)
+	#$AnvilGame.remove_child(ingotInstance)
+	#$Player.add_child(ingotInstance)
+	#ingotInstance.position = handPosition
 	#$AnvilGame.hide()
 
 func _input(event):
