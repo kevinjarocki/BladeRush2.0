@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cab2q7cer6567"]
+[gd_scene load_steps=34 format=3 uid="uid://cab2q7cer6567"]
 
 [ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
 [ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
@@ -13,6 +13,7 @@
 [ext_resource type="Theme" uid="uid://ccxq1ecn67rk" path="res://Assets/end_day.tres" id="9_ne1fh"]
 [ext_resource type="Texture2D" uid="uid://cin7oklhjhe8s" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Banners/Banner_Horizontal.png" id="11_aeu1v"]
 [ext_resource type="AudioStream" uid="uid://btbfj47m04llr" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret1.mp3" id="12_jdva2"]
+[ext_resource type="Texture2D" uid="uid://bkm2k52um0e63" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Pointers/02.png" id="13_smdg2"]
 [ext_resource type="AudioStream" uid="uid://dm1c6rd1ioylc" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret2.mp3" id="13_t1mm5"]
 [ext_resource type="AudioStream" uid="uid://b47won4vrbchq" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret3.mp3" id="14_clega"]
 [ext_resource type="AudioStream" uid="uid://th0gdq3bowgo" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret4.mp3" id="15_5l16s"]
@@ -232,6 +233,12 @@ scale = Vector2(0.7, 0.7)
 text = "Golden
 Hammer"
 
+[node name="Sprite2D" type="Sprite2D" parent="GUI HUD/Golden Hammer"]
+visible = false
+position = Vector2(58.5714, 38.5715)
+scale = Vector2(2.12946, 1.70089)
+texture = ExtResource("13_smdg2")
+
 [node name="Kings Sigil" type="Button" parent="GUI HUD"]
 layout_mode = 0
 offset_left = 270.0
@@ -241,6 +248,12 @@ offset_bottom = 645.0
 scale = Vector2(0.7, 0.7)
 text = "Kings
 Sigil"
+
+[node name="Sprite2D2" type="Sprite2D" parent="GUI HUD/Kings Sigil"]
+visible = false
+position = Vector2(57.1428, 40)
+scale = Vector2(2.12946, 1.70089)
+texture = ExtResource("13_smdg2")
 
 [node name="Be Back in 5" type="Button" parent="GUI HUD"]
 layout_mode = 0
@@ -252,6 +265,12 @@ scale = Vector2(0.7, 0.7)
 text = "Be back
 in 5"
 
+[node name="Sprite2D3" type="Sprite2D" parent="GUI HUD/Be Back in 5"]
+visible = false
+position = Vector2(58.5714, 40)
+scale = Vector2(2.12946, 1.70089)
+texture = ExtResource("13_smdg2")
+
 [node name="Bottled Fire" type="Button" parent="GUI HUD"]
 layout_mode = 0
 offset_left = 180.0
@@ -261,6 +280,12 @@ offset_bottom = 645.0
 scale = Vector2(0.7, 0.7)
 text = "Bottled
 Fire"
+
+[node name="Sprite2D4" type="Sprite2D" parent="GUI HUD/Bottled Fire"]
+visible = false
+position = Vector2(58.5714, 40)
+scale = Vector2(2.12946, 1.70089)
+texture = ExtResource("13_smdg2")
 
 [node name="Ferret" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_8i7mk")

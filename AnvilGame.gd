@@ -50,9 +50,12 @@ func _input(event):
 		print("temp miss:",tempMiss)
 		
 		#distance punishment
-		if missDistance <= ingotInstance.recipeProperties["perfectRange"]:
+		if owner.goldenHammerActive:
+			owner.goldenHammerActive = false
+			ingotInstance.stage += 1
+		elif missDistance <= ingotInstance.recipeProperties["perfectRange"]:
 			print("Perfect Strike!")
-			$Perfect.play()
+			$Perfect.play()			
 		else:
 			if missDistance*ingotInstance.recipeProperties["punishRate"] > ingotInstance.quality:
 				ingotInstance.quality = 0
@@ -61,7 +64,6 @@ func _input(event):
 			else:
 				ingotInstance.quality -= missDistance * ingotInstance.recipeProperties["punishRate"]
 		print("quality score" ,ingotInstance.quality)
-		
 		
 		ingotInstance.stage += 1
 		if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
