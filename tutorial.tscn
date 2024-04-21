@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://pbf0rnvtidu1"]
+[gd_scene load_steps=12 format=3 uid="uid://pbf0rnvtidu1"]
 
 [ext_resource type="Script" path="res://tutorial.gd" id="1_5n47n"]
 [ext_resource type="Texture2D" uid="uid://bjmjj3p7c6wq3" path="res://Assets/HowtoPlay/MainGame.PNG" id="1_bo1vo"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://36i2jnd452l" path="res://Assets/HowtoPlay/Furnace.PNG" id="6_7vh2p"]
 [ext_resource type="Texture2D" uid="uid://bihuivmoi5ghj" path="res://Assets/HowtoPlay/Anvil.PNG" id="7_pr1fr"]
 [ext_resource type="AudioStream" uid="uid://bsv436vlcuyea" path="res://Assets/Sounds/Audacity/blacksmith3.mp3" id="7_r0ej4"]
+[ext_resource type="Texture2D" uid="uid://0nwthrj57l4r" path="res://Assets/HowtoPlay/Chaching.PNG" id="8_bqqss"]
+[ext_resource type="Texture2D" uid="uid://tyebgpa0hvbl" path="res://Assets/HowtoPlay/CompletedWeapon.PNG" id="9_fbydb"]
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3
@@ -30,7 +32,6 @@ position = Vector2(576, 323)
 texture = ExtResource("2_l04la")
 
 [node name="TaxmanImage" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(574, 327)
 texture = ExtResource("3_8g8by")
 
@@ -45,10 +46,24 @@ position = Vector2(580, 328)
 texture = ExtResource("6_7vh2p")
 
 [node name="AnvilImage" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(580, 328)
 texture = ExtResource("7_pr1fr")
 
+[node name="ChaChingImage" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 324)
+scale = Vector2(1.00697, 1.01238)
+texture = ExtResource("8_bqqss")
+
+[node name="CompletedImage" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(579, 327.25)
+scale = Vector2(1.03877, 1.00232)
+texture = ExtResource("9_fbydb")
+
 [node name="NextButton" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 528.0
 offset_top = 582.0
@@ -61,11 +76,12 @@ text = "Next"
 [node name="MainMenuButton" type="Button" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 540.0
-offset_top = 593.0
-offset_right = 684.0
+offset_left = 534.0
+offset_top = 573.0
+offset_right = 743.0
 offset_bottom = 622.0
 theme_override_fonts/font = ExtResource("5_aldoo")
+theme_override_font_sizes/font_size = 23
 text = "Back to Main Menu"
 
 [node name="TutorialDialog1" type="Label" parent="."]
@@ -124,6 +140,7 @@ Click \"Next\" to continue this guide."
 autowrap_mode = 2
 
 [node name="TutorialDialog4" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 707.0
 offset_top = 294.0
@@ -139,8 +156,85 @@ If your ingot leaves the \"Green Sweet Spot\" you can bring it back to the furna
 Click \"Next\" to continue this guide."
 autowrap_mode = 2
 
+[node name="TutorialDialog5" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 707.0
+offset_top = 294.0
+offset_right = 1151.0
+offset_bottom = 555.0
+theme_override_fonts/font = ExtResource("5_aldoo")
+text = "Step 5:
+Once Yolkenheim is finished forging his masterpiece of a blade, we are ready to deliver the good to our valued customer.
+
+Bring the finished weapon to the Cash Register so that the customer can leave happy with their forged blade and fill our deep pockects with valuable gold.
+
+Press the Interact button while at the cash register to complete the transaction with the customer.
+
+Click \"Next\" to continue this guide."
+autowrap_mode = 2
+
+[node name="TutorialDialog6" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 372.0
+offset_top = 174.0
+offset_right = 816.0
+offset_bottom = 459.0
+theme_override_fonts/font = ExtResource("5_aldoo")
+text = "Yolkenheim will receive an amount of gold coins equivalent to the quality of his ore and craftsmanship. 
+
+Once one customer is helped, the word will spread of the legendary blacksmith named Yolkenheim and more customers will come trickling in until the daylight runs out. 
+
+Forge as many weapons as you can before the day is finished!
+
+Daylight remaining can be tracked on the bottom right corner of the screen. 
+
+Click \"Next\" to continue this guide."
+autowrap_mode = 2
+
+[node name="TutorialDialog7" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 660.0
+offset_top = 17.0
+offset_right = 1104.0
+offset_bottom = 638.0
+theme_override_fonts/font = ExtResource("5_aldoo")
+text = "Yolkenheim can use his hard earned gold to purchase upgrades and consumables to help with forging. 
+
+\"Golden Hammer\" - Next successful hit in the \"Green Sweet Spot\" will yield two perfect strikes. This will increase the value of the weapon sold to the customer.
+
+\"Bottled Fire\" - Yolkenheim pours a bottle of liquid fire all over his current ingot. This will bring the ingot to it's \"Green Sweet Spot\" for a long period of time. 
+
+\"King's Sigil\" - Yolkenheim will sell his next masterpiece for double the price when he presents the Kings Sigil.
+
+\"Be back in 6\" - Yolkenheim will find a clever way to dodge the Taxman. This item will make the Taxman think that Yolkenheim is unavailable to pay his taxes for the day the Taxman is here to collect.
+
+\"Auto Mol Mol\" - Mol Mol will learn to lightyly toss all ores to Yolkenheim. This prevents Yolkenheim from having to walk to Mol Mol for a new ore.
+
+Make sure to save some gold aside for the Tax man!
+
+Click \"Next\" to continue this guide."
+autowrap_mode = 2
+
+[node name="TutorialDialog8" type="Label" parent="."]
+layout_mode = 0
+offset_left = 421.0
+offset_top = 94.0
+offset_right = 1063.0
+offset_bottom = 360.0
+theme_override_fonts/font = ExtResource("5_aldoo")
+text = "Yolkenheim hates the Tax man. Unfortunately Yolkenheim is just a civilian and the Tax man is constantly extorting Yolkenheim for his hard earned gold coins. If Yolkenheim does not pay his taxes then he will lose his shop. It is very important to have gold coins set aside for the Tax man to keep the shop running. The game will end if Yolkenheim loses his shop.
+
+To pay the Tax man, walk up to the cash register and press the Interact key. When you have enough gold coins the Tax man will go away for a while. This will make Yolkenheim very happy.
+
+Click \"Main Menu\" to exit this guide."
+autowrap_mode = 2
+
 [node name="Thwak" type="AudioStreamPlayer2D" parent="."]
 visible = false
 stream = ExtResource("7_r0ej4")
 
 [connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="MainMenuButton" to="." method="_on_main_menu_button_pressed"]
