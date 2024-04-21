@@ -1,10 +1,10 @@
+Label
+Sprite2D
 LightOccluder2D
 PointLight2D
-Sprite2D
 AudioStreamPlayer2D
 AnimatedSprite2D
 Button
-Label
 TextEdit
 TileMap
 GPUParticles2D
@@ -12,4 +12,3 @@ TextureButton
 ColorRect
 ProgressBar
 Control
-CharacterBody2D
