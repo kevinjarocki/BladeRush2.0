@@ -116,6 +116,7 @@ func _on_SaveScore_request_completed(result, response_code, headers, body) -> vo
 
 
 func get_scores(maximum: int=10, ldboard_name: String="main", period_offset: int=0) -> Node:
+	print("In get_scores")
 	var prepared_http_req = SilentWolf.prepare_http_request()
 	GetScores = prepared_http_req.request
 	wrGetScores = prepared_http_req.weakref
@@ -125,6 +126,7 @@ func get_scores(maximum: int=10, ldboard_name: String="main", period_offset: int
 	latest_max = maximum
 	var request_url = "https://api.silentwolf.com/get_scores/" + str(SilentWolf.config.game_id) + "?max=" + str(maximum)  + "&ldboard_name=" + str(ldboard_name) + "&period_offset=" + str(period_offset)
 	SilentWolf.send_get_request(GetScores, request_url)
+	print("Sent request?")
 	return self
 
 
