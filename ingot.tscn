@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://7nch364v2svb"]
+[gd_scene load_steps=18 format=3 uid="uid://7nch364v2svb"]
 
 [ext_resource type="Script" path="res://Ingot.gd" id="1_iac0r"]
 [ext_resource type="Texture2D" uid="uid://db52wh6xkyow2" path="res://Assets/Shareef/Ingot_Axe.png" id="2_jgmdq"]
 [ext_resource type="Texture2D" uid="uid://dfrdi5r22eshs" path="res://Assets/Shareef/Ingot_Scimitar.png" id="4_f5qwb"]
+[ext_resource type="Texture2D" uid="uid://dvy7ncrs3anmk" path="res://Assets/Shareef/Ingot_Longsword.png" id="4_htq1w"]
 [ext_resource type="Texture2D" uid="uid://wsjx08weifro" path="res://Assets/Shareef/dagger.png" id="6_3ku6o"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_46kyo"]
@@ -19,6 +20,14 @@ region = Rect2(0, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_61q7q"]
 atlas = ExtResource("6_3ku6o")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe0e2"]
+atlas = ExtResource("4_htq1w")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwjmb"]
+atlas = ExtResource("4_htq1w")
 region = Rect2(200, 0, 200, 200)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8mr8m"]
@@ -55,6 +64,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_pe0e2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwjmb")
+}],
+"loop": true,
+"name": &"longsword",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_8mr8m")
 }, {
 "duration": 1.0,
@@ -83,11 +103,11 @@ script = ExtResource("1_iac0r")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.168627, 0.168627, 0.168627, 0.752941)
 scale = Vector2(0.3, 0.3)
-
 sprite_frames = SubResource("SpriteFrames_6qvr0")
-animation = &"axe"
+animation = &"longsword"
+frame = 1
+frame_progress = 0.893834
 
 [node name="Filter" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.788235, 0.678431, 0.67451, 1)

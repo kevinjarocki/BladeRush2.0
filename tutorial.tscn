@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://pbf0rnvtidu1"]
+
+[ext_resource type="Texture2D" uid="uid://bjmjj3p7c6wq3" path="res://Assets/HowtoPlay/MainGame.PNG" id="1_bo1vo"]
+[ext_resource type="Texture2D" uid="uid://j24apy7ncb5q" path="res://Assets/HowtoPlay/Shop.PNG" id="2_l04la"]
+[ext_resource type="Texture2D" uid="uid://06sa50iv8utp" path="res://Assets/HowtoPlay/Taxman.PNG" id="3_8g8by"]
+
+[node name="Tutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainGameImage" type="Sprite2D" parent="."]
+texture = ExtResource("1_bo1vo")
+
+[node name="ShopImage" type="Sprite2D" parent="."]
+texture = ExtResource("2_l04la")
+
+[node name="TaxmanImage" type="Sprite2D" parent="."]
+texture = ExtResource("3_8g8by")
