@@ -23,7 +23,7 @@ var coolingModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var playerSpeedModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var autoMolmolCost = 150
 
-@export var goldenHammer = false
+@export var goldenHammer = true
 @export var bottledFire = true
 @export var kingsSigil = false
 @export var beBackIn5 = false
@@ -31,7 +31,7 @@ var autoMolmolCost = 150
 @export var bottledFireActive = false
 @export var kingsSigilActive = false
 @export var beBackIn5Active = false
-@export var goldenHammerCost = 10
+@export var goldenHammerCost = 3
 @export var bottledFireCost = 10
 @export var kingsSigilCost = 25
 @export var beBackIn5Cost = 50
@@ -109,6 +109,11 @@ func _process(delta):
 	$"GUI HUD/Kings Sigil".disabled = !kingsSigil
 	$"GUI HUD/Be Back in 5".disabled = !beBackIn5 
 	$"GUI HUD/Bottled Fire".disabled = !bottledFire
+	
+	$"GUI HUD/Golden Hammer/Sprite2D".visible = goldenHammerActive
+	$"GUI HUD/Kings Sigil/Sprite2D2".visible = kingsSigilActive
+	$"GUI HUD/Be Back in 5/Sprite2D3".visible = beBackIn5Active
+	$"GUI HUD/Bottled Fire/Sprite2D4".visible = bottledFireActive
 
 func _on_player_interacted(station):
 	
@@ -264,7 +269,20 @@ func playerAtCashRegister():
 	
 	elif taxManHere:
 		
-		if money >= int(taxesOwed):
+		if beBackIn5Active:
+			$CashRegister.drawGoldValue(0)
+			$CashRegister.play()
+			$CashRegister.get_node("Ding").play()
+			$GPUParticles2D.amount = int(9999)
+			$GPUParticles2D.emitting = true
+			taxMan.ExitShop()
+			await get_tree().create_timer(2).timeout 
+			taxManHere = false
+			resetDay()
+			_on_end_day_next_day_pressed()
+			beBackIn5Active = false
+		
+		elif money >= int(taxesOwed):
 			money -= int(taxesOwed)
 			$CashRegister.drawGoldValue(int(-taxesOwed))
 			$CashRegister.play()

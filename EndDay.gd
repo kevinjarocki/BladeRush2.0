@@ -3,6 +3,7 @@ extends Node2D
 var heatingMod = 0
 var moneyPrevTurn = 0
 var moneyEarned = 0
+var beBackIn5Game = false
 
 signal nextDayPressed
 signal speedInc
@@ -24,7 +25,10 @@ func _process(delta):
 	
 	$"Control/Golden Hammer".disabled = owner.goldenHammer 
 	$"Control/Kings Sigil".disabled = owner.kingsSigil
-	$"Control/Be Back in 5".disabled = owner.beBackIn5 
+	if beBackIn5Game:
+		$"Control/Be Back in 5".disabled = true
+	else:
+		$"Control/Be Back in 5".disabled = false
 	$"Control/Bottled Fire".disabled = owner.bottledFire
 	
 func endDay(day, money):
@@ -67,6 +71,7 @@ func _on_kings_sigil_pressed():
 
 func _on_be_back_in_5_pressed():
 	if owner.money >= owner.beBackIn5Cost:
+		beBackIn5Game = true
 		owner.money -= owner.beBackIn5Cost
 		owner.beBackIn5 = true
 	pass # Replace with function body.
