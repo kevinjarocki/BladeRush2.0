@@ -17,6 +17,7 @@ func _ready():
 	"game_id": "BladeRush",
 	"log_level": 1
   })
+	$DeathSound.play()
 	fakeOnReady()
 
 func fakeOnReady():

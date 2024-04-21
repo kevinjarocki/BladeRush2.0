@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cfyw15npequdn"]
+[gd_scene load_steps=11 format=3 uid="uid://6jcoa40tm8f6"]
 
 [ext_resource type="Theme" uid="uid://ccxq1ecn67rk" path="res://Assets/end_day.tres" id="1_3lmyd"]
 [ext_resource type="Script" path="res://endGame.gd" id="2_ekh4y"]
 [ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="3_no0yc"]
 [ext_resource type="Texture2D" uid="uid://dqs8l8yjjil2j" path="res://Assets/Shareef/MomoStart.png" id="4_uns1y"]
+[ext_resource type="AudioStream" uid="uid://6qiebnhmj46y" path="res://Assets/Sounds/aidan1.mp3" id="6_0408j"]
 [ext_resource type="AudioStream" uid="uid://bsv436vlcuyea" path="res://Assets/Sounds/Audacity/blacksmith3.mp3" id="6_mcyl8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2n57"]
@@ -120,5 +121,9 @@ layout_mode = 2
 
 [node name="Label6" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_0408j")
+pitch_scale = 0.95
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

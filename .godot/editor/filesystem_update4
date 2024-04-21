@@ -17,3 +17,5 @@ res://lamp.tscn
 res://Player.gd
 res://EndDay.gd
 res://GUI HUD.gd
+res://endGame.tscn
+res://endGame.gd
