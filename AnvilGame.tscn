@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b1qqtnco6o3b5"]
+[gd_scene load_steps=26 format=3 uid="uid://b1qqtnco6o3b5"]
 
 [ext_resource type="Script" path="res://AnvilGame.gd" id="1_3ooct"]
 [ext_resource type="PackedScene" uid="uid://bxch7joyvexmh" path="res://click_target.tscn" id="2_k18te"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bsv436vlcuyea" path="res://Assets/Sounds/Audacity/blacksmith3.mp3" id="7_qfhuv"]
 [ext_resource type="AudioStream" uid="uid://br7qg3ntb3h2j" path="res://Assets/Sounds/pog ping.mp3" id="9_ix781"]
 [ext_resource type="AudioStream" uid="uid://xky5hhp50v5n" path="res://Assets/Sounds/break_metal.mp3" id="10_kile0"]
+[ext_resource type="Texture2D" uid="uid://bl7n336mfvqcn" path="res://Assets/Shareef/coin.png" id="12_heubb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_km7r8"]
 atlas = ExtResource("3_410m1")
@@ -110,6 +111,18 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h4lqw"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 1.0
+direction = Vector3(1, -0.4, 0)
+spread = 180.0
+initial_velocity_min = 644.29
+initial_velocity_max = 1000.0
+scale_max = 1.1
+turbulence_noise_strength = 15.58
+turbulence_noise_scale = 2.684
+turbulence_noise_speed_random = 0.0
+
 [node name="AnvilGame" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -146,3 +159,16 @@ volume_db = 3.0
 
 [node name="Broken" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_kile0")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(1, 0.403922, 0.0588235, 0.470588)
+position = Vector2(587, 357)
+scale = Vector2(0.2, 0.2)
+emitting = false
+amount = 60
+process_material = SubResource("ParticleProcessMaterial_h4lqw")
+texture = ExtResource("12_heubb")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 0.62
