@@ -112,6 +112,7 @@ animations = [{
 }]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h4lqw"]
+particle_flag_disable_z = true
 inherit_velocity_ratio = 1.0
 direction = Vector3(1, -0.4, 0)
 spread = 180.0
@@ -173,5 +174,3 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 randomness = 0.62
-interpolate = false
-fract_delta = false

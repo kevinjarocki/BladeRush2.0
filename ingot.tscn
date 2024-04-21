@@ -298,7 +298,7 @@ metadata/_edit_group_ = true
 modulate = Color(0.168627, 0.168627, 0.168627, 0.752941)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_6qvr0")
-animation = &"tashi"
+animation = &"longsword"
 
 [node name="Filter" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(0.788235, 0.678431, 0.67451, 1)

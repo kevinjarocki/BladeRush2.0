@@ -47,7 +47,6 @@ func _input(event):
 		elif ingotInstance.temperature < ingotInstance.materialProperties["idealTemp"] - ingotInstance.materialProperties["idealTempRange"]:
 			tempMiss = (ingotInstance.materialProperties["idealTemp"] - ingotInstance.materialProperties["idealTempRange"]) - ingotInstance.temperature
 			TempQualitySubtract()
-		print("temp miss:",tempMiss)
 		
 		#distance punishment
 		if owner.goldenHammerActive:
@@ -57,7 +56,6 @@ func _input(event):
 			$GPUParticles2D.position = userClick
 			$GPUParticles2D.emitting = true
 		elif missDistance <= ingotInstance.recipeProperties["perfectRange"]:
-			print("Perfect Strike!")
 			$Perfect.play()
 			$GPUParticles2D.position = userClick
 			$GPUParticles2D.emitting = true
@@ -66,10 +64,11 @@ func _input(event):
 				ingotInstance.quality = 0
 				ingotSprite.frame = 2
 				ingotFilter.frame = 2
+				#qualityHistory.append(ingotInstance.quality)
 			else:
 				ingotInstance.quality -= missDistance * ingotInstance.recipeProperties["punishRate"]
 		print("quality score" ,ingotInstance.quality)
-		
+		#WHY IS THIS HERE??? Is this a duplicate of below?? it is apperently needed to index click position
 		ingotInstance.stage += 1
 		if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
 			nextClick.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
@@ -77,9 +76,10 @@ func _input(event):
 		else:
 			ingotSprite.frame = 3
 			ingotFilter.frame = 3
+			#qualityHistory.append(ingotInstance.quality)
 			nextClick.killInstance()
 			gameCompletedBool = true
-			#gameCompleteSignal.emit(ingotInstance)
+			gameCompleteSignal.emit(ingotInstance)
 		if ingotSprite.frame == 2 or ingotFilter.frame ==2:
 			nextClick.killInstance()
 			gameCompletedBool = true
@@ -115,7 +115,9 @@ func summonMinigame(instance):
 	else:
 		ingotSprite.frame = 3
 		ingotFilter.frame = 3
+		#qualityHistory.append(ingotInstance.quality)
 		abortAnvilGame()
+		
 
 	#await get_tree().create_timer(1.0).timeout
 	
@@ -127,10 +129,10 @@ func TempQualitySubtract():
 		$Broken.play()
 		ingotSprite.frame = 2
 		ingotFilter.frame = 2
+		#qualityHistory.append(ingotInstance.quality)
 	elif abs(tempMiss) > 0 and abs(tempMiss) <= 1000:
 		tempQualityMod = -0.008*abs(tempMiss)
 		ingotInstance.quality += tempQualityMod
-	print("temp modifier : ",tempQualityMod)
 		
 func _on_player_departed(body):
 	if body.owner.name == "Anvil":
@@ -162,4 +164,5 @@ func abortAnvilGame():
 		instanceBudget = 1
 		gameCompleteSignal.emit(ingotInstance)
 		gameStarted = false
+	#print("quality history array: ",qualityHistory)
 	hide()
