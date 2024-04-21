@@ -19,3 +19,4 @@
 .godot/editor/editor_layout.cfg
 .godot/editor/Customer.tscn-editstate-793d83231fa0faf578859c264c9185ce.cfg
 .godot/editor/cash_register.tscn-editstate-32b08d242dc5b5eb7f053c685d3bdc29.cfg
+**/*.cfg
