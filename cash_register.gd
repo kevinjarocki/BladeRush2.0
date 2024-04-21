@@ -17,3 +17,9 @@ func drawGoldValue(value):
 	$Label.visible = false
 	
 	
+
+
+func _on_area_2d_area_entered(area):
+	print(area.name)
+	print("here")
+	pass # Replace with function body.

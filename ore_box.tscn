@@ -93,7 +93,7 @@ animations = [{
 size = Vector2(9.88312, 6.76665)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqsir"]
-size = Vector2(15.0909, 25.7333)
+size = Vector2(15.0909, 24.8667)
 
 [node name="OreBox" type="AnimatedSprite2D"]
 modulate = Color(0.54902, 0.54902, 0.54902, 1)
@@ -118,5 +118,5 @@ position = Vector2(344, 101)
 scale = Vector2(9.625, 7.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-36.1558, -11.4667)
+position = Vector2(-36.1558, -11.9)
 shape = SubResource("RectangleShape2D_wqsir")

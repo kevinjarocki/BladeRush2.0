@@ -253,9 +253,9 @@ func playerAtCashRegister():
 			print("rep: ",rep)
 			
 			if ingotNode.quality == 100:
-				sellValue = int(recipeValue*materialValue*4)
-			elif ingotNode.quality > 90:
 				sellValue = int(recipeValue*materialValue*2)
+			elif ingotNode.quality > 95:
+				sellValue = int(recipeValue*materialValue*1.3)
 			else:
 				sellValue = int(recipeValue*materialValue*(ingotNode.quality/100))
 			
@@ -297,7 +297,7 @@ func playerAtCashRegister():
 		else:
 			activeRecipe = recipeProgression[randi_range(0,recipeProgression.size()-1)]
 			
-		challengeRating = 3 + rep/4
+		challengeRating = 2 + rep/4
 		level = floor(challengeRating)
 		if level <= materialProgression.size():
 			activeMaterial = materialProgression[randi_range(0,level-1)]
@@ -354,6 +354,10 @@ func playerAtTrashCan():
 		$AnvilGame.abortAnvilGame()
 		ingotNode.queue_free()
 		
+		if autoMolmol:
+			await get_tree().create_timer(.2).timeout  
+			playerAtOreBox()
+		
 #Checks if player is holding an ingot, returns ingot node or false
 func ingotCheck():
 	for child in $Player.get_children():
@@ -409,13 +413,18 @@ func _on_end_day_next_day_pressed():
 	day += 1
 	dayTimer = 0.00
 	#START HERE -------------------------------------------------------------
-	if(day == 2 || day % 5 == 0):
+	if day == 2:
 		taxManHere = true
-		taxesOwed = int(5*pow(day,1.1))
+		taxesOwed = 2
 		createTaxMan()
 		activeRecipe = "Tax Man is here. Time to Pay up!"
 		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
-		
+	elif(day % 5 == 0):
+		taxManHere = true
+		taxesOwed = int(6*pow(day,1.1))
+		createTaxMan()
+		activeRecipe = "Tax Man is here. Time to Pay up!"
+		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
 	else:
 		createCustomer()
 	
