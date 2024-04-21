@@ -100,7 +100,6 @@ scale = Vector2(6.67857, 6.31325)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.449196, -0.475189)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_hmlun")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -108,7 +107,6 @@ scale = Vector2(6.67857, 6.31325)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-0.748663, 5.08851)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_lui1a")
 debug_color = Color(0.960784, 0, 0.505882, 0.419608)
 

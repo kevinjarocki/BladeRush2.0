@@ -22,7 +22,7 @@ func _process(delta):
 	$Control/PlayerSpeedInc.text = "Increase Player Walk Speed; \nLevel: " + str(owner.playerSpeedModInc) + "/10 Costs: " + str(owner.playerSpeedModCost[owner.playerSpeedModInc]) + "G"
 	$Control/CoolingRateDec.text = "Decrease Cooling Rate; \nLevel: " + str(owner.coolingModInc) + "/10 Costs: " + str(owner.coolingModCost[owner.coolingModInc]) + "G"
 	$Control/HeatRateInc.text = "Increase Heating Rate; \nLevel: " + str(owner.heatingModInc) + "/10 Costs: " + str(owner.heatingModCost[owner.heatingModInc]) + "G"
-	$Control/Info.text = "Finished Day: " + str(owner.day) + "\nGold Earned: " + str(moneyEarned) + "G\nGold: " + str(owner.money) + "G\nReputation: " + str(floor(owner.rep)) + "\nTaxes Due In " + str(taxesDueDate) + " Days, " + str(taxesDueValue) + " Gs"
+	$Control/Info.text = "Finished Day: " + str(owner.day) + "\nGold Earned: " + str(moneyEarned) + "G\nGold: " + str(owner.money) + "G\nReputation: " + str(floor(owner.rep)) + "\nDays Left Before Taxes Due:" + str(taxesDueDate-1) + " Days\n" + str(taxesDueValue) + " Gs"
 	
 	$Control/AutoIngot.text = "Auto Molmol: " + str(owner.autoMolmol) + "\nCosts: " + str(owner.autoMolmolCost) + "G"
 	
