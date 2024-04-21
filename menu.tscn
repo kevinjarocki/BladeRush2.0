@@ -64,6 +64,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_swbaj")
 text = "Play"
 
+[node name="How to Play" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_swbaj")
+text = "How to Play"
+
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_swbaj")
@@ -111,5 +116,6 @@ animation = &"Menu"
 stream = ExtResource("6_rarox")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/How to Play" to="." method="_on_how_to_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
