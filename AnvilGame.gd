@@ -55,7 +55,10 @@ func _input(event):
 			ingotInstance.stage += 1
 		elif missDistance <= ingotInstance.recipeProperties["perfectRange"]:
 			print("Perfect Strike!")
-			$Perfect.play()			
+			$Perfect.play()
+			$GPUParticles2D.position = userClick
+			$GPUParticles2D.emitting = true
+
 		else:
 			if missDistance*ingotInstance.recipeProperties["punishRate"] > ingotInstance.quality:
 				ingotInstance.quality = 0

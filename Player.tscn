@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dpjpqh73a8uds" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/Factions/Knights/Troops/Warrior/Red/BlackSmith.png" id="3_yvduj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fl4ui"]
-radius = 33.0
-height = 88.0
+radius = 43.0
+height = 98.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_11dum"]
 atlas = ExtResource("3_yvduj")
@@ -174,15 +174,14 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b4m60"]
-radius = 12.0
-height = 34.0
+radius = 12.61
+height = 48.0
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 platform_floor_layers = 4294936576
 platform_wall_layers = 1
 script = ExtResource("1_g1068")
-metadata/_edit_group_ = true
 
 [node name="Area2D" type="Area2D" parent="."]
 

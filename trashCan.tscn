@@ -1,33 +1,81 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlgvjnk6rw5xy"]
+[gd_scene load_steps=10 format=3 uid="uid://dlgvjnk6rw5xy"]
 
-[ext_resource type="Texture2D" uid="uid://n5eey64opuvo" path="res://Assets/Sprites/can.png" id="1_rp70y"]
+[ext_resource type="Texture2D" uid="uid://dvi4dfe4f4v6w" path="res://Assets/Shareef/tashCan.png" id="1_bsdos"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf3qv"]
+atlas = ExtResource("1_bsdos")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvc23"]
+atlas = ExtResource("1_bsdos")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qd6ly"]
+atlas = ExtResource("1_bsdos")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxu1y"]
+atlas = ExtResource("1_bsdos")
+region = Rect2(200, 200, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5dwqu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf3qv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvc23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvc23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvc23")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qd6ly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxu1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sf3qv")
+}],
+"loop": false,
+"name": &"grab",
+"speed": 8.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1pib"]
-size = Vector2(347.143, 401.429)
+size = Vector2(302.857, 341.429)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ov7ng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pav70"]
 size = Vector2(138.571, 223.003)
 
-[node name="TrashCan" type="Sprite2D"]
-texture_filter = 5
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("1_rp70y")
-region_rect = Rect2(20, 27, 160, 122)
-metadata/_edit_group_ = true
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+modulate = Color(0.94902, 0.94902, 0.94902, 1)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_5dwqu")
+animation = &"grab"
+frame = 6
+frame_progress = 1.0
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.7, 0.7)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-15, -70.7143)
+position = Vector2(22.8571, -47.1429)
 scale = Vector2(0.999999, 0.999999)
 shape = SubResource("RectangleShape2D_l1pib")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2(0.7, 0.7)
 physics_material_override = SubResource("PhysicsMaterial_ov7ng")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-5, -57.0701)
+position = Vector2(54.2857, -7.14286)
 shape = SubResource("RectangleShape2D_pav70")
 debug_color = Color(0.980392, 0, 0.368627, 0.419608)
