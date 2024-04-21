@@ -18,13 +18,19 @@ var heatingModInc = 0
 var coolingModInc = 0
 var playerSpeedModInc = 0
 
+#var ingotSprite = AnimatedSprite2D
+#var lastFrameState = 10
+#var currentFrameState = 10
+
+
 var heatingModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var coolingModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var playerSpeedModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var autoMolmolCost = 150
 
-@export var goldenHammer = true
-@export var bottledFire = true
+
+@export var goldenHammer = false
+@export var bottledFire = false
 @export var kingsSigil = false
 @export var beBackIn5 = false
 @export var goldenHammerActive = false
@@ -42,6 +48,15 @@ var taxMan = InstancePlaceholder
 var taxesOwed = 0
 var ingotNode = null
 var gameFinished = false
+var quality = 0
+
+var recipeProgression = ["Dagger","Scimitar","Longsword","Axe","Rapier","Sabre","Tashi","Falchion"]
+var materialProgression = ["Tin","Iron","Bronze","Rune","Gold","Mithirl","Caledonite"]
+var challengeRating = 3.0
+var level = 3
+var qualityHistory = []
+var rep = 0
+
 
 var handPosition = Vector2(20,10)
 
@@ -69,18 +84,18 @@ var recipeBook = {
 	"name": "sabre", "perfectRange": 6, "punishRate": 0.5, "value" : 2},
 	
 	"Tashi" : {"points": [Vector2(566, 287),Vector2(567, 287),Vector2(527, 360),Vector2(581, 247),Vector2(526, 327),Vector2(525, 328),Vector2(640, 258),Vector2(515, 364),Vector2(591, 237),Vector2(474, 412),Vector2(428, 387),Vector2(651, 240),Vector2(530, 370),Vector2(530, 371)], 
-	"name": "tashi", "perfectRange": 15, "punishRate": 1.5, "value" : 2}
+	"name": "tashi", "perfectRange": 15, "punishRate": 1.5, "value" : 3}
 }
 
 var materialBook = {
 
-	"Tin" : {"name": "tin", "coolRate" : 4, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 2, "cost": 0},
-	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 3, "cost": 1},
-	"Bronze" : {"name": "bronze", "coolRate" : 5, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 4, "cost": 1},
-	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 3000, "idealTempRange": 500, "valueMod": 6, "cost": 1},
-	"Rune": {"name": "rune", "coolRate" : 15, "heatRate" : 40, "idealTemp": 5500, "idealTempRange": 400, "valueMod": 7, "cost": 1},
-	"Mithril": {"name": "mithril", "coolRate" : 40, "heatRate" : 10, "idealTemp": 5000, "idealTempRange": 1000, "valueMod": 7, "cost": 1},
-	"Caledonite": {"name": "caledonite", "coolRate" : 4, "heatRate" : 20, "idealTemp": 7000, "idealTempRange": 200, "valueMod": 8, "cost": 1}
+	"Tin" : {"name": "tin", "coolRate" : 4, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 3, "cost": 0},
+	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 4, "cost": 1},
+	"Bronze" : {"name": "bronze", "coolRate" : 5, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 2, "cost": 1},
+	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 3000, "idealTempRange": 500, "valueMod": 7, "cost": 1},
+	"Rune": {"name": "rune", "coolRate" : 15, "heatRate" : 40, "idealTemp": 5500, "idealTempRange": 400, "valueMod": 6, "cost": 1},
+	"Mithril": {"name": "mithril", "coolRate" : 30, "heatRate" : 10, "idealTemp": 5000, "idealTempRange": 500, "valueMod": 7, "cost": 1},
+	"Caledonite": {"name": "caledonite", "coolRate" : 4, "heatRate" : 20, "idealTemp": 7000, "idealTempRange": 100, "valueMod": 8, "cost": 1}
 }
 
 func _process(delta):
@@ -114,6 +129,12 @@ func _process(delta):
 	$"GUI HUD/Kings Sigil/Sprite2D2".visible = kingsSigilActive
 	$"GUI HUD/Be Back in 5/Sprite2D3".visible = beBackIn5Active
 	$"GUI HUD/Bottled Fire/Sprite2D4".visible = bottledFireActive
+	
+	#if currentFrameState != lastFrameState:
+		#if currentFrameState == 3 or currentFrameState == 2:
+			#appendQualityHistory()
+			#print("state changed in ingot")
+		#lastFrameState = currentFrameState
 
 func _on_player_interacted(station):
 	
@@ -197,6 +218,10 @@ func playerAtOreBox():
 		$Player.add_child(ingotNode)
 		ingotNode.position = handPosition
 		ingotNode.scale = Vector2(1.5,1.5)
+		#ingotSprite = ingotNode.get_node("AnimatedSprite2D")
+		#lastFrameState = ingotSprite.frame
+		#CurrentFrameState = ingotSprite.frame
+		#print(lastFrameState)
 		print ("Picked up ingot")
 		
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
@@ -223,6 +248,9 @@ func playerAtCashRegister():
 			var recipeValue = ingotNode.recipeProperties["value"]
 			var materialValue = ingotNode.materialProperties["valueMod"]
 			var sellValue = 0
+			
+			rep = appendQualityHistory(ingotNode.quality)/100 * qualityHistory.size()
+			print("rep: ",rep)
 			
 			if ingotNode.quality == 100:
 				sellValue = int(recipeValue*materialValue*4)
@@ -261,8 +289,25 @@ func playerAtCashRegister():
 		else: print("Sorry bar is not complete")
 		
 	elif activeRecipe == "Awaiting Order" and get_tree().get_nodes_in_group("customer"):
-		activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
-		activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
+		
+		challengeRating = 3 + rep/3
+		level = floor(challengeRating)
+		if level <= recipeProgression.size():
+			activeRecipe = recipeProgression[randi_range(0,level-1)]
+		else:
+			activeRecipe = recipeProgression[randi_range(0,recipeProgression.size()-1)]
+			
+		challengeRating = 3 + rep/4
+		level = floor(challengeRating)
+		if level <= materialProgression.size():
+			activeMaterial = materialProgression[randi_range(0,level-1)]
+		else:
+			activeMaterial = materialProgression[randi_range(0,materialProgression.size()-1)]
+		
+		#activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
+		#activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
+		
+		
 		
 		if autoMolmol:
 			playerAtOreBox()
@@ -338,7 +383,8 @@ func createTaxMan():
 
 func _input(event):
 	if Input.is_action_just_pressed("click"):
-		print(event.get_position())
+		#print(event.get_position())
+		pass
 
 func _on_button_pressed():
 	#SilentWolf.Scores.save_score("GitDumpster", 105)
@@ -505,3 +551,14 @@ func _on_bottled_fire_pressed():
 			if child.is_in_group("ingot"):
 				child.bottledFire(3)
 		
+func appendQualityHistory(tempQuality):
+	var historySum = 0.0
+	qualityHistory.append(tempQuality)
+	for x in qualityHistory:
+		historySum += x
+	return(historySum/qualityHistory.size())
+	print(qualityHistory)
+
+
+func _on_ingot_append_quality_history():
+	print("ingot done")

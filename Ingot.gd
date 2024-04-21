@@ -10,6 +10,7 @@ var isForge = false
 var recipe = []
 var stage = 0
 var bottledFireTime = 3
+signal appendQualityHistory
 
 var recipeProperties = {
 	"name" : "forged",
@@ -34,7 +35,6 @@ var heatingMod = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var stage = 0
-	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var WhiteHot = Color(0.229,0.202,0.002,0.250)
@@ -52,6 +52,7 @@ func _process(delta):
 			temperature -= (materialProperties["coolRate"] * (1-coolingMod))
 		else:
 			temperature = 0
+		
 
 func SetMaterialColor():
 	var targetColor = Color(0,0,0,0)
@@ -83,4 +84,3 @@ func bottledFire(time):
 	await get_tree().create_timer(3).timeout
 	materialProperties["coolRate"] = originalCoolRate
 	materialProperties["heatRate"] = originalHeatRate
-

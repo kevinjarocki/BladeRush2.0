@@ -14,3 +14,5 @@ res://ShopManager.gd
 res://Ingot.gd
 res://tax_man.tscn
 res://lamp.tscn
+res://Player.gd
+res://EndDay.gd
