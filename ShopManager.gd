@@ -53,14 +53,15 @@ var recipeBook = {
 	"name": "axe", "perfectRange": 10, "punishRate": 0.5, "value" : 8}
 }
 
-var materialBook = {
-	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 1, "cost": 1},
-	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 2, "cost": 1},
-	"Bronze" : {"name": "bronze", "coolRate" : 4, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 2, "cost": 1},
-	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 800, "valueMod": 6, "cost": 1},
-	#"Rune": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 800, "valueMod": 6, "cost": 1},
-	#"Mithril": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 800, "valueMod": 6, "cost": 1},
-	#"Caledonite": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 2000, "idealTempRange": 800, "valueMod": 6, "cost": 1}
+
+	"Tin" : {"name": "tin", "coolRate" : 10, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 2, "cost": 1},
+	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 3, "cost": 1},
+	"Bronze" : {"name": "bronze", "coolRate" : 4, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 4, "cost": 1},
+	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 3000, "idealTempRange": 500, "valueMod": 6, "cost": 1},
+	"Rune": {"name": "rune", "coolRate" : 15, "heatRate" : 40, "idealTemp": 5500, "idealTempRange": 400, "valueMod": 7, "cost": 1},
+	"Mithril": {"name": "mithril", "coolRate" : 50, "heatRate" : 10, "idealTemp": 5000, "idealTempRange": 200, "valueMod": 7, "cost": 1},
+	"Caledonite": {"name": "caledonite", "coolRate" : 4, "heatRate" : 20, "idealTemp": 7000, "idealTempRange": 200, "valueMod": 8, "cost": 1}
+
 }
 
 func _process(delta):
@@ -297,10 +298,11 @@ func _on_ore_box_animation_finished(Start):
 	$OreBox.pause()
 
 func _on_anvil_game_player_left(child):
-		remove_child(child)
-		$Player.add_child(child)
-		print($Player.get_children())
-		child.position = Vector2.ZERO
+		
+			remove_child(child)
+			$Player.add_child(child)
+			print($Player.get_children())
+			child.position = Vector2.ZERO
 
 func _on_day_button_pressed():
 	resetDay()

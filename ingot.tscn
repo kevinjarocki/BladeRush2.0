@@ -83,7 +83,9 @@ script = ExtResource("1_iac0r")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.308594, 0.302734)
+modulate = Color(0.168627, 0.168627, 0.168627, 0.752941)
+scale = Vector2(0.3, 0.3)
+
 sprite_frames = SubResource("SpriteFrames_6qvr0")
 animation = &"axe"
 
