@@ -8,8 +8,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
-	pass
+	if owner.day == 1:
+		$MiniTut.visible = true
+	else:
+		$MiniTut.visible = false
 
 
 

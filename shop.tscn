@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cab2q7cer6567"]
+[gd_scene load_steps=38 format=3 uid="uid://cab2q7cer6567"]
 
 [ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
 [ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
@@ -16,7 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://bkm2k52um0e63" path="res://Assets/Tiny Swords/Tiny Swords (Update 010)/UI/Pointers/02.png" id="13_smdg2"]
 [ext_resource type="AudioStream" uid="uid://dm1c6rd1ioylc" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret2.mp3" id="13_t1mm5"]
 [ext_resource type="AudioStream" uid="uid://b47won4vrbchq" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret3.mp3" id="14_clega"]
+[ext_resource type="Texture2D" uid="uid://dqynolof4ufar" path="res://Assets/Shareef/tutOverlayLucent.png" id="14_j5pgk"]
 [ext_resource type="AudioStream" uid="uid://th0gdq3bowgo" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret4.mp3" id="15_5l16s"]
+[ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="15_am06y"]
 [ext_resource type="AudioStream" uid="uid://df4ym32qvy80h" path="res://Assets/Sounds/Ferret/155115__jzazvurek__ferret5.mp3" id="16_k12j5"]
 [ext_resource type="AudioStream" uid="uid://bdml4x3j8ni0w" path="res://Assets/Sounds/Ferret/477390__nuff3__steps-dirt_2a.ogg" id="17_axae4"]
 [ext_resource type="AudioStream" uid="uid://ba8u1nix4fee7" path="res://Assets/Sounds/214456__quaker540__hq-flamethrower-burning.wav" id="18_mw575"]
@@ -25,7 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://dlgvjnk6rw5xy" path="res://trashCan.tscn" id="21_lpgaf"]
 [ext_resource type="AudioStream" uid="uid://db4md3siwxiht" path="res://Assets/Sounds/racoon-gecker (1).mp3" id="23_7iopb"]
 [ext_resource type="Texture2D" uid="uid://bl7n336mfvqcn" path="res://Assets/Shareef/coin.png" id="23_ijiq0"]
-[ext_resource type="PackedScene" path="res://lamp.tscn" id="25_1k1tr"]
+[ext_resource type="PackedScene" uid="uid://cegfh61h80clf" path="res://lamp.tscn" id="25_1k1tr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xo30u"]
 texture = ExtResource("3_v2og8")
@@ -289,6 +291,54 @@ visible = false
 position = Vector2(58.5714, 40)
 scale = Vector2(2.12946, 1.70089)
 texture = ExtResource("13_smdg2")
+
+[node name="MiniTut" type="Sprite2D" parent="GUI HUD"]
+z_index = -3
+position = Vector2(571, 334)
+texture = ExtResource("14_j5pgk")
+
+[node name="RepExplain" type="Label" parent="GUI HUD/MiniTut"]
+z_index = -3
+offset_left = 241.0
+offset_top = -222.0
+offset_right = 478.0
+offset_bottom = -3.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("15_am06y")
+theme_override_font_sizes/font_size = 29
+text = "Rep =
+Harder Weapons"
+horizontal_alignment = 2
+
+[node name="PriceExplain" type="Label" parent="GUI HUD/MiniTut"]
+z_index = -3
+offset_left = -547.0
+offset_top = 89.0
+offset_right = -269.0
+offset_bottom = 193.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("15_am06y")
+theme_override_font_sizes/font_size = 29
+text = "Better Quality =
+More Gold & Rep"
+
+[node name="QualExplain" type="Label" parent="GUI HUD/MiniTut"]
+z_index = -3
+offset_left = -196.0
+offset_top = 151.0
+offset_right = 287.0
+offset_bottom = 370.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("15_am06y")
+theme_override_font_sizes/font_size = 29
+text = "Accuracy + Temp Control = Quality"
+horizontal_alignment = 2
 
 [node name="Ferret" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_8i7mk")
