@@ -97,6 +97,8 @@ size = Vector2(15.0909, 25.7333)
 
 [node name="OreBox" type="AnimatedSprite2D"]
 modulate = Color(0.54902, 0.54902, 0.54902, 1)
+light_mask = 9
+visibility_layer = 9
 sprite_frames = SubResource("SpriteFrames_scdnw")
 animation = &"Start"
 metadata/_edit_group_ = true

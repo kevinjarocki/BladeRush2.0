@@ -18,6 +18,8 @@ z_index = 30
 script = ExtResource("1_5xngi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 16
+visibility_layer = 16
 z_index = -5
 position = Vector2(576, 325)
 scale = Vector2(5.97917, 3.36458)

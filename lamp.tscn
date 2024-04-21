@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cegfh61h80clf"]
+
+[ext_resource type="Texture2D" uid="uid://b3j5kek71apia" path="res://Assets/Shareef/sign2.png" id="1_fw450"]
+
+[sub_resource type="Gradient" id="Gradient_f208e"]
+offsets = PackedFloat32Array(0, 0.558442, 0.772727)
+colors = PackedColorArray(1, 1, 1, 1, 0.0672268, 0.0672268, 0.0672268, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m1j3h"]
+gradient = SubResource("Gradient_f208e")
+fill = 1
+fill_from = Vector2(0.477064, 0.477064)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a6746"]
+polygon = PackedVector2Array(75.5245, -86.7133, 78.3217, -22.3776, 58.7413, -19.5804, 16.7832, -16.7832, -33.5665, -5.59441, -44.7552, -13.986, -44.7552, -44.7552, -55.9441, -86.7133, -44.7552, -89.5105, 0, -89.5105, 44.7552, -92.3077, 64.3356, -97.9021)
+
+[node name="Lamp" type="Sprite2D"]
+position = Vector2(280, 70)
+scale = Vector2(0.3575, 0.3575)
+texture = ExtResource("1_fw450")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(134.266, 22.3776)
+scale = Vector2(5.97924, 5.54218)
+color = Color(1, 0.737255, 0.207843, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_item_cull_mask = 8
+texture = SubResource("GradientTexture2D_m1j3h")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(2.7972, 0)
+occluder = SubResource("OccluderPolygon2D_a6746")
+occluder_light_mask = 8

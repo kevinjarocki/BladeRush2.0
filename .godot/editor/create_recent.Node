@@ -1,3 +1,6 @@
+LightOccluder2D
+PointLight2D
+Sprite2D
 AudioStreamPlayer2D
 AnimatedSprite2D
 Button
@@ -5,11 +8,8 @@ Label
 TextEdit
 TileMap
 GPUParticles2D
-Sprite2D
 TextureButton
 ColorRect
 ProgressBar
 Control
 CharacterBody2D
-RigidBody2D
-CollisionShape2D

@@ -57,7 +57,7 @@ size = Vector2(138.571, 223.003)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D"]
 modulate = Color(0.94902, 0.94902, 0.94902, 1)
-scale = Vector2(2, 2)
+z_index = -5
 sprite_frames = SubResource("SpriteFrames_5dwqu")
 animation = &"grab"
 frame = 6
