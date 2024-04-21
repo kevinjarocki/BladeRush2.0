@@ -46,10 +46,10 @@ func _process(delta):
 	
 	if isForge:
 		if temperature < maxTemp:
-			temperature += materialProperties["heatRate"] + heatingMod
+			temperature += (materialProperties["heatRate"] + heatingMod)*delta*60
 	else:
 		if temperature >= materialProperties["coolRate"]:
-			temperature -= (materialProperties["coolRate"] * (1-coolingMod))
+			temperature -= ((materialProperties["coolRate"] * (1-coolingMod)))*delta*60
 		else:
 			temperature = 0
 		
