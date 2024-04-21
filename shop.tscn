@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cab2q7cer6567"]
+[gd_scene load_steps=34 format=3 uid="uid://cab2q7cer6567"]
 
 [ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
 [ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://k1brmsrvmi3s" path="res://end_day.tscn" id="19_bnti8"]
 [ext_resource type="AudioStream" uid="uid://dpmica7dit60i" path="res://Assets/Sounds/Audacity/blacksmith2.mp3" id="19_p3ybx"]
 [ext_resource type="PackedScene" uid="uid://dlgvjnk6rw5xy" path="res://trashCan.tscn" id="21_lpgaf"]
+[ext_resource type="AudioStream" uid="uid://db4md3siwxiht" path="res://Assets/Sounds/racoon-gecker (1).mp3" id="23_7iopb"]
 [ext_resource type="Texture2D" uid="uid://bl7n336mfvqcn" path="res://Assets/Shareef/coin.png" id="23_ijiq0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xo30u"]
@@ -283,7 +284,12 @@ stream = ExtResource("19_p3ybx")
 
 [node name="TrashCan" parent="." instance=ExtResource("21_lpgaf")]
 position = Vector2(985, 309)
+scale = Vector2(0.7, 0.7)
+
+[node name="racoon" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(985, 309)
 scale = Vector2(0.303125, 0.303125)
+stream = ExtResource("23_7iopb")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 color = Color(0.666667, 0.729412, 0.498039, 1)

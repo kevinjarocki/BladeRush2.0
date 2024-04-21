@@ -283,7 +283,8 @@ func playerAtCashRegister():
 		
 func playerAtTrashCan():
 	if ingotCheck():
-		
+		$TrashCan.play()
+		$racoon.play()
 		ingotNode = ingotCheck()
 		$AnvilGame.abortAnvilGame()
 		ingotNode.queue_free()
