@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cab2q7cer6567"]
+[gd_scene load_steps=36 format=3 uid="uid://cab2q7cer6567"]
 
 [ext_resource type="Script" path="res://ShopManager.gd" id="1_07efy"]
 [ext_resource type="PackedScene" uid="uid://c2foh3xf7xqox" path="res://ore_box.tscn" id="2_lioss"]
