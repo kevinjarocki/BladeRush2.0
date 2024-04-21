@@ -23,6 +23,7 @@ func fakeOnReady():
 	#var fuckMe = (SilentWolf.Scores.get_scores())
 	await get_tree().create_timer(.1).timeout 
 	var sw_result: Dictionary = await SilentWolf.Scores.get_scores(5).sw_get_scores_complete
+	$Label.text = "Score: " + str(score.score)
 	
 	var players = []
 	var scores = []
