@@ -82,7 +82,7 @@ shape = SubResource("CapsuleShape2D_7knbn")
 [node name="TaxManAnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
 sprite_frames = SubResource("SpriteFrames_fo5yt")
 animation = &"walk"
-frame_progress = 0.301606
+frame_progress = 0.130689
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_aaw1j")

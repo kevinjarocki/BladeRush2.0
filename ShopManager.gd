@@ -57,7 +57,7 @@ var recipeBook = {
 	
 	"Longsword" : {"points": [Vector2(519, 374),Vector2(658, 264),Vector2(562, 324),Vector2(562, 325),Vector2(620, 252),Vector2(557, 368)], 
 	"name": "longsword", "perfectRange": 8, "punishRate": 0.1, "value" : 1},
-	
+	#
 	"Rapier" : {"points": [Vector2(635, 248),Vector2(635, 248),Vector2(635, 248),Vector2(600, 292),Vector2(600, 292),Vector2(600, 292),Vector2(563, 355),Vector2(563, 355),Vector2(563, 355),Vector2(526, 413),Vector2(526, 413),Vector2(526, 413)], 
 	"name": "rapier", "perfectRange": 3, "punishRate": 1, "value" : 3},
 	
