@@ -6,8 +6,10 @@ res://Customer.tscn
 res://recipeTool.tscn
 res://trashCan.tscn
 res://cash_register.tscn
-res://ore_box.tscn
-res://AnvilGame.tscn
-res://AnvilGame.gd
+res://shop.tscn
 res://ShopManager.gd
+res://AnvilGame.gd
+res://anvil.tscn
 res://Ingot.gd
+res://AnvilGame.tscn
+res://recipeTool.gd
