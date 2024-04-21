@@ -1,6 +1,5 @@
-res://shop.tscn
-res://Assets/end_day.tres
 res://end_day.tscn
+res://Assets/end_day.tres
 res://ingot.tscn
 res://Player.tscn
 res://Customer.tscn
