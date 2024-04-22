@@ -38,8 +38,8 @@ func _process(delta):
 func endDay(day, money):
 	visible = true
 
-	taxesDueDate = 5 - (owner.day % 5)
-	taxesDueValue = int(4*pow((((owner.day/5)+1)*5),1.1))
+	taxesDueDate = 4 - (owner.day % 4)
+	taxesDueValue = int(4*pow((((owner.day/4)+1)*4),1.1))
 	moneyEarned = owner.money - moneyPrevTurn
 
 func _on_next_day_pressed():

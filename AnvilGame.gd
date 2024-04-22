@@ -80,6 +80,7 @@ func _input(event):
 			nextClick.killInstance()
 			gameCompletedBool = true
 			gameCompleteSignal.emit(ingotInstance)
+			ingotInstance.isCompleted = true
 		if ingotSprite.frame == 2 or ingotFilter.frame ==2:
 			nextClick.killInstance()
 			gameCompletedBool = true

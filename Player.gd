@@ -71,7 +71,6 @@ func start(pos):
 
 func _on_area_2d_body_entered(body):
 	station = body
-	print(station.name)
 
 func _on_area_2d_body_exited(body):
 	station = null

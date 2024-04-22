@@ -52,6 +52,7 @@ var quality = 0
 
 var recipeProgression = ["Dagger","Scimitar","Longsword","Axe","Rapier","Sabre","Tashi","Falchion"]
 var materialProgression = ["Tin","Iron","Bronze","Rune","Gold","Mithirl","Caledonite"]
+var materialWeight = [10,20,28,31,34,37,40] 
 var challengeRating = 3.0
 var level = 3
 var qualityHistory = []
@@ -113,7 +114,7 @@ func _process(delta):
 				createTaxMan()
 				activeRecipe = "Tax Man is here. Time to Pay up!"
 				activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
-			elif(day % 5 == 0):
+			elif(day % 4 == 0):
 				taxManHere = true
 				taxesOwed = int(4*pow(day,1.1))
 				createTaxMan()
@@ -143,12 +144,6 @@ func _process(delta):
 	$"GUI HUD/Kings Sigil/Sprite2D2".visible = kingsSigilActive
 	$"GUI HUD/Be Back in 5/Sprite2D3".visible = beBackIn5Active
 	$"GUI HUD/Bottled Fire/Sprite2D4".visible = bottledFireActive
-	
-	#if currentFrameState != lastFrameState:
-		#if currentFrameState == 3 or currentFrameState == 2:
-			#appendQualityHistory()
-			#print("state changed in ingot")
-		#lastFrameState = currentFrameState
 
 func _on_player_interacted(station):
 	
@@ -232,10 +227,6 @@ func playerAtOreBox():
 		$Player.add_child(ingotNode)
 		ingotNode.position = handPosition
 		ingotNode.scale = Vector2(1.5,1.5)
-		#ingotSprite = ingotNode.get_node("AnimatedSprite2D")
-		#lastFrameState = ingotSprite.frame
-		#CurrentFrameState = ingotSprite.frame
-		#print(lastFrameState)
 		print ("Picked up ingot")
 		
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
@@ -258,7 +249,7 @@ func playerAtCashRegister():
 	if ingotCheck():
 		
 		ingotNode = ingotCheck()
-		if $AnvilGame.gameCompletedBool:
+		if ingotNode.isCompleted:
 			var recipeValue = ingotNode.recipeProperties["value"]
 			var materialValue = ingotNode.materialProperties["valueMod"]
 			var sellValue = 0
@@ -270,8 +261,12 @@ func playerAtCashRegister():
 				sellValue = int(recipeValue*materialValue*2)
 			elif ingotNode.quality > 95:
 				sellValue = int(recipeValue*materialValue*1.3)
-			else:
+			elif ingotNode.quality > 80:
+				sellValue = int(recipeValue*materialValue)
+			elif ingotNode.quality > 40:
 				sellValue = int(recipeValue*materialValue*(ingotNode.quality/100))
+			else:
+				sellValue = int(recipeValue*materialValue*(ingotNode.quality/100)*.5)
 			
 			if kingsSigilActive:
 				sellValue = sellValue*2
@@ -299,29 +294,57 @@ func playerAtCashRegister():
 					x.collider.owner.ExitShop()
 					createCustomer()
 					
-		else: print("Sorry bar is not complete")
+		else:
+			var recipeValue = ingotNode.recipeProperties["value"]
+			var materialValue = ingotNode.materialProperties["valueMod"]
+			var sellValue = 0
+			
+			rep = appendQualityHistory(0)/100 * qualityHistory.size()
+			print("rep: ",rep)
+			
+			if kingsSigilActive:
+				kingsSigilActive = false
+				
+			$CashRegister.drawGoldValue(0)
+			$CashRegister.get_node("Ding").play()
+			resetOrder()
+			ingotNode.queue_free()
+
+			var query := PhysicsPointQueryParameters2D.new()
+			query.collide_with_areas = true
+			query.collide_with_bodies = false
+			query.position = Vector2(173, 431)
+			var space = get_world_2d().direct_space_state
+	
+			for x in get_world_2d().direct_space_state.intersect_point(query):
+
+				if x.collider.owner.is_in_group("customer"):
+					x.collider.owner.ExitShop()
+					createCustomer()
 		
 	elif activeRecipe == "Awaiting Order" and get_tree().get_nodes_in_group("customer"):
 		
-		challengeRating = 3 + rep/3
-		level = floor(challengeRating)
+		level = floor(3 + rep/3)
 		if level <= recipeProgression.size():
 			activeRecipe = recipeProgression[randi_range(0,level-1)]
 		else:
 			activeRecipe = recipeProgression[randi_range(0,recipeProgression.size()-1)]
-			
-		challengeRating = 2 + rep/4
-		level = floor(challengeRating)
+
+		level = floor(2 + rep/4)
+		var weight = 0
+		var randomNum = 0
+		
 		if level <= materialProgression.size():
-			activeMaterial = materialProgression[randi_range(0,level-1)]
-		else:
-			activeMaterial = materialProgression[randi_range(0,materialProgression.size()-1)]
+			randomNum = randi_range(0, materialWeight[level-1])
 		
-		#activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
-		#activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
-		
-		
-		
+		else: 
+			randomNum = randi_range(0, materialWeight[materialWeight.size()-1])
+
+		for x in materialWeight.size():
+			if randomNum <= materialWeight[x]:
+				activeMaterial = materialProgression[x]
+				break
+
 		if autoMolmol:
 			playerAtOreBox()
 	
@@ -547,7 +570,6 @@ func appendQualityHistory(tempQuality):
 	for x in qualityHistory:
 		historySum += x
 	return(historySum/qualityHistory.size())
-	print(qualityHistory)
 
 
 func _on_ingot_append_quality_history():

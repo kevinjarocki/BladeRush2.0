@@ -2,15 +2,6 @@ extends Control
 
 @onready var score = get_node("/root/ScoreSingleton")
 
-#func _ready():
-	#SilentWolf.Scores.get_high_scores().connect(sw_get_scores_complete)
-#
-  #func _on_registration_complete(sw_result: Dictionary) -> void:
-  #if sw_result.success:
-	#print("Registration succeeded!")
-  #else:
-	#print("Error: " + str(sw_result.error))
-
 func _ready():
 	SilentWolf.configure({
 	"api_key": "7UNhUyzXAO2TnnCDn2v4h6hKxQAlDCSc9ODDHErW",
@@ -40,6 +31,8 @@ func _on_button_pressed():
 
 	$Label.text = "Score: " + str(score.score)
 	print(SilentWolf.Scores.scores)
+	$Button.disable = true
+	SilentWolf.Scores.save_score($TextEdit.text, score.score, score.ldboard)
 
-	SilentWolf.Scores.save_score($TextEdit.text, score.score)
+func _on_menu_pressed():
 	get_tree().change_scene_to_file("res://menu.tscn")

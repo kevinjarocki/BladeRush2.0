@@ -73,7 +73,6 @@ func SetMaterialColor():
 		targetColor = Color(43.0/255,43.0/255,43.0/255,192.0/255)
 		
 	$AnimatedSprite2D.modulate = targetColor
-	print("new color" ,targetColor)
 
 func bottledFire(time):
 	var originalCoolRate = materialProperties["coolRate"]
