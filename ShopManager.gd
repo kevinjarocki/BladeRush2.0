@@ -92,10 +92,10 @@ var materialBook = {
 	"Tin" : {"name": "tin", "coolRate" : 4, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 3, "cost": 0},
 	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 4, "cost": 1},
 	"Bronze" : {"name": "bronze", "coolRate" : 5, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 2, "cost": 1},
-	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 3000, "idealTempRange": 500, "valueMod": 7, "cost": 1},
-	"Rune": {"name": "rune", "coolRate" : 15, "heatRate" : 40, "idealTemp": 5500, "idealTempRange": 400, "valueMod": 6, "cost": 1},
-	"Mithril": {"name": "mithril", "coolRate" : 30, "heatRate" : 10, "idealTemp": 5000, "idealTempRange": 500, "valueMod": 7, "cost": 1},
-	"Caledonite": {"name": "caledonite", "coolRate" : 4, "heatRate" : 20, "idealTemp": 7000, "idealTempRange": 100, "valueMod": 8, "cost": 1}
+	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 3000, "idealTempRange": 500, "valueMod": 9, "cost": 1},
+	"Rune": {"name": "rune", "coolRate" : 15, "heatRate" : 40, "idealTemp": 5500, "idealTempRange": 400, "valueMod": 12, "cost": 1},
+	"Mithril": {"name": "mithril", "coolRate" : 30, "heatRate" : 10, "idealTemp": 5000, "idealTempRange": 500, "valueMod": 15, "cost": 1},
+	"Caledonite": {"name": "caledonite", "coolRate" : 4, "heatRate" : 20, "idealTemp": 7000, "idealTempRange": 100, "valueMod": 15, "cost": 1}
 }
 
 func _process(delta):
@@ -104,9 +104,23 @@ func _process(delta):
 	if !taxManHere:
 		dayTimer += delta
 	
-	if dayTimer > endDayTime and !$EndDay.visible:
-		resetDay()
-		$EndDay.endDay(day, money)
+		if dayTimer > endDayTime and !$EndDay.visible:
+			resetDay()
+			
+			if day == 1:
+				taxManHere = true
+				taxesOwed = 2
+				createTaxMan()
+				activeRecipe = "Tax Man is here. Time to Pay up!"
+				activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
+			elif(day % 5 == 0):
+				taxManHere = true
+				taxesOwed = int(4*pow(day,1.1))
+				createTaxMan()
+				activeRecipe = "Tax Man is here. Time to Pay up!"
+				activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
+			else:
+				$EndDay.endDay(day, money)
 	
 	$"GUI HUD/ActiveRecipe".text = ("Active Recipe: " + str(activeMaterial) + " " + str(activeRecipe))
 	$"GUI HUD/DayCount".text = ("Day " + str(day))
@@ -270,7 +284,6 @@ func playerAtCashRegister():
 			$CashRegister.get_node("Ding").play()
 			$GPUParticles2D.amount = sellValue
 			$GPUParticles2D.emitting = true
-			#$GPUParticles2D.emitting = false
 			resetOrder()
 			ingotNode.queue_free()
 
@@ -324,7 +337,7 @@ func playerAtCashRegister():
 			await get_tree().create_timer(2).timeout 
 			taxManHere = false
 			resetDay()
-			_on_end_day_next_day_pressed()
+			$EndDay.endDay(day, money)
 			beBackIn5Active = false
 		
 		elif money >= int(taxesOwed):
@@ -338,9 +351,7 @@ func playerAtCashRegister():
 			await get_tree().create_timer(2).timeout 
 			taxManHere = false
 			resetDay()
-			_on_end_day_next_day_pressed()
-			$EndDay.moneyPrevTurn = money
-			
+			$EndDay.endDay(day, money)
 			
 		else:
 			get_tree().change_scene_to_file("res://endGame.tscn")
@@ -412,21 +423,7 @@ func _on_day_button_pressed():
 func _on_end_day_next_day_pressed():
 	day += 1
 	dayTimer = 0.00
-	#START HERE -------------------------------------------------------------
-	if day == 2:
-		taxManHere = true
-		taxesOwed = 2
-		createTaxMan()
-		activeRecipe = "Tax Man is here. Time to Pay up!"
-		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
-	elif(day % 5 == 0):
-		taxManHere = true
-		taxesOwed = int(6*pow(day,1.1))
-		createTaxMan()
-		activeRecipe = "Tax Man is here. Time to Pay up!"
-		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
-	else:
-		createCustomer()
+	createCustomer()
 	
 func _on_ready():
 	$ThwakToMainMenu.play()
