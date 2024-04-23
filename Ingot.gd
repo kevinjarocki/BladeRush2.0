@@ -7,7 +7,7 @@ var isCompleted = false;
 var recipeName = "dagger"; #i.e Could be "Longsword"
 var timeLeftHeated = 30.0;
 var isForge = false
-var recipe = []
+
 var stage = 0
 var bottledFireTime = 3
 signal appendQualityHistory

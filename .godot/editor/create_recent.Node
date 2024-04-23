@@ -1,14 +1,14 @@
+AnimatedSprite2D
+CheckButton
 Button
 Label
 AudioStreamPlayer2D
 Sprite2D
 LightOccluder2D
 PointLight2D
-AnimatedSprite2D
 TextEdit
 TileMap
 GPUParticles2D
 TextureButton
 ColorRect
 ProgressBar
-Control

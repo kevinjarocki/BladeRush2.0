@@ -8,47 +8,41 @@ extends Node2D
 @export var endDayTime = 80
 @export var activeRecipe = "Awaiting Order"
 @export var activeMaterial = ""
-@export var minigame: PackedScene
 
 @export var heatingMod = 0
 @export var coolingMod = 0
 @export var autoMolmol = false
 
+var audioBus = AudioServer.get_bus_index("Master")
+var isMuted = false
+
 var heatingModInc = 0
 var coolingModInc = 0
 var playerSpeedModInc = 0
-
-#var ingotSprite = AnimatedSprite2D
-#var lastFrameState = 10
-#var currentFrameState = 10
-
 
 var heatingModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var coolingModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var playerSpeedModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var autoMolmolCost = 150
 
-
-@export var goldenHammer = false
-@export var bottledFire = false
-@export var kingsSigil = false
-@export var beBackIn5 = false
-@export var goldenHammerActive = false
-@export var bottledFireActive = false
-@export var kingsSigilActive = false
-@export var beBackIn5Active = false
-@export var goldenHammerCost = 3
-@export var bottledFireCost = 10
-@export var kingsSigilCost = 25
-@export var beBackIn5Cost = 50
+var goldenHammer = false
+var bottledFire = false
+var kingsSigil = false
+var beBackIn5 = false
+var goldenHammerActive = false
+var bottledFireActive = false
+var kingsSigilActive = false
+var beBackIn5Active = false
+var goldenHammerCost = 3
+var bottledFireCost = 10
+var kingsSigilCost = 25
+var beBackIn5Cost = 50
 
 var taxManHere = false
 var taxPayed = false
 var taxMan = InstancePlaceholder
 var taxesOwed = 0
 var ingotNode = null
-var gameFinished = false
-var quality = 0
 
 var recipeProgression = ["Dagger","Scimitar","Longsword","Axe","Rapier","Sabre","Tashi","Falchion"]
 var materialProgression = ["Tin","Iron","Bronze","Rune","Gold","Mithirl","Caledonite"]
@@ -57,7 +51,6 @@ var challengeRating = 3.0
 var level = 3
 var qualityHistory = []
 var rep = 0
-
 
 var handPosition = Vector2(20,10)
 
@@ -100,7 +93,6 @@ var materialBook = {
 }
 
 func _process(delta):
-	
 	$"GUI HUD/DayTimer".value = (dayTimer/endDayTime)*100
 	if !taxManHere:
 		dayTimer += delta
@@ -166,20 +158,15 @@ func _on_player_interacted(station):
 		print("No station nearby")
 	
 func playerAtAnvil():
-	if (ingotCheck()):
-		$Player.freeze()
+	
+	if ingotCheck():
 		var ingotNode = ingotCheck()
-		if !gameFinished:
+		if !ingotNode.isCompleted:
 			print("take my ingot")
 			$Player.remove_child(ingotNode)
 			$AnvilGame.add_child(ingotNode)
-			$AnvilGame.move_child(ingotNode,1)
 			$AnvilGame.summonMinigame(ingotNode)
 			
-		else:
-			print("dont take my ingot")
-		
-		$Player.unFreeze()
 	else:
 		print("no ingot")
 	
@@ -222,7 +209,6 @@ func playerAtOreBox():
 		$Ferret.play()
 		$Dirt.play()
 	
-		gameFinished = false
 		ingotNode = load("res://ingot.tscn").instantiate()
 		$Player.add_child(ingotNode)
 		ingotNode.position = handPosition
@@ -254,7 +240,7 @@ func playerAtCashRegister():
 			var materialValue = ingotNode.materialProperties["valueMod"]
 			var sellValue = 0
 			
-			rep = appendQualityHistory(ingotNode.quality)/100 * qualityHistory.size()
+			appendQualityHistory(ingotNode.quality)
 			print("rep: ",rep)
 			
 			if ingotNode.quality == 100:
@@ -295,11 +281,12 @@ func playerAtCashRegister():
 					createCustomer()
 					
 		else:
+			
 			var recipeValue = ingotNode.recipeProperties["value"]
 			var materialValue = ingotNode.materialProperties["valueMod"]
 			var sellValue = 0
 			
-			rep = appendQualityHistory(0)/100 * qualityHistory.size()
+			appendQualityHistory(0)
 			print("rep: ",rep)
 			
 			if kingsSigilActive:
@@ -409,15 +396,6 @@ func createTaxMan():
 	taxMan = load("res://tax_man.tscn").instantiate()
 	add_child(taxMan)
 	taxMan.position = Vector2(172,580)
-	#taxMan.speed = 1
-
-#func _on_anvil_game_game_complete_signal(ingotInstance):
-	#gameFinished = true
-	#ingotInstance.scale = Vector2(1.5,1.5)
-	#$AnvilGame.remove_child(ingotInstance)
-	#$Player.add_child(ingotInstance)
-	#ingotInstance.position = handPosition
-	#$AnvilGame.hide()
 
 func _input(event):
 	if Input.is_action_just_pressed("click"):
@@ -435,9 +413,9 @@ func _on_ore_box_animation_finished(Start):
 	$OreBox.pause()
 
 func _on_anvil_game_player_left(child):
-			remove_child(child)
-			$Player.add_child(child)
-			child.position = Vector2.ZERO
+	remove_child(child)
+	$Player.add_child(child)
+	child.position = Vector2.ZERO
 
 func _on_day_button_pressed():
 	resetDay()
@@ -567,10 +545,14 @@ func _on_bottled_fire_pressed():
 func appendQualityHistory(tempQuality):
 	var historySum = 0.0
 	qualityHistory.append(tempQuality)
+	
 	for x in qualityHistory:
 		historySum += x
-	return(historySum/qualityHistory.size())
-
+		
+	rep = (historySum/qualityHistory.size())/100 * (qualityHistory.size())
 
 func _on_ingot_append_quality_history():
 	print("ingot done")
+
+func _on_mute_pressed():
+	AudioServer.set_bus_mute(audioBus, !isMuted)
