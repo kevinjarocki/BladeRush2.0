@@ -8,55 +8,48 @@ extends Node2D
 @export var endDayTime = 80
 @export var activeRecipe = "Awaiting Order"
 @export var activeMaterial = ""
-@export var minigame: PackedScene
 
 @export var heatingMod = 0
 @export var coolingMod = 0
 @export var autoMolmol = false
 
+var audioBus = AudioServer.get_bus_index("Master")
+var isMuted = false
+
 var heatingModInc = 0
 var coolingModInc = 0
 var playerSpeedModInc = 0
-
-#var ingotSprite = AnimatedSprite2D
-#var lastFrameState = 10
-#var currentFrameState = 10
-
 
 var heatingModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var coolingModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var playerSpeedModCost = [10,12,15,20,25,35,45,50,60,80,100]
 var autoMolmolCost = 150
 
-
-@export var goldenHammer = false
-@export var bottledFire = false
-@export var kingsSigil = false
-@export var beBackIn5 = false
-@export var goldenHammerActive = false
-@export var bottledFireActive = false
-@export var kingsSigilActive = false
-@export var beBackIn5Active = false
-@export var goldenHammerCost = 3
-@export var bottledFireCost = 10
-@export var kingsSigilCost = 25
-@export var beBackIn5Cost = 50
+var goldenHammer = false
+var bottledFire = false
+var kingsSigil = false
+var beBackIn5 = false
+var goldenHammerActive = false
+var bottledFireActive = false
+var kingsSigilActive = false
+var beBackIn5Active = false
+var goldenHammerCost = 3
+var bottledFireCost = 10
+var kingsSigilCost = 25
+var beBackIn5Cost = 50
 
 var taxManHere = false
 var taxPayed = false
 var taxMan = InstancePlaceholder
 var taxesOwed = 0
 var ingotNode = null
-var gameFinished = false
-var quality = 0
 
 var recipeProgression = ["Dagger","Scimitar","Longsword","Axe","Rapier","Sabre","Tashi","Falchion"]
-var materialProgression = ["Tin","Iron","Bronze","Rune","Gold","Mithirl","Caledonite"]
-var challengeRating = 3.0
+var materialProgression = ["Tin","Iron","Bronze","Rune","Gold","Mithril","Caledonite"]
+var materialWeight = [10,20,28,31,34,37,40] 
 var level = 3
 var qualityHistory = []
 var rep = 0
-
 
 var handPosition = Vector2(20,10)
 
@@ -92,21 +85,34 @@ var materialBook = {
 	"Tin" : {"name": "tin", "coolRate" : 4, "heatRate" : 25, "idealTemp": 7500, "idealTempRange": 1200, "valueMod": 3, "cost": 0},
 	"Iron" : {"name": "iron", "coolRate" : 8, "heatRate" : 25, "idealTemp": 6600, "idealTempRange": 800, "valueMod": 4, "cost": 1},
 	"Bronze" : {"name": "bronze", "coolRate" : 5, "heatRate" : 25, "idealTemp": 4000, "idealTempRange": 1000, "valueMod": 2, "cost": 1},
-	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 3000, "idealTempRange": 500, "valueMod": 7, "cost": 1},
-	"Rune": {"name": "rune", "coolRate" : 15, "heatRate" : 40, "idealTemp": 5500, "idealTempRange": 400, "valueMod": 6, "cost": 1},
-	"Mithril": {"name": "mithril", "coolRate" : 30, "heatRate" : 10, "idealTemp": 5000, "idealTempRange": 500, "valueMod": 7, "cost": 1},
-	"Caledonite": {"name": "caledonite", "coolRate" : 4, "heatRate" : 20, "idealTemp": 7000, "idealTempRange": 100, "valueMod": 8, "cost": 1}
+	"Gold": {"name": "gold", "coolRate" : 20, "heatRate" : 50, "idealTemp": 3000, "idealTempRange": 500, "valueMod": 9, "cost": 1},
+	"Rune": {"name": "rune", "coolRate" : 15, "heatRate" : 40, "idealTemp": 5500, "idealTempRange": 400, "valueMod": 12, "cost": 1},
+	"Mithril": {"name": "mithril", "coolRate" : 30, "heatRate" : 10, "idealTemp": 5000, "idealTempRange": 500, "valueMod": 15, "cost": 1},
+	"Caledonite": {"name": "caledonite", "coolRate" : 4, "heatRate" : 20, "idealTemp": 7000, "idealTempRange": 100, "valueMod": 15, "cost": 1}
 }
 
 func _process(delta):
-	
 	$"GUI HUD/DayTimer".value = (dayTimer/endDayTime)*100
 	if !taxManHere:
 		dayTimer += delta
 	
-	if dayTimer > endDayTime and !$EndDay.visible:
-		resetDay()
-		$EndDay.endDay(day, money)
+		if dayTimer > endDayTime and !$EndDay.visible:
+			resetDay()
+			
+			if day == 1:
+				taxManHere = true
+				taxesOwed = 2
+				createTaxMan()
+				activeRecipe = "Tax Man is here. Time to Pay up!"
+				activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
+			elif(day % 4 == 0):
+				taxManHere = true
+				taxesOwed = int(4*pow(day,1.1))
+				createTaxMan()
+				activeRecipe = "Tax Man is here. Time to Pay up!"
+				activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
+			else:
+				$EndDay.endDay(day, money)
 	
 	$"GUI HUD/ActiveRecipe".text = ("Active Recipe: " + str(activeMaterial) + " " + str(activeRecipe))
 	$"GUI HUD/DayCount".text = ("Day " + str(day))
@@ -129,12 +135,6 @@ func _process(delta):
 	$"GUI HUD/Kings Sigil/Sprite2D2".visible = kingsSigilActive
 	$"GUI HUD/Be Back in 5/Sprite2D3".visible = beBackIn5Active
 	$"GUI HUD/Bottled Fire/Sprite2D4".visible = bottledFireActive
-	
-	#if currentFrameState != lastFrameState:
-		#if currentFrameState == 3 or currentFrameState == 2:
-			#appendQualityHistory()
-			#print("state changed in ingot")
-		#lastFrameState = currentFrameState
 
 func _on_player_interacted(station):
 	
@@ -157,20 +157,15 @@ func _on_player_interacted(station):
 		print("No station nearby")
 	
 func playerAtAnvil():
-	if (ingotCheck()):
-		$Player.freeze()
+	
+	if ingotCheck():
 		var ingotNode = ingotCheck()
-		if !gameFinished:
+		if !ingotNode.isCompleted:
 			print("take my ingot")
 			$Player.remove_child(ingotNode)
 			$AnvilGame.add_child(ingotNode)
-			$AnvilGame.move_child(ingotNode,1)
 			$AnvilGame.summonMinigame(ingotNode)
 			
-		else:
-			print("dont take my ingot")
-		
-		$Player.unFreeze()
 	else:
 		print("no ingot")
 	
@@ -213,19 +208,19 @@ func playerAtOreBox():
 		$Ferret.play()
 		$Dirt.play()
 	
-		gameFinished = false
 		ingotNode = load("res://ingot.tscn").instantiate()
 		$Player.add_child(ingotNode)
 		ingotNode.position = handPosition
 		ingotNode.scale = Vector2(1.5,1.5)
-		#ingotSprite = ingotNode.get_node("AnimatedSprite2D")
-		#lastFrameState = ingotSprite.frame
-		#CurrentFrameState = ingotSprite.frame
-		#print(lastFrameState)
 		print ("Picked up ingot")
 		
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
 		ingotNode.materialProperties = materialBook[activeMaterial]
+		
+		if !scoreSingleton.fpsGamer:
+			ingotNode.recipeProperties["perfectRange"] += 10
+			ingotNode.materialProperties["coolRate"] = ingotNode.materialProperties["coolRate"]*0.9
+		
 		ingotNode.heatingMod = heatingMod
 		ingotNode.coolingMod = coolingMod
 		
@@ -244,20 +239,24 @@ func playerAtCashRegister():
 	if ingotCheck():
 		
 		ingotNode = ingotCheck()
-		if $AnvilGame.gameCompletedBool:
+		if ingotNode.isCompleted:
 			var recipeValue = ingotNode.recipeProperties["value"]
 			var materialValue = ingotNode.materialProperties["valueMod"]
 			var sellValue = 0
 			
-			rep = appendQualityHistory(ingotNode.quality)/100 * qualityHistory.size()
+			appendQualityHistory(ingotNode.quality)
 			print("rep: ",rep)
 			
 			if ingotNode.quality == 100:
 				sellValue = int(recipeValue*materialValue*2)
 			elif ingotNode.quality > 95:
 				sellValue = int(recipeValue*materialValue*1.3)
-			else:
+			elif ingotNode.quality > 80:
+				sellValue = int(recipeValue*materialValue)
+			elif ingotNode.quality > 40:
 				sellValue = int(recipeValue*materialValue*(ingotNode.quality/100))
+			else:
+				sellValue = int(recipeValue*materialValue*(ingotNode.quality/100)*.5)
 			
 			if kingsSigilActive:
 				sellValue = sellValue*2
@@ -270,7 +269,6 @@ func playerAtCashRegister():
 			$CashRegister.get_node("Ding").play()
 			$GPUParticles2D.amount = sellValue
 			$GPUParticles2D.emitting = true
-			#$GPUParticles2D.emitting = false
 			resetOrder()
 			ingotNode.queue_free()
 
@@ -286,29 +284,58 @@ func playerAtCashRegister():
 					x.collider.owner.ExitShop()
 					createCustomer()
 					
-		else: print("Sorry bar is not complete")
+		else:
+			
+			var recipeValue = ingotNode.recipeProperties["value"]
+			var materialValue = ingotNode.materialProperties["valueMod"]
+			var sellValue = 0
+			
+			appendQualityHistory(-100)
+			print("rep: ",rep)
+			
+			if kingsSigilActive:
+				kingsSigilActive = false
+				
+			$CashRegister.drawGoldValue(0)
+			$CashRegister.get_node("Ding").play()
+			resetOrder()
+			ingotNode.queue_free()
+
+			var query := PhysicsPointQueryParameters2D.new()
+			query.collide_with_areas = true
+			query.collide_with_bodies = false
+			query.position = Vector2(173, 431)
+			var space = get_world_2d().direct_space_state
+	
+			for x in get_world_2d().direct_space_state.intersect_point(query):
+
+				if x.collider.owner.is_in_group("customer"):
+					x.collider.owner.ExitShop()
+					createCustomer()
 		
 	elif activeRecipe == "Awaiting Order" and get_tree().get_nodes_in_group("customer"):
 		
-		challengeRating = 3 + rep/3
-		level = floor(challengeRating)
+		level = floor(3 + rep/3)
 		if level <= recipeProgression.size():
 			activeRecipe = recipeProgression[randi_range(0,level-1)]
 		else:
 			activeRecipe = recipeProgression[randi_range(0,recipeProgression.size()-1)]
-			
-		challengeRating = 2 + rep/4
-		level = floor(challengeRating)
+
+		level = floor(2 + rep/4)
+		var weight = 0
+		var randomNum = 0
+		
 		if level <= materialProgression.size():
-			activeMaterial = materialProgression[randi_range(0,level-1)]
-		else:
-			activeMaterial = materialProgression[randi_range(0,materialProgression.size()-1)]
+			randomNum = randi_range(0, materialWeight[level-1])
 		
-		#activeRecipe = recipeBook.keys()[randi_range(0, recipeBook.size()-1)]
-		#activeMaterial = materialBook.keys()[randi_range(0, materialBook.size()-1)]
-		
-		
-		
+		else: 
+			randomNum = randi_range(0, materialWeight[materialWeight.size()-1])
+
+		for x in materialWeight.size():
+			if randomNum <= materialWeight[x]:
+				activeMaterial = materialProgression[x]
+				break
+
 		if autoMolmol:
 			playerAtOreBox()
 	
@@ -324,7 +351,7 @@ func playerAtCashRegister():
 			await get_tree().create_timer(2).timeout 
 			taxManHere = false
 			resetDay()
-			_on_end_day_next_day_pressed()
+			$EndDay.endDay(day, money)
 			beBackIn5Active = false
 		
 		elif money >= int(taxesOwed):
@@ -338,9 +365,7 @@ func playerAtCashRegister():
 			await get_tree().create_timer(2).timeout 
 			taxManHere = false
 			resetDay()
-			_on_end_day_next_day_pressed()
-			$EndDay.moneyPrevTurn = money
-			
+			$EndDay.endDay(day, money)
 			
 		else:
 			get_tree().change_scene_to_file("res://endGame.tscn")
@@ -375,15 +400,6 @@ func createTaxMan():
 	taxMan = load("res://tax_man.tscn").instantiate()
 	add_child(taxMan)
 	taxMan.position = Vector2(172,580)
-	#taxMan.speed = 1
-
-#func _on_anvil_game_game_complete_signal(ingotInstance):
-	#gameFinished = true
-	#ingotInstance.scale = Vector2(1.5,1.5)
-	#$AnvilGame.remove_child(ingotInstance)
-	#$Player.add_child(ingotInstance)
-	#ingotInstance.position = handPosition
-	#$AnvilGame.hide()
 
 func _input(event):
 	if Input.is_action_just_pressed("click"):
@@ -401,9 +417,9 @@ func _on_ore_box_animation_finished(Start):
 	$OreBox.pause()
 
 func _on_anvil_game_player_left(child):
-			remove_child(child)
-			$Player.add_child(child)
-			child.position = Vector2.ZERO
+	remove_child(child)
+	$Player.add_child(child)
+	child.position = Vector2.ZERO
 
 func _on_day_button_pressed():
 	resetDay()
@@ -412,21 +428,7 @@ func _on_day_button_pressed():
 func _on_end_day_next_day_pressed():
 	day += 1
 	dayTimer = 0.00
-	#START HERE -------------------------------------------------------------
-	if day == 2:
-		taxManHere = true
-		taxesOwed = 2
-		createTaxMan()
-		activeRecipe = "Tax Man is here. Time to Pay up!"
-		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
-	elif(day % 5 == 0):
-		taxManHere = true
-		taxesOwed = int(6*pow(day,1.1))
-		createTaxMan()
-		activeRecipe = "Tax Man is here. Time to Pay up!"
-		activeMaterial = "Total Taxes Owed: " + str(snappedf(taxesOwed,1.0))
-	else:
-		createCustomer()
+	createCustomer()
 	
 func _on_ready():
 	$ThwakToMainMenu.play()
@@ -547,11 +549,14 @@ func _on_bottled_fire_pressed():
 func appendQualityHistory(tempQuality):
 	var historySum = 0.0
 	qualityHistory.append(tempQuality)
+	
 	for x in qualityHistory:
 		historySum += x
-	return(historySum/qualityHistory.size())
-	print(qualityHistory)
-
+		
+	rep = (historySum/qualityHistory.size())/100 * (qualityHistory.size())
 
 func _on_ingot_append_quality_history():
 	print("ingot done")
+
+func _on_mute_pressed():
+	AudioServer.set_bus_mute(audioBus, !isMuted)

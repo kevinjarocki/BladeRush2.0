@@ -3,50 +3,48 @@ extends Control
 var missDistance = 10000000
 var missDistanceVector = Vector2()
 var userClick = Vector2(-100000,100000)
-var nextClick = InstancePlaceholder
 var ingotInstance = InstancePlaceholder
-var gameCompletedBool = false
 var recipeTool = false
 var tempRecipeArray = []
-var instanceCounter = 0
-var instanceBudget = 1
-var mouseLocation = Vector2.ZERO
 var scaleValue = Vector2(5,5)
 @export var ingotPosition = Vector2(500,-500)
-var gameStarted = false
 var tempQualityMod = 0
 var tempMiss = 0
 var ingotSprite = AnimatedSprite2D
 var ingotFilter = AnimatedSprite2D
-var ingotIsChild = false
-signal gameCompleteSignal
+
 signal playerLeft(child)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ingotPosition = $AnvilTop.position + $AnvilTop.offset
 	hide()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 	
 func _input(event):
 	
-	if (event is InputEventMouseButton and visible and Input.is_action_just_pressed("click") and not gameCompletedBool and event.position.y < 570):
+	if (visible and Input.is_action_just_pressed("click") and ingotSprite.frame == 1 and event.position.y < 570):
+		
+		var tempQual = 0
+		var posQual = 0
+		
 		$AnimatedSprite2D.play()
 		$Ping.play()
 		$AnvilTop.play()
 		userClick = event.position
-		missDistanceVector = userClick - nextClick.position
-		missDistance = missDistanceVector.length()
+		missDistance = (userClick - $clickTarget.position).length()
+		
 		#if too hot
 		if ingotInstance.temperature > ingotInstance.materialProperties["idealTemp"] + ingotInstance.materialProperties["idealTempRange"]:
 			tempMiss = (ingotInstance.temperature - (ingotInstance.materialProperties["idealTemp"] + ingotInstance.materialProperties["idealTempRange"]))
-			TempQualitySubtract()
-			#if too cold
+			tempQual = TempQualitySubtract()
+		#if too cold
 		elif ingotInstance.temperature < ingotInstance.materialProperties["idealTemp"] - ingotInstance.materialProperties["idealTempRange"]:
 			tempMiss = (ingotInstance.materialProperties["idealTemp"] - ingotInstance.materialProperties["idealTempRange"]) - ingotInstance.temperature
-			TempQualitySubtract()
+			tempQual = TempQualitySubtract()
 		
 		#distance punishment
 		if owner.goldenHammerActive:
@@ -55,114 +53,115 @@ func _input(event):
 			$Perfect.play()
 			$GPUParticles2D.position = userClick
 			$GPUParticles2D.emitting = true
+			await get_tree().create_timer(.2).timeout
+			$Perfect.play()
+			
 		elif missDistance <= ingotInstance.recipeProperties["perfectRange"]:
 			$Perfect.play()
 			$GPUParticles2D.position = userClick
 			$GPUParticles2D.emitting = true
+			
 		else:
-			if missDistance*ingotInstance.recipeProperties["punishRate"] > ingotInstance.quality:
-				ingotInstance.quality = 0
-				ingotSprite.frame = 2
-				ingotFilter.frame = 2
-				#qualityHistory.append(ingotInstance.quality)
+			posQual = -missDistance * ingotInstance.recipeProperties["punishRate"]
+		
+		var qualChange = posQual + tempQual
+		
+		ingotInstance.quality += qualChange
+		drawQualityChange(snapped(qualChange, 0.1), event.position)
+		
+		if ingotInstance.quality  <= 0:
+			ingotInstance.quality = 0
+			ingotSprite.frame = 2 
+			ingotFilter.frame = 2
+			$clickTarget.visible = false
+			$Broken.play()
+			
+		else:
+
+			if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
+				ingotInstance.stage += 1
+			
+			if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
+				$clickTarget.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
+				
 			else:
-				ingotInstance.quality -= missDistance * ingotInstance.recipeProperties["punishRate"]
+				ingotSprite.frame = 3
+				ingotFilter.frame = 3
+				$clickTarget.visible = false
+				ingotInstance.isCompleted = true
+				
 		print("quality score" ,ingotInstance.quality)
-		#WHY IS THIS HERE??? Is this a duplicate of below?? it is apperently needed to index click position
-		ingotInstance.stage += 1
-		if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
-			nextClick.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
-			
-		else:
-			ingotSprite.frame = 3
-			ingotFilter.frame = 3
-			#qualityHistory.append(ingotInstance.quality)
-			nextClick.killInstance()
-			gameCompletedBool = true
-			gameCompleteSignal.emit(ingotInstance)
-		if ingotSprite.frame == 2 or ingotFilter.frame ==2:
-			nextClick.killInstance()
-			gameCompletedBool = true
-			#gameCompleteSignal.emit(ingotInstance)
-			
+		
 	if (event is InputEventMouseMotion and visible):
 		$AnimatedSprite2D.position = event.position
 		
 func summonMinigame(instance):
-	ingotInstance = instance
+	
+	$clickTarget.visible = false
+	
+	for child in self.get_children():
+		if child.is_in_group("ingot"):
+			ingotInstance = child
+			
 	ingotSprite = ingotInstance.get_node("AnimatedSprite2D")
 	ingotFilter = ingotInstance.get_node("Filter")
-	ingotSprite.frame = 1
-	ingotFilter.frame = 1
-	gameStarted = true
+	
+	if ingotSprite.frame == 0:
+		ingotSprite.frame = 1
+		ingotFilter.frame = 1
+		
 	ingotInstance.position = ingotPosition
 	ingotInstance.scale = scaleValue
+	
 	#This will change the ingot animation to the recipe animation we need. Every animation for evcery weapon type will be a part of the ingot scene
 	#ingotInstance.AnimatedSprite2D.animation = ingotInstance.recipe.name
 
-	if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
-
-		gameCompletedBool = false
-		show()
-		if instanceBudget > 0:
-			nextClick = clickTarget.instantiate()
-			nextClick.play()
-			instanceCounter += 1
-			instanceBudget -= 1
-		nextClick.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
-		add_child(nextClick)
-		move_child(nextClick, 2)
-	else:
-		ingotSprite.frame = 3
-		ingotFilter.frame = 3
-		#qualityHistory.append(ingotInstance.quality)
-		abortAnvilGame()
-		
-
-	#await get_tree().create_timer(1.0).timeout
+	show()
 	
-func _on_button_pressed():
-	recipeTool = true
+	if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()) and ingotInstance.quality > 0:
+		$clickTarget.visible = true
+		$clickTarget.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
+		
 func TempQualitySubtract():
 	if abs(tempMiss) > 1000:
-		ingotInstance.quality = 0
-		$Broken.play()
-		ingotSprite.frame = 2
-		ingotFilter.frame = 2
-		#qualityHistory.append(ingotInstance.quality)
+		return (-1000)
+		
 	elif abs(tempMiss) > 0 and abs(tempMiss) <= 1000:
-		tempQualityMod = -0.008*abs(tempMiss)
-		ingotInstance.quality += tempQualityMod
+		return (-0.008*abs(tempMiss))
 		
 func _on_player_departed(body):
 	if body.owner.name == "Anvil":
 		abortAnvilGame()
-func pauseAnvilGame():
-	if gameStarted and ingotInstance != null:
-		ingotInstance.scale = Vector2(1.5,1.5)
-		remove_child(ingotInstance)
-		owner.add_child(ingotInstance)
-		ingotInstance.position = Vector2(20,10)
-		playerLeft.emit(ingotInstance)
-		gameCompletedBool = false
-	if gameCompletedBool:
-		instanceBudget = 1
-		gameCompleteSignal.emit(ingotInstance)
-		gameStarted = false
-		gameCompletedBool = true
-	hide()
+		
 func abortAnvilGame():
-	if !gameCompletedBool and instanceCounter > 0:
-		instanceCounter = 0
-	if gameStarted and ingotInstance != null:
+	ingotInstance = null
+	for child in self.get_children():
+		if child.is_in_group("ingot"):
+			ingotInstance = child
+	if ingotInstance:
 		ingotInstance.scale = Vector2(1.5,1.5)
 		remove_child(ingotInstance)
 		owner.add_child(ingotInstance)
 		ingotInstance.position = Vector2(20,10)
 		playerLeft.emit(ingotInstance)
-	if gameCompletedBool:
-		instanceBudget = 1
-		gameCompleteSignal.emit(ingotInstance)
-		gameStarted = false
-	#print("quality history array: ",qualityHistory)
+
 	hide()
+	$clickTarget.visible = false
+
+func drawQualityChange(value, drawPos):
+	
+	if value == 0:
+		$QualityChange.text = "PERFECT"
+	else:
+		$QualityChange.text = str(value)
+		
+	$QualityChange.position = drawPos
+	$QualityChange.visible = true
+	$QualityChange.modulate.a = 1
+	
+	for x in 30:
+		$QualityChange.position.y -= 3
+		$QualityChange.modulate.a -= (1.00/30.00)
+		await get_tree().create_timer(.03).timeout 
+		
+	$QualityChange.visible = false

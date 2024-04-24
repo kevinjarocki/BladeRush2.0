@@ -7,7 +7,7 @@ var isCompleted = false;
 var recipeName = "dagger"; #i.e Could be "Longsword"
 var timeLeftHeated = 30.0;
 var isForge = false
-var recipe = []
+
 var stage = 0
 var bottledFireTime = 3
 signal appendQualityHistory
@@ -73,7 +73,6 @@ func SetMaterialColor():
 		targetColor = Color(43.0/255,43.0/255,43.0/255,192.0/255)
 		
 	$AnimatedSprite2D.modulate = targetColor
-	print("new color" ,targetColor)
 
 func bottledFire(time):
 	var originalCoolRate = materialProperties["coolRate"]

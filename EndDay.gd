@@ -28,6 +28,7 @@ func _process(delta):
 	
 	$"Control/Golden Hammer".disabled = owner.goldenHammer 
 	$"Control/Kings Sigil".disabled = owner.kingsSigil
+	
 	if beBackIn5Game:
 		$"Control/Be Back in 5".disabled = true
 	else:
@@ -36,12 +37,9 @@ func _process(delta):
 	
 func endDay(day, money):
 	visible = true
-	if owner.day == 1:
-		taxesDueDate = 1
-		taxesDueValue = 2
-	else:
-		taxesDueDate = 5 - (owner.day % 5)
-		taxesDueValue = int(6*pow((((owner.day/5)+1)*5),1.1))
+
+	taxesDueDate = 4 - (owner.day % 4)
+	taxesDueValue = int(4*pow((((owner.day/4)+1)*4),1.1))
 	moneyEarned = owner.money - moneyPrevTurn
 
 func _on_next_day_pressed():
