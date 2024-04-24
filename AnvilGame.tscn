@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://b1qqtnco6o3b5"]
+[gd_scene load_steps=36 format=3 uid="uid://b1qqtnco6o3b5"]
 
 [ext_resource type="Script" path="res://AnvilGame.gd" id="1_3ooct"]
 [ext_resource type="Texture2D" uid="uid://brx5dttqs8k13" path="res://Assets/Shareef/clickTarget.png" id="2_nd3av"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://br7qg3ntb3h2j" path="res://Assets/Sounds/pog ping.mp3" id="9_ix781"]
 [ext_resource type="AudioStream" uid="uid://xky5hhp50v5n" path="res://Assets/Sounds/break_metal.mp3" id="10_kile0"]
 [ext_resource type="Texture2D" uid="uid://bl7n336mfvqcn" path="res://Assets/Shareef/coin.png" id="12_heubb"]
+[ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="13_1aqtw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pwdab"]
 atlas = ExtResource("2_nd3av")
@@ -198,6 +199,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_v3vnd"]
+font = ExtResource("13_1aqtw")
+
 [node name="AnvilGame" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -222,6 +226,7 @@ stream = SubResource("AudioStreamRandomizer_6cs55")
 pitch_scale = 0.7
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
 position = Vector2(686, 433)
 scale = Vector2(2.07, 2.07)
 sprite_frames = SubResource("SpriteFrames_xmowa")
@@ -256,3 +261,14 @@ z_index = 1
 sprite_frames = SubResource("SpriteFrames_vv0xa")
 animation = &"Target"
 offset = Vector2(12, -7)
+
+[node name="QualityChange" type="Label" parent="."]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_right = 15.0
+offset_bottom = 23.0
+scale = Vector2(0.8, 0.8)
+label_settings = SubResource("LabelSettings_v3vnd")
+horizontal_alignment = 1
+vertical_alignment = 1

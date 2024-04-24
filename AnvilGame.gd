@@ -26,7 +26,10 @@ func _process(delta):
 	
 func _input(event):
 	
-	if (visible and Input.is_action_just_pressed("click") and !ingotInstance.isCompleted and event.position.y < 570):
+	if (visible and Input.is_action_just_pressed("click") and ingotSprite.frame == 1 and event.position.y < 570):
+		
+		var tempQual = 0
+		var posQual = 0
 		
 		$AnimatedSprite2D.play()
 		$Ping.play()
@@ -37,11 +40,11 @@ func _input(event):
 		#if too hot
 		if ingotInstance.temperature > ingotInstance.materialProperties["idealTemp"] + ingotInstance.materialProperties["idealTempRange"]:
 			tempMiss = (ingotInstance.temperature - (ingotInstance.materialProperties["idealTemp"] + ingotInstance.materialProperties["idealTempRange"]))
-			TempQualitySubtract()
+			tempQual = TempQualitySubtract()
 		#if too cold
 		elif ingotInstance.temperature < ingotInstance.materialProperties["idealTemp"] - ingotInstance.materialProperties["idealTempRange"]:
 			tempMiss = (ingotInstance.materialProperties["idealTemp"] - ingotInstance.materialProperties["idealTempRange"]) - ingotInstance.temperature
-			TempQualitySubtract()
+			tempQual = TempQualitySubtract()
 		
 		#distance punishment
 		if owner.goldenHammerActive:
@@ -59,28 +62,36 @@ func _input(event):
 			$GPUParticles2D.emitting = true
 			
 		else:
-			ingotInstance.quality -= missDistance * ingotInstance.recipeProperties["punishRate"]
-				
-		print("quality score" ,ingotInstance.quality)
-
-		if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
-			ingotInstance.stage += 1
+			posQual = -missDistance * ingotInstance.recipeProperties["punishRate"]
 		
-		if ingotInstance.quality  <= 0 :
+		var qualChange = posQual + tempQual
+		
+		ingotInstance.quality += qualChange
+		drawQualityChange(snapped(qualChange, 0.1), event.position)
+		
+		if ingotInstance.quality  <= 0:
 			ingotInstance.quality = 0
 			ingotSprite.frame = 2 
 			ingotFilter.frame = 2
 			$clickTarget.visible = false
-		
-		elif (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
-			$clickTarget.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
+			$Broken.play()
 			
 		else:
-			ingotSprite.frame = 3
-			ingotFilter.frame = 3
-			$clickTarget.visible = false
-			ingotInstance.isCompleted = true
+
+			if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
+				ingotInstance.stage += 1
 			
+			if (ingotInstance.stage < ingotInstance.recipeProperties["points"].size()):
+				$clickTarget.position = ingotInstance.recipeProperties["points"][ingotInstance.stage]
+				
+			else:
+				ingotSprite.frame = 3
+				ingotFilter.frame = 3
+				$clickTarget.visible = false
+				ingotInstance.isCompleted = true
+				
+		print("quality score" ,ingotInstance.quality)
+		
 	if (event is InputEventMouseMotion and visible):
 		$AnimatedSprite2D.position = event.position
 		
@@ -113,15 +124,10 @@ func summonMinigame(instance):
 		
 func TempQualitySubtract():
 	if abs(tempMiss) > 1000:
-		ingotInstance.quality = 0
-		$Broken.play()
-		ingotSprite.frame = 2
-		ingotFilter.frame = 2
+		return (-1000)
 		
 	elif abs(tempMiss) > 0 and abs(tempMiss) <= 1000:
-		ingotInstance.quality -= 0.008*abs(tempMiss)
-		if ingotInstance.quality < 0:
-			ingotInstance.quality = 0
+		return (-0.008*abs(tempMiss))
 		
 func _on_player_departed(body):
 	if body.owner.name == "Anvil":
@@ -141,3 +147,21 @@ func abortAnvilGame():
 
 	hide()
 	$clickTarget.visible = false
+
+func drawQualityChange(value, drawPos):
+	
+	if value == 0:
+		$QualityChange.text = "PERFECT"
+	else:
+		$QualityChange.text = str(value)
+		
+	$QualityChange.position = drawPos
+	$QualityChange.visible = true
+	$QualityChange.modulate.a = 1
+	
+	for x in 30:
+		$QualityChange.position.y -= 3
+		$QualityChange.modulate.a -= (1.00/30.00)
+		await get_tree().create_timer(.03).timeout 
+		
+	$QualityChange.visible = false

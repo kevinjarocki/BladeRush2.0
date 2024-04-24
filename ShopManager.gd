@@ -45,9 +45,8 @@ var taxesOwed = 0
 var ingotNode = null
 
 var recipeProgression = ["Dagger","Scimitar","Longsword","Axe","Rapier","Sabre","Tashi","Falchion"]
-var materialProgression = ["Tin","Iron","Bronze","Rune","Gold","Mithirl","Caledonite"]
+var materialProgression = ["Tin","Iron","Bronze","Rune","Gold","Mithril","Caledonite"]
 var materialWeight = [10,20,28,31,34,37,40] 
-var challengeRating = 3.0
 var level = 3
 var qualityHistory = []
 var rep = 0
@@ -217,6 +216,11 @@ func playerAtOreBox():
 		
 		ingotNode.recipeProperties = recipeBook[activeRecipe]
 		ingotNode.materialProperties = materialBook[activeMaterial]
+		
+		if !scoreSingleton.fpsGamer:
+			ingotNode.recipeProperties["perfectRange"] += 10
+			ingotNode.materialProperties["coolRate"] = ingotNode.materialProperties["coolRate"]*0.9
+		
 		ingotNode.heatingMod = heatingMod
 		ingotNode.coolingMod = coolingMod
 		
@@ -286,7 +290,7 @@ func playerAtCashRegister():
 			var materialValue = ingotNode.materialProperties["valueMod"]
 			var sellValue = 0
 			
-			appendQualityHistory(0)
+			appendQualityHistory(-100)
 			print("rep: ",rep)
 			
 			if kingsSigilActive:

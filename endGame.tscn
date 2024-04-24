@@ -79,7 +79,7 @@ offset_right = 264.0
 offset_bottom = 243.0
 placeholder_text = "Enter Name"
 
-[node name="Label" type="Label" parent="."]
+[node name="PlayerScore" type="Label" parent="."]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 262.0
@@ -88,7 +88,7 @@ offset_bottom = 321.0
 text = "Score:"
 label_settings = SubResource("LabelSettings_3m3qv")
 
-[node name="Button" type="Button" parent="."]
+[node name="Save" type="Button" parent="."]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 326.0
@@ -126,7 +126,7 @@ layout_mode = 2
 stream = ExtResource("6_0408j")
 pitch_scale = 0.95
 
-[node name="Player Score" type="Label" parent="."]
+[node name="PlayerPosition" type="Label" parent="."]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 516.0
@@ -142,5 +142,5 @@ offset_right = 202.0
 offset_bottom = 475.0
 text = "Menu"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Save" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
