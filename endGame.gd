@@ -1,11 +1,12 @@
 extends Control
 
 @onready var scoreSingleton = get_node("/root/ScoreSingleton")
+@onready var labels = [$VBoxContainer/Label2,$VBoxContainer/Label3,$VBoxContainer/Label4,$VBoxContainer/Label5,$VBoxContainer/Label6]
 
 var leaderboard = ""
 var players = []
 var scores = []
-var labels = [$VBoxContainer/Label2,$VBoxContainer/Label3,$VBoxContainer/Label4,$VBoxContainer/Label5,$VBoxContainer/Label6]
+
 
 func _ready():
 	SilentWolf.configure({
@@ -31,8 +32,12 @@ func fakeOnReady():
 	for x in sw_result.scores:
 		players.append(x["player_name"])
 		scores.append(x["score"])
+		
 	
 	for x in sw_result.scores.size():
+		print(players)
+		print(sw_result.scores.size())
+		print(labels[x])
 		labels[x].text = str(players[x]) + " Score: " + str(scores[x])
 	
 	var place = await SilentWolf.Scores.get_score_position(scoreSingleton.score, leaderboard).sw_get_position_complete
