@@ -1,7 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://b1qqtnco6o3b5"]
+[gd_scene load_steps=36 format=3 uid="uid://b1qqtnco6o3b5"]
 
 [ext_resource type="Script" path="res://AnvilGame.gd" id="1_3ooct"]
-[ext_resource type="PackedScene" uid="uid://bxch7joyvexmh" path="res://click_target.tscn" id="2_k18te"]
+[ext_resource type="Texture2D" uid="uid://brx5dttqs8k13" path="res://Assets/Shareef/clickTarget.png" id="2_nd3av"]
 [ext_resource type="Texture2D" uid="uid://dc1yopttemrmx" path="res://Assets/Shareef/anvilTop.png" id="3_410m1"]
 [ext_resource type="AudioStream" uid="uid://7sjplt5w0opd" path="res://Assets/Sounds/Audacity/AnvilHit1.wav" id="3_k1k31"]
 [ext_resource type="AudioStream" uid="uid://dfc24sukfej28" path="res://Assets/Sounds/Audacity/AnvilHit2.wav" id="4_1ywx1"]
@@ -12,6 +12,59 @@
 [ext_resource type="AudioStream" uid="uid://br7qg3ntb3h2j" path="res://Assets/Sounds/pog ping.mp3" id="9_ix781"]
 [ext_resource type="AudioStream" uid="uid://xky5hhp50v5n" path="res://Assets/Sounds/break_metal.mp3" id="10_kile0"]
 [ext_resource type="Texture2D" uid="uid://bl7n336mfvqcn" path="res://Assets/Shareef/coin.png" id="12_heubb"]
+[ext_resource type="FontFile" uid="uid://d4gloc7rb6s5s" path="res://Assets/Font/vinque rg.otf" id="13_1aqtw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwdab"]
+atlas = ExtResource("2_nd3av")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gplbg"]
+atlas = ExtResource("2_nd3av")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kps6f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwdab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gplbg")
+}],
+"loop": true,
+"name": &"Target",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_7bp6q"]
+script/source = "extends AnimatedSprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+	
+func killInstance():
+	queue_free()
+"
+
+[sub_resource type="PackedScene" id="PackedScene_aslp7"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("clickTarget", "sprite_frames", "animation", "frame_progress", "offset", "script", "AnimatedSprite2D"),
+"node_count": 1,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 6, 0, -1, 5, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 0),
+"variants": [SubResource("SpriteFrames_kps6f"), &"Target", 0.2995, Vector2(11.59, -7.33), SubResource("GDScript_7bp6q")],
+"version": 3
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_km7r8"]
 atlas = ExtResource("3_410m1")
@@ -124,6 +177,31 @@ turbulence_noise_strength = 15.58
 turbulence_noise_scale = 2.684
 turbulence_noise_speed_random = 0.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksutl"]
+atlas = ExtResource("2_nd3av")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfnfn"]
+atlas = ExtResource("2_nd3av")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vv0xa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksutl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfnfn")
+}],
+"loop": true,
+"name": &"Target",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_v3vnd"]
+font = ExtResource("13_1aqtw")
+
 [node name="AnvilGame" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -132,7 +210,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3ooct")
-clickTarget = ExtResource("2_k18te")
+clickTarget = SubResource("PackedScene_aslp7")
 
 [node name="AnvilTop" type="AnimatedSprite2D" parent="."]
 position = Vector2(579, 402)
@@ -148,6 +226,7 @@ stream = SubResource("AudioStreamRandomizer_6cs55")
 pitch_scale = 0.7
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 5
 position = Vector2(686, 433)
 scale = Vector2(2.07, 2.07)
 sprite_frames = SubResource("SpriteFrames_xmowa")
@@ -175,3 +254,21 @@ lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
 randomness = 0.62
+
+[node name="clickTarget" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_vv0xa")
+animation = &"Target"
+offset = Vector2(12, -7)
+
+[node name="QualityChange" type="Label" parent="."]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_right = 15.0
+offset_bottom = 23.0
+scale = Vector2(0.8, 0.8)
+label_settings = SubResource("LabelSettings_v3vnd")
+horizontal_alignment = 1
+vertical_alignment = 1
